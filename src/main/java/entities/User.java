@@ -8,7 +8,14 @@ public class User {
     private Boolean premium;
     private int points;
 
+    public User(String name, String mail, String pWord, Boolean prem){
+        points = 0;
+        friends = new ArrayList<User>();
+        username = name;
+        email = mail;
+        password = pWord;
 
+    }
 
     public String getUsername() {
         return username;
