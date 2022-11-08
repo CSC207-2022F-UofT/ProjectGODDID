@@ -8,13 +8,33 @@ public class User {
     private Boolean premium;
     private int points;
 
-    public User(String name, String mail, String pWord, Boolean prem){
+    public User(){
         points = 0;
         friends = new ArrayList<User>();
-        username = name;
-        email = mail;
-        password = pWord;
+    }
 
+    public void setUsername(String name){
+        username = name;
+    }
+
+    public void setEmail(String mail){
+        email = mail;
+    }
+
+    public void setPassword(String pWord){
+        password = pWord;
+    }
+
+    public void setPremium(Boolean prem){
+        premium = prem;
+    }
+
+    public void setFriends(ArrayList<User> friends) {
+        this.friends = friends;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public String getUsername() {
