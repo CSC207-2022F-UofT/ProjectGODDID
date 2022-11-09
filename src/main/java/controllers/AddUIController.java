@@ -12,7 +12,7 @@ public class AddUIController {
     public void addUser(ArrayList<User> allUsers, User currUser, User target) {
         FriendAdder friendAdder = new FriendAdder();
         for (User i : allUsers)
-            if (i.getUsername() == target.getUsername()){
+            if (i.getUsername().equals(target.getUsername())){
                 friendAdder.add(currUser, target);
             }
     }
