@@ -75,7 +75,6 @@ class RegisterScreen extends JFrame implements ActionListener
             regControl.performRegister(passValue, userValue, mailValue);
             //create instance of the NewPage
             HomeScreen home = new HomeScreen();
-
             //make page visible to the user
             home.setVisible(true);
 

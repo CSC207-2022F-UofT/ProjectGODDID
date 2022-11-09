@@ -52,4 +52,8 @@ public class User {
     public Boolean getPremium() {
         return premium;
     }
+
+    public ArrayList<User> getFriends() {
+        return friends;
+    }
 }

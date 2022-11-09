@@ -1,8 +1,13 @@
 package UI;
 // import statements
+
+import controllers.*;
+import entities.User;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class HomeScreen extends JFrame implements ActionListener
 {
@@ -53,7 +58,26 @@ public class HomeScreen extends JFrame implements ActionListener
     {
 // Upon clicking the button, the next card of the container is shown
 // after the last card, again, the first card of the container is shown upon clicking
+        User bob = new User();
+        bob.setUsername("bob");
+        User joe = new User();
+        joe.setUsername("joe");
+        User frank = new User();
+        frank.setUsername("frank");
+        ArrayList<User> users = new ArrayList<>();
+        users.add(bob);
+        users.add(joe);
+        users.add(frank);
+        ArrayList<User> bobFriends = new ArrayList<>();
+        bobFriends.add(frank);
+        bob.setFriends(bobFriends);
         crd.next(cPane);
+        AddUIController addUIController = new AddUIController();
+        addUIController.addUser(users, bob, joe);
+        for (User i: bob.getFriends()){
+            System.out.println(i.getUsername());
+        }
+
     }
 
     /*
