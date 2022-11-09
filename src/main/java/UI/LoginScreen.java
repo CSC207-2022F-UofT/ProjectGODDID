@@ -1,10 +1,12 @@
 package UI;
 //import required classes and packages
 
+import entities.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
+import java.util.ArrayList;
 
 //create CreateLoginForm class to create login form
 //class extends JFrame to create a window where our component add
@@ -61,24 +63,37 @@ class LoginScreen extends JFrame implements ActionListener
         String passValue = textField2.getText();        //get user entered pasword from the textField2
 
         //check whether the credentials are authentic or not
-        if (userValue.equals("test@mail.com") && passValue.equals("test")) {  //if authentic, navigate user to a new page
+        User bob = new User();
+        bob.setUsername("bob");
+        bob.setPassword("123");
+        User joe = new User();
+        joe.setUsername("joe");
+        User frank = new User();
+        frank.setUsername("frank");
+        ArrayList<User> users = new ArrayList<>();
+        users.add(bob);
+        users.add(joe);
+        users.add(frank);
+        ArrayList<User> bobFriends = new ArrayList<>();
+        bobFriends.add(frank);
+        bob.setFriends(bobFriends);
+        for (User i : users) {
+            if (i.getUsername().equals(userValue) && i.getPassword().equals(passValue)) {
+                NewPage page = new NewPage();
+                //HomeScreen home = new NewPage();
 
-            //create instance of the NewPage
-            NewPage page = new NewPage();
-            HomeScreen home = new HomeScreen();
+                //make page visible to the user
+                page.setVisible(true);
+                //home.setVisible(true);
 
-            //make page visible to the user
-            page.setVisible(true);
-            home.setVisible(true);
-
-            //create a welcome label and set it to the new page
-            JLabel wel_label = new JLabel("Welcome: "+userValue);
-            page.getContentPane().add(wel_label);
-            page.userLabel = new JLabel("Welcome: "+userValue);
-        }
-        else{
-            //show error message
-            System.out.println("Please enter valid username and password");
+                //create a welcome label and set it to the new page
+                JLabel wel_label = new JLabel("Welcome: "+userValue);
+                page.getContentPane().add(wel_label);
+                page.userLabel = new JLabel("Welcome: "+userValue);
+            } else {
+                //show error message
+                System.out.println("Please enter valid username and password");
+            }
         }
     }
 }

@@ -53,6 +53,10 @@ public class User {
         return premium;
     }
 
+    public String getPassword(){
+        return password;
+    }
+
     public ArrayList<User> getFriends() {
         return friends;
     }
