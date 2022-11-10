@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class User {
     private ArrayList<User> friends;
     private String username, email, password;
-    private Boolean premium;
-    private int points;
+    public String acc_type;
+    public int points;
 
     public User(){
         points = 0;
@@ -25,8 +25,12 @@ public class User {
         password = pWord;
     }
 
-    public void setPremium(Boolean prem){
-        premium = prem;
+    public void setAccountType(String acc_type){
+        this.acc_type = acc_type;
+    }
+
+    public String getAccountType(){
+        return this.acc_type;
     }
 
     public void setFriends(ArrayList<User> friends) {
@@ -49,11 +53,11 @@ public class User {
         return points;
     }
 
-    public Boolean getPremium() {
+    /*public Boolean getPremium() {
         return premium;
-    }
+    }*/
 
-    public String getPassword(){
+    public String getPassword(  ){
         return password;
     }
 

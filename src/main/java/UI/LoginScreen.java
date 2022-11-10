@@ -79,17 +79,17 @@ class LoginScreen extends JFrame implements ActionListener
         bob.setFriends(bobFriends);
         for (User i : users) {
             if (i.getUsername().equals(userValue) && i.getPassword().equals(passValue)) {
-                NewPage page = new NewPage();
-                //HomeScreen home = new NewPage();
+                //NewPage page = new NewPage();
+                HomeScreen home = new HomeScreen();
 
                 //make page visible to the user
-                page.setVisible(true);
-                //home.setVisible(true);
+                //page.setVisible(true);
+                home.setVisible(true);
 
                 //create a welcome label and set it to the new page
-                JLabel wel_label = new JLabel("Welcome: "+userValue);
+                /*JLabel wel_label = new JLabel("Welcome: "+userValue);
                 page.getContentPane().add(wel_label);
-                page.userLabel = new JLabel("Welcome: "+userValue);
+                page.userLabel = new JLabel("Welcome: "+userValue);*/
             } else {
                 //show error message
                 System.out.println("Please enter valid username and password");
