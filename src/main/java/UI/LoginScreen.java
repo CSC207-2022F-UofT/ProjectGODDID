@@ -2,7 +2,10 @@ package UI;
 //import required classes and packages
 
 import entities.*;
+import UI.RegisterScreen;
+
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
@@ -17,12 +20,12 @@ class LoginScreen extends JFrame implements ActionListener
     JButton b1;
     JPanel newPanel;
     JLabel userLabel, passLabel;
-    final JTextField  textField1, textField2;
+
+    JTextField  textField1, textField2;
 
     //calling constructor
     LoginScreen()
     {
-
         //create label for username
         userLabel = new JLabel();
         userLabel.setText("Username");      //set label value for textField1
@@ -56,6 +59,10 @@ class LoginScreen extends JFrame implements ActionListener
         setTitle("LOGIN FORM");         //set title to the login form
     }
 
+    public JPanel getPanel(){
+        return newPanel;
+    }
+
     //define abstract method actionPerformed() which will be called on button click
     public void actionPerformed(ActionEvent ae)     //pass action listener as a parameter
     {
@@ -79,6 +86,7 @@ class LoginScreen extends JFrame implements ActionListener
         bob.setFriends(bobFriends);
         for (User i : users) {
             if (i.getUsername().equals(userValue) && i.getPassword().equals(passValue)) {
+                newPanel.setVisible(false);
                 NewPage page = new NewPage();
                 //HomeScreen home = new NewPage();
 
@@ -107,8 +115,10 @@ class LoginFormDemo
         try
         {
             //create instance of the CreateLoginForm
-            LoginScreen form = new LoginScreen();
-            form.setSize(500,200);  //set size of the frame
+
+            //LoginScreen form = new LoginScreen();
+            StartScreen form = new StartScreen();
+            form.setSize(500,500);  //set size of the frame
             form.setVisible(true);  //make form visible to the user
         }
         catch(Exception e)
