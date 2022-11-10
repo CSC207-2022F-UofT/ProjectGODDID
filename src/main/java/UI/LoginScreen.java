@@ -87,7 +87,8 @@ class LoginScreen extends JFrame implements ActionListener
         for (User i : users) {
             if (i.getUsername().equals(userValue) && i.getPassword().equals(passValue)) {
                 newPanel.setVisible(false);
-                NewPage page = new NewPage();
+                ChatUI page = new ChatUI();
+                //NewPage page = new NewPage();
                 //HomeScreen home = new NewPage();
 
                 //make page visible to the user
@@ -97,7 +98,7 @@ class LoginScreen extends JFrame implements ActionListener
                 //create a welcome label and set it to the new page
                 JLabel wel_label = new JLabel("Welcome: "+userValue);
                 page.getContentPane().add(wel_label);
-                page.userLabel = new JLabel("Welcome: "+userValue);
+                //page.userLabel = new JLabel("Welcome: "+userValue);
             } else {
                 //show error message
                 System.out.println("Please enter valid username and password");
@@ -115,7 +116,6 @@ class LoginFormDemo
         try
         {
             //create instance of the CreateLoginForm
-
             //LoginScreen form = new LoginScreen();
             StartScreen form = new StartScreen();
             form.setSize(500,500);  //set size of the frame
