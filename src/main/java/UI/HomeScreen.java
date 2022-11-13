@@ -32,7 +32,7 @@ public class HomeScreen extends JFrame implements ActionListener
         cPane.setLayout(crd);
 
 // creating the buttons
-        btn1 = new JButton("Apple");
+        btn1 = new JButton("Add Friend");
         btn2 = new JButton("Boy");
         btn3 = new JButton("Cat");
 
@@ -71,6 +71,7 @@ public class HomeScreen extends JFrame implements ActionListener
         ArrayList<User> bobFriends = new ArrayList<>();
         bobFriends.add(frank);
         bob.setFriends(bobFriends);
+
         crd.next(cPane);
         AddUIController addUIController = new AddUIController();
         addUIController.addUser(users, bob, joe);

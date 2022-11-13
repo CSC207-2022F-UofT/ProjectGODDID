@@ -1,10 +1,15 @@
 package UI;
 //import required classes and packages
 
+import entities.*;
+import UI.RegisterScreen;
+
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
+import java.util.ArrayList;
 
 //create CreateLoginForm class to create login form
 //class extends JFrame to create a window where our component add
@@ -15,12 +20,12 @@ class LoginScreen extends JFrame implements ActionListener
     JButton b1;
     JPanel newPanel;
     JLabel userLabel, passLabel;
-    final JTextField  textField1, textField2;
+
+    JTextField  textField1, textField2;
 
     //calling constructor
     LoginScreen()
     {
-
         //create label for username
         userLabel = new JLabel();
         userLabel.setText("Username");      //set label value for textField1
@@ -54,6 +59,10 @@ class LoginScreen extends JFrame implements ActionListener
         setTitle("LOGIN FORM");         //set title to the login form
     }
 
+    public JPanel getPanel(){
+        return newPanel;
+    }
+
     //define abstract method actionPerformed() which will be called on button click
     public void actionPerformed(ActionEvent ae)     //pass action listener as a parameter
     {
@@ -61,24 +70,39 @@ class LoginScreen extends JFrame implements ActionListener
         String passValue = textField2.getText();        //get user entered pasword from the textField2
 
         //check whether the credentials are authentic or not
-        if (userValue.equals("test@mail.com") && passValue.equals("test")) {  //if authentic, navigate user to a new page
+        User bob = new User();
+        bob.setUsername("bob");
+        bob.setPassword("123");
+        User joe = new User();
+        joe.setUsername("joe");
+        User frank = new User();
+        frank.setUsername("frank");
+        ArrayList<User> users = new ArrayList<>();
+        users.add(bob);
+        users.add(joe);
+        users.add(frank);
+        ArrayList<User> bobFriends = new ArrayList<>();
+        bobFriends.add(frank);
+        bob.setFriends(bobFriends);
+        for (User i : users) {
+            if (i.getUsername().equals(userValue) && i.getPassword().equals(passValue)) {
+                newPanel.setVisible(false);
+                ChatUI page = new ChatUI();
+                //NewPage page = new NewPage();
+                //HomeScreen home = new NewPage();
 
-            //create instance of the NewPage
-            NewPage page = new NewPage();
-            HomeScreen home = new HomeScreen();
+                //make page visible to the user
+                page.setVisible(true);
+                //home.setVisible(true);
 
-            //make page visible to the user
-            page.setVisible(true);
-            home.setVisible(true);
-
-            //create a welcome label and set it to the new page
-            JLabel wel_label = new JLabel("Welcome: "+userValue);
-            page.getContentPane().add(wel_label);
-            page.userLabel = new JLabel("Welcome: "+userValue);
-        }
-        else{
-            //show error message
-            System.out.println("Please enter valid username and password");
+                //create a welcome label and set it to the new page
+                JLabel wel_label = new JLabel("Welcome: "+userValue);
+                page.getContentPane().add(wel_label);
+                //page.userLabel = new JLabel("Welcome: "+userValue);
+            } else {
+                //show error message
+                System.out.println("Please enter valid username and password");
+            }
         }
     }
 }
@@ -92,8 +116,9 @@ class LoginFormDemo
         try
         {
             //create instance of the CreateLoginForm
-            LoginScreen form = new LoginScreen();
-            form.setSize(500,200);  //set size of the frame
+            //LoginScreen form = new LoginScreen();
+            StartScreen form = new StartScreen();
+            form.setSize(500,500);  //set size of the frame
             form.setVisible(true);  //make form visible to the user
         }
         catch(Exception e)

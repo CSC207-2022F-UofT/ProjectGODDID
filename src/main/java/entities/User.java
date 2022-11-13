@@ -60,6 +60,10 @@ public class User implements Serializable {
         return premium;
     }
 
+    public String getPassword(){
+        return password;
+    }
+
     public ArrayList<User> getFriends() {
         return friends;
     }
