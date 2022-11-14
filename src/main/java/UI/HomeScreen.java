@@ -56,7 +56,7 @@ public class HomeScreen extends JFrame implements ActionListener
         crd.next(cPane);
     }
 
-    /*
+
     // main method
     public static void main(String argvs[])
     {
@@ -69,5 +69,5 @@ public class HomeScreen extends JFrame implements ActionListener
         crdl.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-     */
+
 }

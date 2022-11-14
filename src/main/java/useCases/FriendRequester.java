@@ -6,7 +6,6 @@ public class FriendRequester {
     private int amountWanted;
 
     public FriendRequester(){
-
     }
 
     public int getAmountWanted(){
