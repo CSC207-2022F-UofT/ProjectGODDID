@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
+import useCases.*;
 
 //create CreateLoginForm class to create login form
 //class extends JFrame to create a window where our component add
@@ -15,8 +16,8 @@ class RegisterScreen extends JFrame implements ActionListener
     //initialize button, panel, label, and text field
     JButton b1;
     JPanel newPanel;
-    JLabel userLabel, emailLabel, passLabel;
-    final JTextField  nameField, mailField, passField;
+    JLabel userLabel, emailLabel, passLabel, acc_typeLabel;
+    final JTextField  nameField, mailField, passField, acc_typeField;
 
     //calling constructor
     RegisterScreen()
@@ -27,31 +28,39 @@ class RegisterScreen extends JFrame implements ActionListener
         userLabel.setText("Username");      //set label value for textField1
 
         //create text field to get username from the user
-        nameField = new JTextField(15);    //set length of the text
+        nameField = new JTextField();    //set length of the text
 
         emailLabel = new JLabel();
         emailLabel.setText("Email");
 
-        mailField = new JTextField(15);
+        mailField = new JTextField();
 
         //create label for password
         passLabel = new JLabel();
         passLabel.setText("Password");      //set label value for textField2
 
         //create text field to get password from the user
-        passField = new JPasswordField(15);    //set length for the password
+        passField = new JPasswordField();    //set length for the password
+
+        acc_typeLabel = new JLabel();
+        acc_typeLabel.setText("Type Of Account");      //set label value for textField2
+
+        //create text field to get password from the user
+        acc_typeField = new JTextField();
 
         //create submit button
         b1 = new JButton("SUBMIT"); //set label to button
 
         //create panel to put form elements
-        newPanel = new JPanel(new GridLayout(4, 1));
+        newPanel = new JPanel(new GridLayout(5, 1));
         newPanel.add(userLabel);    //set username label to panel
         newPanel.add(nameField);   //set text field to panel
         newPanel.add(emailLabel);    //set password label to panel
         newPanel.add(mailField);
         newPanel.add(passLabel);    //set password label to panel
         newPanel.add(passField);   //set text field to panel
+        newPanel.add(acc_typeLabel);    //set password label to panel
+        newPanel.add(acc_typeField);
         newPanel.add(b1);           //set button to panel
 
         //set border to panel
@@ -72,11 +81,12 @@ class RegisterScreen extends JFrame implements ActionListener
         String userValue = nameField.getText();        //get user entered username from the textField1
         String passValue = passField.getText();        //get user entered password from the textField2
         String mailValue = mailField.getText();
+        String acc_typeValue = acc_typeField.getText();
 
         //check whether user already exists
         if (true) {  //if authentic, navigate user to a new page
             RegisterUIController regControl = new RegisterUIController();
-            regControl.performRegister(passValue, userValue, mailValue);
+            regControl.performRegister(passValue, userValue, mailValue, acc_typeValue);
             //create instance of the NewPage
             HomeScreen home = new HomeScreen();
             //make page visible to the user

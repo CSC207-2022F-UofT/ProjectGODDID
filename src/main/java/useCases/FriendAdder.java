@@ -7,7 +7,8 @@ public class FriendAdder {
 
     }
 
-    public void add(User currUser, User friend){
+    public void add(User currUser, User friend)
+    {
         currUser.getFriends().add(friend);
     }
 }
