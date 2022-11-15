@@ -1,24 +1,14 @@
 package entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User implements Serializable {
+public class User {
     private ArrayList<User> friends;
-    private String username, password;
+    private String username, email, password;
     private Boolean premium;
     private int points;
 
-    public User(String username, String password, ArrayList<User> friends){
-        this.username = username;
-        this.password = password;
-        points = 0;
-        this.friends = friends;
-    }
-
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
+    public User(){
         points = 0;
         friends = new ArrayList<User>();
     }
@@ -27,13 +17,12 @@ public class User implements Serializable {
         username = name;
     }
 
+    public void setEmail(String mail){
+        email = mail;
+    }
 
     public void setPassword(String pWord){
         password = pWord;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPremium(Boolean prem){
@@ -50,6 +39,10 @@ public class User implements Serializable {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public int getPoints() {
