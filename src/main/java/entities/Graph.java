@@ -28,13 +28,8 @@ public class Graph  implements Serializable {
 
     public void removeEdge(Vertex v1, Vertex v2)
     {
-        //user 1 removes user 2 as a friend.
-        //Vertex v1 = new Vertex(user1, a1, u1);
-        //Vertex v2 = new Vertex(user2, a2, u2);
-        List<Vertex> v1_neighbours = accounts.get(v1);
-        //List<Vertex> v2_neighbours = accounts.get(v2);
-        if (v1_neighbours != null)
-            v1_neighbours.remove(v2);
+        if (accounts.get(v1) != null)
+            accounts.get(v1).remove(v2);
     }
 
     public ArrayList<Vertex> getVertices()
