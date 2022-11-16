@@ -18,28 +18,28 @@ public class Graph{
 
     public void addEdge(String user1, String a1, User u1, String user2, String a2, User u2)
     {
+        //user 1 adds user 2 as a friend.
         Vertex v1 = new Vertex(user1, a1, u1);
         Vertex v2 = new Vertex(user2, a2, u2);
         accounts.get(v1).add(v2);
-        accounts.get(v2).add(v1);
     }
 
     public void removeEdge(String user1, String a1, User u1, String user2, String a2, User u2)
     {
+        //user 1 removes user 2 as a friend.
         Vertex v1 = new Vertex(user1, a1, u1);
         Vertex v2 = new Vertex(user2, a2, u2);
         List<Vertex> v1_neighbours = accounts.get(v1);
         List<Vertex> v2_neighbours = accounts.get(v2);
         if (v1_neighbours != null)
             v1_neighbours.remove(v2);
-        if (v2_neighbours != null)
-            v2_neighbours.remove(v1);
-
     }
 
     public Set<Vertex> getVertices()
     {
         return this.accounts.keySet();
     }
+
+
 
 }
