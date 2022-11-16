@@ -39,10 +39,10 @@ public class AccountManager extends User {
         ArrayList<Vertex> users = user_graph.getVertices();
         for(Vertex i: users) {
             if (i.curr_user.equals(user1)) {
-                ArrayList<Vertex> temp = i.curr_user.getFriends();
-                for(Vertex j: temp)
-                    if(j.curr_user.equals(user2))
-                        user_graph.removeEdge(i,j);
+                ArrayList<User> temp = i.curr_user.getFriends();
+                for(User j: temp)
+                    if(j.equals(user2))
+                        user_graph.removeEdge(i,j.getEqVertex(j));
                 break;
             }
         }

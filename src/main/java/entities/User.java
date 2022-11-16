@@ -2,6 +2,8 @@ package entities;
 
 import java.util.ArrayList;
 
+import static useCases.AccountManager.*;
+
 public class User {
     private ArrayList<User> friends;
     private String username, email, password;
@@ -53,6 +55,17 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public Vertex getEqVertex(User user)
+    {
+        ArrayList<Vertex> users = user_graph.getVertices();
+        for(Vertex i: users)
+        {
+            if(i.curr_user.equals(user))
+                return i;
+        }
+        return null;
     }
 
     public String getEmail() {
