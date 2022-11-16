@@ -115,6 +115,5 @@ class FriendRecommenderTest {
         FriendRecommender fRec = new FriendRecommender();
         Vertex rec = fRec.getRecommend(keys.get(0), graph);
         assertEquals(keys.get(4),rec); //Get the most common friend between your friends
-
     }
 }
