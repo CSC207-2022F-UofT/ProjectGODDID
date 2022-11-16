@@ -8,8 +8,6 @@ import entities.User;
 
 public class Report {
 
-    public User account_checking;
-
     public List<String> hatewords(){
         List<String> hate_words = new ArrayList<String>();
         try {
@@ -23,9 +21,7 @@ public class Report {
             error.printStackTrace();
         }
         String[] array = {"fuck", "shit", "bitch", "pussy", "cunt", "dick", "twat", "cock", "cuck"};
-        for(String lang:array) {
-            hate_words.add(lang);
-        }
+        hate_words.addAll(Arrays.asList(array));
         return hate_words;
     }
 
@@ -39,8 +35,7 @@ public class Report {
 
     public List<String> ConvertToLostOfStrings(String s){
         String[] array1 = s.split("");
-        List<String> message = new ArrayList<String>(Arrays.asList(array1));
-        return message;
+        return new ArrayList<String>(Arrays.asList(array1));
     }
 
     public boolean checkOffensive(String s){
@@ -69,16 +64,7 @@ public class Report {
 
     public boolean checkBan(User user1){
         int number_stikes = user1.getNum_strikes();
-        if (number_stikes < 3){
-            user1.addStrike();
-            if (user1.getNum_strikes() == 3) {
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        return true;
+        return number_stikes >= 3;
 
     }
 
@@ -88,18 +74,20 @@ public class Report {
         int index = all_messages.size() - 1;
         while (index >= 0) {
             String s = all_messages.get(index);
-            String arr[] = s.split(":", 2);
+            String[] arr = s.split(":", 2);
             String name = arr[0];
-            if (Objects.equals(name, account_checking.getUsername())) {
-                boolean is_ban = checkOffensive(s);
-                if (is_ban) {
+            if (Objects.equals(name, user2.getUsername())) {
+                boolean bool = checkOffensive(s);
+                if (bool) {
                     AccountManager manager = new AccountManager();
                     FriendRemover remover = new FriendRemover();
                     remover.remove(user1, user2, manager);
                     manager.blockUser(user1, user2);
-                    boolean bool = checkBan(user2);
-                    if (bool){
+                    user2.addStrike();  //strike added to user 2 for vulgar language
+                    boolean is_ban = checkBan(user2);
+                    if (is_ban){
                         // user2 is banned//
+                        manager.removeUser(user2);
                     }
 
                     break;
