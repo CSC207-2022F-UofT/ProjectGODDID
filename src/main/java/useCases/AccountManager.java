@@ -34,8 +34,16 @@ public class AccountManager extends User {
 
     public void removeFriend(User user1, User user2)
     {
-        user_graph.removeEdge(user1.getUsername(), user1.getAccountType(), user1,
-                user2.getUsername(), user2.getAccountType(), user2);
+        ArrayList<Vertex> users = user_graph.getVertices();
+        for(Vertex i: users) {
+            if (i.curr_user.equals(user1)) {
+                ArrayList<Vertex> temp = i.curr_user.getFriends();
+                for(Vertex j: temp)
+                    if(j.curr_user.equals(user2))
+                        user_graph.removeEdge(i,j);
+                break;
+            }
+        }
     }
 
     public void removeUser(User curr_user)

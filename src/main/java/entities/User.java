@@ -2,15 +2,17 @@ package entities;
 
 import java.util.ArrayList;
 
+import static useCases.AccountManager.*;
+
 public class User {
-    private ArrayList<User> friends;
+    private ArrayList<Vertex> friends;
     private String username, email, password;
     public String acc_type;
     public int points;
 
     public User(){
         points = 0;
-        friends = new ArrayList<User>();
+        friends = new ArrayList<Vertex>();
     }
 
     public void setUsername(String name){
@@ -33,7 +35,18 @@ public class User {
         return this.acc_type;
     }
 
-    public void setFriends(ArrayList<User> friends) {
+    public Vertex getEqVertex(User user)
+    {
+        ArrayList<Vertex> users = user_graph.getVertices();
+        for(Vertex i: users)
+        {
+            if(i.curr_user.equals(user))
+                return i;
+        }
+        return null;
+    }
+
+    public void setFriends(ArrayList<Vertex> friends) {
         this.friends = friends;
     }
 
@@ -61,7 +74,7 @@ public class User {
         return password;
     }
 
-    public ArrayList<User> getFriends() {
+    public ArrayList<Vertex> getFriends() {
         return friends;
     }
 }
