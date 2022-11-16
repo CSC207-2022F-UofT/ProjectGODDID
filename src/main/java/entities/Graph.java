@@ -16,11 +16,12 @@ public class Graph{
         accounts.remove(new Vertex(name, account_type, curr_user));
     }
 
-    public void addEdge(String user1, String a1, User u1, String user2, String a2, User u2)
+    //public void addEdge(String user1, String a1, User u1, String user2, String a2, User u2)
+    public void addEdge(Vertex v1, Vertex v2)
     {
         //user 1 adds user 2 as a friend.
-        Vertex v1 = new Vertex(user1, a1, u1);
-        Vertex v2 = new Vertex(user2, a2, u2);
+        //Vertex v1 = new Vertex(user1, a1, u1);
+        //Vertex v2 = new Vertex(user2, a2, u2);
         accounts.get(v1).add(v2);
     }
 
