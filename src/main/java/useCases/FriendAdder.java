@@ -14,7 +14,7 @@ public class FriendAdder {
     */
     public void add(User currUser, User friend, AccountManager manager)
     {
-        currUser.getFriends().add(friend.getEqVertex(friend));
+        currUser.getFriends().add((friend.getEqVertex(friend)).curr_user);
         manager.addFriend(currUser, friend);
         //allUsers.addEdge(currUser.getUsername(),currUser.getAccountType(), currUser, friend.getUsername(), friend.getAccountType(), friend);
     }
