@@ -2,6 +2,9 @@ package useCases;
 import entities.*;
 import UI.*;
 
+import java.lang.reflect.Array;
+import java.util.*;
+
 public class AccountManager extends User {
     public static Graph user_graph = new Graph();//so that every time a new user is registered (while doing this
     //an object of account manager is created), each object of account manager refers to the same graph.
@@ -19,8 +22,14 @@ public class AccountManager extends User {
 
     public void addFriend(User user1, User user2)
     {
-        //user_graph.addEdge(user1.getUsername(), user1.getAccountType(), user1,
-        //        user2.getUsername(), user2.getAccountType(), user2);
+        ArrayList<Vertex> users = user_graph.getVertices();
+        for(Vertex i: users) {
+            if (i.curr_user.equals(user1)) {
+                Vertex temp = new Vertex(user2.getUsername(), user2.getAccountType(), user2);
+                user_graph.addEdge(i, temp);
+                break;
+            }
+        }
     }
 
     public void removeFriend(User user1, User user2)

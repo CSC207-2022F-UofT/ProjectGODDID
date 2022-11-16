@@ -36,11 +36,8 @@ public class Graph{
             v1_neighbours.remove(v2);
     }
 
-    public Set<Vertex> getVertices()
+    public ArrayList<Vertex> getVertices()
     {
-        return this.accounts.keySet();
+        return new ArrayList<>(this.accounts.keySet());
     }
-
-
-
 }
