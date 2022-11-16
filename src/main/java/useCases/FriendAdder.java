@@ -10,11 +10,12 @@ public class FriendAdder {
     }
 
     /*
-
+    Add friend to current users friends list and create new edge between the two in the graph of users
     */
-    public void add(User currUser, User friend, Graph allUsers)
+    public void add(User currUser, User friend, AccountManager manager)
     {
         currUser.getFriends().add(friend);
-        allUsers.addEdge(currUser.getUsername(),currUser.getAccountType(), currUser, friend.getUsername(), friend.getAccountType(), friend);
+        manager.addFriend(currUser, friend);
+        //allUsers.addEdge(currUser.getUsername(),currUser.getAccountType(), currUser, friend.getUsername(), friend.getAccountType(), friend);
     }
 }

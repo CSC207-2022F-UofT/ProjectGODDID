@@ -19,8 +19,8 @@ public class AccountManager extends User {
 
     public void addFriend(User user1, User user2)
     {
-        user_graph.addEdge(user1.getUsername(), user1.getAccountType(), user1,
-                user2.getUsername(), user2.getAccountType(), user2);
+        //user_graph.addEdge(user1.getUsername(), user1.getAccountType(), user1,
+        //        user2.getUsername(), user2.getAccountType(), user2);
     }
 
     public void removeFriend(User user1, User user2)
@@ -32,6 +32,10 @@ public class AccountManager extends User {
     public void removeUser(User curr_user)
     {
         user_graph.removeVertex(curr_user.getUsername(), curr_user.getAccountType(), curr_user);
+    }
+
+    public Graph getGraph(){
+        return user_graph;
     }
 
 
