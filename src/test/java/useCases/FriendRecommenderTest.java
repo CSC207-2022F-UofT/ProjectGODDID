@@ -105,7 +105,7 @@ class FriendRecommenderTest {
         }
         //System.out.println(friends.size());
         curUser.setFriends(friends);
-        assertEquals(5,curUser.getFriends().size()); //adds repeat friends???
+        assertEquals(5,curUser.getFriends().size()); //adds repeat friends??
     }
 
     @Test
