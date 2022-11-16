@@ -16,7 +16,7 @@ public class AccountManager extends User {
           new_user.setEmail(mail);
           new_user.setPassword(pWord);
           new_user.setAccountType(acc_type);
-          new_user.setNum_strikes();
+          new_userco.setNum_strikes();
           new_user.setBlocked_friends();
           user_graph.addVertex(new_user.getUsername(), new_user.getAccountType(), new_user);
           //user_graph.getVertices();
