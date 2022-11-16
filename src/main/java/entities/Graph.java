@@ -12,9 +12,8 @@ public class Graph  implements Serializable {
 
     public void removeVertex(String name, String account_type, User curr_user)
     {
-        Vertex v = new Vertex(name, account_type, curr_user);
-        accounts.values().forEach(e -> e.remove(v));
-        accounts.remove(new Vertex(name, account_type, curr_user));
+        accounts.values().forEach(e -> e.remove(curr_user.getEqVertex(curr_user)));
+        accounts.remove(curr_user.getEqVertex(curr_user));
     }
 
     //public void addEdge(String user1, String a1, User u1, String user2, String a2, User u2)
