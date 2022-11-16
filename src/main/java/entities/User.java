@@ -7,8 +7,6 @@ public class User {
     private String username, email, password;
     public String acc_type;
     public int points;
-    private ArrayList<User> blocked_friends;
-    private int num_strikes;
 
     public User(){
         points = 0;
@@ -43,14 +41,6 @@ public class User {
         this.points = points;
     }
 
-    public void setBlocked_friends(){
-        this.blocked_friends = new ArrayList<User>();
-    }
-
-    public void setNum_strikes(){
-        this.num_strikes = 0;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -71,23 +61,7 @@ public class User {
         return password;
     }
 
-    public ArrayList<User> getBlocked_friends(){
-        return blocked_friends;
-    }
-
     public ArrayList<User> getFriends() {
         return friends;
-    }
-
-    public int getNum_strikes(){
-        return num_strikes;
-    }
-
-    public void addStrike(){
-        this.num_strikes += 1;
-    }
-
-    public void addblocked(User user){
-        blocked_friends.add(user);
     }
 }
