@@ -1,7 +1,8 @@
 package entities;
+import java.io.Serializable;
 import java.util.*;
 
-public class Graph{
+public class Graph  implements Serializable {
     public Map<Vertex, List<Vertex>> accounts = new HashMap<>();
 
     public void addVertex(String name, String account_type, User curr_user)
