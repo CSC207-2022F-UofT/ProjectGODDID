@@ -65,4 +65,3 @@ public class User {
         return friends;
     }
 }
-

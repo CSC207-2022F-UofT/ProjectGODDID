@@ -71,6 +71,10 @@ class RegisterScreen extends JFrame implements ActionListener
         setTitle("Register Form");         //set title to the login form
     }
 
+    public JPanel getPanel(){
+        return newPanel;
+    }
+
     //define abstract method actionPerformed() which will be called on button click
     public void actionPerformed(ActionEvent ae)     //pass action listener as a parameter
     {
