@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import static useCases.AccountManager.*;
 
 public class User {
-    private ArrayList<Vertex> friends;
+    private ArrayList<User> friends;
     private String username, email, password;
     public String acc_type;
     public int points;
@@ -14,7 +14,7 @@ public class User {
 
     public User(){
         points = 0;
-        friends = new ArrayList<Vertex>();
+        friends = new ArrayList<User>();
     }
 
     public void setUsername(String name){
@@ -37,18 +37,7 @@ public class User {
         return this.acc_type;
     }
 
-    public Vertex getEqVertex(User user)
-    {
-        ArrayList<Vertex> users = user_graph.getVertices();
-        for(Vertex i: users)
-        {
-            if(i.curr_user.equals(user))
-                return i;
-        }
-        return null;
-    }
-
-    public void setFriends(ArrayList<Vertex> friends) {
+    public void setFriends(ArrayList<User> friends) {
         this.friends = friends;
     }
 
@@ -68,6 +57,17 @@ public class User {
         return username;
     }
 
+    public Vertex getEqVertex(User user)
+    {
+        ArrayList<Vertex> users = user_graph.getVertices();
+        for(Vertex i: users)
+        {
+            if(i.curr_user.equals(user))
+                return i;
+        }
+        return null;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -84,15 +84,11 @@ public class User {
         return password;
     }
 
-<<<<<<<<< Temporary merge branch 1
     public ArrayList<User> getBlocked_friends(){
         return blocked_friends;
     }
 
     public ArrayList<User> getFriends() {
-=========
-    public ArrayList<Vertex> getFriends() {
->>>>>>>>> Temporary merge branch 2
         return friends;
     }
 
