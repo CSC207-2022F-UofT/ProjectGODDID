@@ -8,14 +8,18 @@ import java.util.ArrayList;
 
 public class ReadFile implements Serializable{
 
-    public ArrayList<User> readObject() throws IOException, ClassNotFoundException {
+    public ArrayList<User> readobject() throws IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream("Users.ser");
         ObjectInputStream ois = new ObjectInputStream(fis);
         ArrayList<User> users;
 
+
+
         users = (ArrayList<User>) ois.readObject();
+
         ois.close();
         fis.close();
+
 
         return users;
 

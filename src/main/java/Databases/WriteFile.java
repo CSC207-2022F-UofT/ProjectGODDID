@@ -15,7 +15,7 @@ public class WriteFile implements Serializable{
 
         try {
             ReadFile reader = new ReadFile();
-            users = reader.readObject();
+            users = reader.readobject();
             users.add(user);
             oos.writeObject(users);
 

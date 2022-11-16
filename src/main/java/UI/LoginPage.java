@@ -4,6 +4,7 @@ import Databases.ReadFile;
 
 import Databases.WriteFile;
 import entities.User;
+import useCases.LoginMatcher;
 import useCases.UserCreator;
 
 import java.awt.*;
@@ -23,7 +24,11 @@ public class LoginPage implements ActionListener{
     JLabel userPasswordLabel = new JLabel("password:");
     JLabel messageLabel = new JLabel();
 
-    ArrayList<User> logininfo;
+
+
+    LoginMatcher chatOpen = new LoginMatcher();
+
+    ArrayList<User> logininfos;
     WriteFile userwr = new WriteFile();
     ReadFile userrd = new ReadFile();
 
@@ -81,13 +86,13 @@ public class LoginPage implements ActionListener{
 
         if(e.getSource()==loginButton) {
             try {
-                logininfo = userrd.readObject();
+                logininfos = userrd.readobject();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             } catch (ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
-            for (User i : logininfo) {
+            for (User i : logininfos) {
                 String userID = userIDField.getText();
                 String password = String.valueOf(userPasswordField.getPassword());
 
@@ -96,7 +101,16 @@ public class LoginPage implements ActionListener{
                         messageLabel.setForeground(Color.green);
                         messageLabel.setText("Login successful");
                         frame.dispose();
-                        WelcomePage welcomePage = new WelcomePage(userID);
+
+                        try {
+                            if (!chatOpen.openChat(i).equals("false")){
+                                ChatUIGame chatui = new ChatUIGame();
+                            } else {
+                                WelcomePage welcomePage = new WelcomePage(userID);
+                            }
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     } else {
                         messageLabel.setForeground(Color.red);
                         messageLabel.setText("Wrong password");
