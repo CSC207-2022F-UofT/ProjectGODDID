@@ -13,6 +13,8 @@ public class AccountManager extends User {
           new_user.setEmail(mail);
           new_user.setPassword(pWord);
           new_user.setAccountType(acc_type);
+          new_user.setNum_strikes();
+          new_user.setBlocked_friends();
           user_graph.addVertex(new_user.getUsername(), new_user.getAccountType(), new_user);
           //user_graph.getVertices();
     }
@@ -32,6 +34,13 @@ public class AccountManager extends User {
     public void removeUser(User curr_user)
     {
         user_graph.removeVertex(curr_user.getUsername(), curr_user.getAccountType(), curr_user);
+    }
+
+    public void blockUser(User user1, User user2)
+    {
+     user_graph.removeEdge(user1.getUsername(), user1.getAccountType(), user1,
+             user2.getUsername(), user2.getAccountType(), user2);
+     user1.addblocked(user2);
     }
 
     public Graph getGraph(){

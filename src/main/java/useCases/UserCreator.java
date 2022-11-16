@@ -6,6 +6,8 @@ public class UserCreator {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
+        user.setBlocked_friends();
+        user.setNum_strikes();
         return user;
     }
 }

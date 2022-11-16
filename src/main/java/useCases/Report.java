@@ -3,9 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-import entities.Graph;
 import entities.User;
-import entities.Vertex;
 
 
 public class Report {
@@ -69,6 +67,21 @@ public class Report {
         return false;
     }
 
+    public boolean checkBan(User user1){
+        int number_stikes = user1.getNum_strikes();
+        if (number_stikes < 3){
+            user1.addStrike();
+            if (user1.getNum_strikes() == 3) {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+
+    }
+
     public void CheckReport(String filename, User user1, User user2){
         ReadFile file = new ReadFile(filename);
         ArrayList<String> all_messages = file.ReadFiles();
@@ -80,7 +93,15 @@ public class Report {
             if (Objects.equals(name, account_checking.getUsername())) {
                 boolean is_ban = checkOffensive(s);
                 if (is_ban) {
-                    AccountManager.removeFriend(user1, user2);
+                    AccountManager manager = new AccountManager();
+                    FriendRemover remover = new FriendRemover();
+                    remover.remove(user1, user2, manager);
+                    manager.blockUser(user1, user2);
+                    boolean bool = checkBan(user2);
+                    if (bool){
+                        // user2 is banned//
+                    }
+
                     break;
                 }
             }
