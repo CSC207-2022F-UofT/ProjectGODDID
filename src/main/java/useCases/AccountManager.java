@@ -1,7 +1,9 @@
 package useCases;
 import entities.*;
 import UI.*;
+import useCases.GraphToFile;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -9,6 +11,7 @@ import java.util.*;
 public class AccountManager{
     public static Graph user_graph = new Graph();//so that every time a new user is registered (while doing this
     //an object of account manager is created), each object of account manager refers to the same graph.
+    public GraphToFile g = new GraphToFile();
 
     public void addUser(String name, String pWord, String acc_type) {
         User new_user = new User(name, acc_type);
@@ -73,6 +76,14 @@ public class AccountManager{
         return user_graph;
     }
 
+    public void addGraphToFile(Graph graph)
+    {
+        g.AddToFile(graph);
+    }
+
+    public Graph readGraphFromFile() throws IOException, ClassNotFoundException {
+        return g.ReadFromFile();
+    }
 }
 
 

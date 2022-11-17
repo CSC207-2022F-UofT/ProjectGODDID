@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class FriendRemoverTest {
+public class UserCreatorTest {
 
     AccountManager accountManager = new AccountManager();
     User user1, user2, user3, user4, user5;
@@ -53,6 +53,7 @@ public class FriendRemoverTest {
         accountManager.addUser(user5);
         //accountManager.addUser("Echo", "123","mail","Casual");
 
+
     }
 
     @AfterEach
@@ -60,19 +61,15 @@ public class FriendRemoverTest {
     }
 
     @Test
-    void removeFriend() {
-        FriendRemover fr = new FriendRemover();
-        FriendAdder fd = new FriendAdder();
-        fd.addFriend(user1, user2, accountManager);
-        fd.addFriend(user1, user3, accountManager);
-        fd.addFriend(user1, user4, accountManager);
-
-        fr.remove(user1, user2, accountManager);
-        fr.remove(user1, user3, accountManager);
-
-        assert(!user1.getFriends().contains(user2));
-        assert(!user1.getFriends().contains(user3));
-        assert(user1.getFriends().contains(user4));
+    void addUser() {
+        AccountManager am = new AccountManager();
+        AccountManager.user_graph.accounts.clear();
+        System.out.println(am.getGraph().getUsers());
+        am.addUser(user1);
+        am.addUser(user2);
+        System.out.println(am.getGraph().getUsers());
+        assert(am.getGraph().getUsers().size() == 2);
 
     }
+
 }
