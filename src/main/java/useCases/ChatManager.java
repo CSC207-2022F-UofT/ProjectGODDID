@@ -10,6 +10,7 @@ import UI.*;
 public class ChatManager{
     public User mainUser;
     public User matchedUser;
+    ArrayList<String> messages;
     String fileName = "";
     ChatScreen chat;
 
@@ -43,11 +44,11 @@ public class ChatManager{
     }
 
     public void sendMessage(String message){
-
+        new AddToTextFile(chat.getMessage(), mainUser.getUsername(), fileName);
     }
 
     public void retrieveMessages(){
-
+        messages = new ReadFile(fileName).ReadFiles();
     }
 
     public void endChat(){

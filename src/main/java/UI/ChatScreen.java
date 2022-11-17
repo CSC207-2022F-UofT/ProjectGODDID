@@ -1,5 +1,8 @@
 package UI;
 
+import useCases.AddToTextFile;
+import useCases.ChatManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,9 +18,11 @@ public class ChatScreen extends JFrame implements ActionListener{
     - update event log after each event
      */
     boolean reported = false;
+    String message = "";
 
-    // initializing all buttons to be accessed both by actionPerformed and constructor
+    // initializing all buttons and text fields to be accessed both by actionPerformed and constructor
     JButton newGame; JButton send; JButton report; JButton back;
+    JTextField sendMessage;
 
     // constructor for when a chat screen is opened
     public ChatScreen(String mainUser, String matchedUser){
@@ -32,8 +37,12 @@ public class ChatScreen extends JFrame implements ActionListener{
         label.setVerticalAlignment(JLabel.TOP);
         label.setHorizontalAlignment(JLabel.CENTER);
 
+        // TODO: Display Messages
+        JTextArea displayed = new JTextArea();
+
         // Text field where the used inputs their message
-        JTextField sendMessage = new JTextField(26); //increase max?
+        sendMessage = new JTextField(); //increase max?
+        sendMessage.setPreferredSize(new Dimension(320, 30));
 
         // Button to send the message typed in the sendMessage text field
         send = new JButton();
@@ -109,6 +118,7 @@ public class ChatScreen extends JFrame implements ActionListener{
         } else if (e.getSource()==send) {
             // will send the typed message in the text field
             // add to text file and retrieve from text file
+            message = sendMessage.getText();
 
         } else if (e.getSource()==report) {
             // will use the report feature to send the chat data to be reported at the end of the day when chat ends
@@ -122,6 +132,7 @@ public class ChatScreen extends JFrame implements ActionListener{
         } else if (e.getSource()==back) {
             //leaves the chat screen
             HomeScreen home = new HomeScreen();
+            //code to exit chat screen
         }
     }
 
@@ -131,6 +142,10 @@ public class ChatScreen extends JFrame implements ActionListener{
 
     public void setReported(boolean update){
         this.reported = update;
+    }
+
+    public String getMessage(){
+        return message;
     }
 }
 

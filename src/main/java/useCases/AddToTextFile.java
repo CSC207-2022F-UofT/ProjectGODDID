@@ -4,9 +4,9 @@ import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;  // Import the IOException class to handle errors
 
 public class AddToTextFile{
-    public AddToTextFile(String s, String username){
+    public AddToTextFile(String s, String username, String fileName){
         try {
-            FileWriter writer = new FileWriter("file1.txt");
+            FileWriter writer = new FileWriter(fileName);
             writer.write(username + ": " + s);
             writer.close();
             }
