@@ -27,8 +27,18 @@ public class Graph  implements Serializable {
 
     public void removeEdge(Vertex v1, Vertex v2)
     {
-        if (accounts.get(v1) != null)
-            accounts.get(v1).remove(v2);
+        System.out.println(accounts.get(v1) + "account count");
+        System.out.println(v2 + "remover");
+        if (accounts.get(v1) != null) {
+            for (Vertex i : accounts.get(v1)){
+                if (i.curr_user.getUsername().equals(v2.user_name)){
+                    accounts.get(v1).remove(i);
+                }
+            }
+            //accounts.get(v1).remove(v2);
+            System.out.println(accounts.get(v1)+ "account count new");
+        }
+
     }
 
     public ArrayList<Vertex> getVertices()

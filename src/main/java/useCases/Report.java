@@ -81,7 +81,7 @@ public class Report {
                 if (bool) {
                     AccountManager manager = new AccountManager();
                     FriendRemover remover = new FriendRemover();
-                    remover.remove(user1, user2, manager);
+                    //remover.remove(user1, user2, manager);
                     manager.blockUser(user1, user2);
                     user2.addStrike();  //strike added to user 2 for vulgar language
                     boolean is_ban = checkBan(user2);

@@ -32,16 +32,21 @@ public class AccountManager extends User {
         }
     }
 
-    public void removeFriend(User user1, User user2) {
+    //public void removeFriend(User user1, User user2) {
+    public void removeFriend(Vertex user1, Vertex user2) {
         ArrayList<Vertex> users = user_graph.getVertices();
         for (Vertex i : users) {
-            if (i.curr_user.equals(user1)) {
+            System.out.println(i);
+            if (i.curr_user.getUsername().equals(user1.user_name)) {
+                //user_graph.accounts.get(i).remove(user1);
+                //user_graph.removeEdge(i, user2.getEqVertex(user2));
                 ArrayList<User> temp = i.curr_user.getFriends();
                 //System.out.println(i.curr_user.getFriends());
                 for (User j : temp) {
-                    System.out.println(j);
-                    System.out.println(user2 + "user");
-                    if (j.equals(user2))
+                    //System.out.println(j);
+                    //System.out.println(user2 + "user");
+                    if (j.getUsername().equals(user2.user_name));
+                    //    System.out.println(j.getEqVertex(j) + "get vertex");
                         user_graph.removeEdge(i, j.getEqVertex(j));
                 }
                 break;

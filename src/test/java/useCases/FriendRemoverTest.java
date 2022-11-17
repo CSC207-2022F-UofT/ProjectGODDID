@@ -31,7 +31,8 @@ class FriendRemoverTest {
         friendAdder.add(keys.get(0).curr_user, keys.get(1).curr_user, accountManager);
         friendAdder.add(keys.get(0).curr_user, keys.get(2).curr_user, accountManager);
         FriendRemover friendRemover = new FriendRemover();
-        friendRemover.remove(keys.get(0).curr_user, keys.get(1).curr_user, accountManager);
+        System.out.println(accountManager.getGraph().accounts);
+        friendRemover.remove(keys.get(0), keys.get(1), accountManager);
         //assertEquals(1, keys.get(0).curr_user.getFriends().size());
         assertEquals(1, accountManager.getGraph().accounts.get(keys.get(0)).size());
     }
