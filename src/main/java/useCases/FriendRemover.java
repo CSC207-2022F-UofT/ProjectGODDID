@@ -11,10 +11,11 @@ public class FriendRemover {
     /*
     Add friend to current users friends list and create new edge between the two in the graph of users
     */
-    public void remove(Vertex currUser, Vertex friend, AccountManager manager)
+    public void remove(User currUser, User friend, AccountManager manager)
     {
+        currUser.getFriends().remove(friend);
+        friend.getFriends().remove(currUser);
         manager.removeFriend(currUser, friend);
-        currUser.curr_user.getFriends().remove(friend.curr_user);
         //allUsers.removeEdge(currUser.getUsername(),currUser.getAccountType(), currUser, friend.getUsername(), friend.getAccountType(), friend);
     }
 }

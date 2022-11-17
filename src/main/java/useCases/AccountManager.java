@@ -5,64 +5,67 @@ import UI.*;
 import java.lang.reflect.Array;
 import java.util.*;
 
-public class AccountManager extends User {
+//public class AccountManager extends User {
+public class AccountManager{
     public static Graph user_graph = new Graph();//so that every time a new user is registered (while doing this
     //an object of account manager is created), each object of account manager refers to the same graph.
 
-    public void addUser(String name, String pWord, String mail, String acc_type) {
-        User new_user = new User();
-        new_user.setUsername(name);
-        new_user.setEmail(mail);
-        new_user.setPassword(pWord);
-        new_user.setAccountType(acc_type);
-        new_user.setNum_strikes();
-        new_user.setBlocked_friends();
-        user_graph.addVertex(new_user.getUsername(), new_user.getAccountType(), new_user);
-        //user_graph.getVertices();
-    }
-
-    public void addFriend(User user1, User user2) {
-        ArrayList<Vertex> users = user_graph.getVertices();
-        for (Vertex i : users) {
-            if (i.curr_user.equals(user1)) {
-                Vertex temp = new Vertex(user2.getUsername(), user2.getAccountType(), user2);
-                user_graph.addEdge(i, temp);
-                break;
-            }
+    public void addUser(String name, String pWord, String acc_type) {
+        User new_user = new User(name, acc_type);
+        if(!user_graph.accounts.containsKey(new_user))
+        {
+            new_user.setUsername(name);
+            new_user.setPassword(pWord);
+            new_user.setAccountType(acc_type);
+            new_user.setNum_strikes();
+            new_user.setBlocked_friends();
+            user_graph.accounts.putIfAbsent(new_user, new ArrayList<>());
         }
     }
 
-    //public void removeFriend(User user1, User user2) {
-    public void removeFriend(Vertex user1, Vertex user2) {
-        ArrayList<Vertex> users = user_graph.getVertices();
-        for (Vertex i : users) {
-            System.out.println(i);
-            if (i.curr_user.getUsername().equals(user1.user_name)) {
-                //user_graph.accounts.get(i).remove(user1);
-                //user_graph.removeEdge(i, user2.getEqVertex(user2));
-                ArrayList<User> temp = i.curr_user.getFriends();
-                //System.out.println(i.curr_user.getFriends());
-                for (User j : temp) {
-                    //System.out.println(j);
-                    //System.out.println(user2 + "user");
-                    if (j.getUsername().equals(user2.user_name));
-                    //    System.out.println(j.getEqVertex(j) + "get vertex");
-                        user_graph.removeEdge(i, j.getEqVertex(j));
+    public void addUser(User user)
+    {
+        user_graph.accounts.putIfAbsent(user, new ArrayList<>());
+    }
+
+    public void addFriend(User currUser, User friendToAdd) {
+        if(user_graph.accounts.containsKey(currUser))
+        {
+            ArrayList<User> users = user_graph.getUsers();
+            for (User i : users) {
+                if (i.equals(currUser)) {
+                    user_graph.accounts.get(currUser).add(friendToAdd);
+                    break;
                 }
-                break;
             }
         }
     }
 
-    public void removeUser(User curr_user) {
-        user_graph.removeVertex(curr_user.getUsername(), curr_user.getAccountType(), curr_user);
+    public void removeFriend(User currUser, User friendToRemove) {
+        if(user_graph.accounts.containsKey(currUser))
+        {
+            ArrayList<User> users = user_graph.getUsers();
+            for (User i : users) {
+                if (i.equals(currUser)) {
+                    user_graph.accounts.get(currUser).remove(friendToRemove);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void removeUser(User userToBeRemoved)
+    {
+        if(user_graph.accounts.containsKey(userToBeRemoved))
+        {
+            user_graph.accounts.values().forEach(e -> e.remove(userToBeRemoved));
+            user_graph.accounts.remove(userToBeRemoved);
+        }
     }
 
     public void blockUser(User user1, User user2) {
-        Vertex v1 = user1.getEqVertex(user1);
-        Vertex v2 = user2.getEqVertex(user2);
-        Graph graph = new Graph();
-        graph.removeEdge(v1, v2);
+        user_graph.getUsers();
+        this.removeFriend(user1, user2);
         user1.addblocked(user2);
     }
 
