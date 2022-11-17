@@ -46,9 +46,8 @@ public class PointsSystem{
         else{
             int newPoints = earnCases.get(earnCase);
             X.points += newPoints;
-            return "Points renewed successfully"
+            return "Points renewed successfully";
         }
-        return "Points could not be renewed";
     }
 
 

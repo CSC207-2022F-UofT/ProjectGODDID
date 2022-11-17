@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLOutput;
 
 public class ChatScreen extends JFrame implements ActionListener{
     /* TODO:
@@ -108,13 +109,19 @@ public class ChatScreen extends JFrame implements ActionListener{
         } else if (e.getSource()==send) {
             // will send the typed message in the text field
             // add to text file and retrieve from text file
+
         } else if (e.getSource()==report) {
             // will use the report feature to send the chat data to be reported at the end of the day when chat ends
-            reported = true; // TODO: output to user that report went through?
+            int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to report?",
+                    "Report", JOptionPane.YES_NO_OPTION);
+
+            if (answer == 0){
+                reported = true;
+            }
 
         } else if (e.getSource()==back) {
             //leaves the chat screen
-
+            HomeScreen home = new HomeScreen();
         }
     }
 

@@ -1,7 +1,10 @@
 package useCases;
 
+import EventRepository.Event;
 import entities.*;
 import java.io.File;
+import java.util.ArrayList;
+
 import UI.*;
 
 public class ChatManager{
@@ -18,7 +21,7 @@ public class ChatManager{
     public void startChat(boolean usedPoints){
         // if-else to execute the correct code depending on if the main user used their points
         if (usedPoints){
-            matchedUser = ... // TODO: get selected user from points manager class
+            //matchedUser = ; // TODO: get selected user from points manager class
         } else {
             matchedUser = this.selectUser();
         }
@@ -39,7 +42,7 @@ public class ChatManager{
         return mainUser.getFriends().get(index);
     }
 
-    public void sendMessage(){
+    public void sendMessage(String message){
 
     }
 
@@ -48,14 +51,21 @@ public class ChatManager{
     }
 
     public void endChat(){
+        ArrayList <User> users = new ArrayList<User>();
+        users.add(mainUser); users.add(matchedUser);
+        Report report = new Report();
+
         if (chat.getReported()){
-            Report.checkReport(fileName, mainUser, matchedUser);
+            report.checkReport(fileName, mainUser, matchedUser);
         }
-        // call point manager to attribute points (speak w/ malhar)
+
+        Event e = new Event("ChatEnd", users, false);
+        e.execute();
+
         // delete text file and reset instance attributes after (speak w/ mert)
         matchedUser = null;
         fileName = "";
-        chat = null;
         chat.setReported(false);
+        chat = null;
     }
 }
