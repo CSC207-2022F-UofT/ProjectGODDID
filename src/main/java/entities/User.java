@@ -6,7 +6,7 @@ import static useCases.AccountManager.*;
 
 public class User {
     private ArrayList<User> friends;
-    private String username, email, password;
+    private String username, password;
     public String acc_type;
     public int points;
     private ArrayList<User> blocked_friends;
@@ -23,9 +23,6 @@ public class User {
         username = name;
     }
 
-    public void setEmail(String mail){
-        email = mail;
-    }
 
     public void setPassword(String pWord){
         password = pWord;
@@ -59,20 +56,6 @@ public class User {
         return username;
     }
 
-//    public Vertex getEqVertex(User user)
-//    {
-//        ArrayList<Vertex> users = user_graph.getVertices();
-//        for(Vertex i: users)
-//        {
-//            if(i.curr_user.equals(user))
-//                return i;
-//        }
-//        return null;
-//    }
-
-    public String getEmail() {
-        return email;
-    }
 
     public int getPoints() {
         return points;
