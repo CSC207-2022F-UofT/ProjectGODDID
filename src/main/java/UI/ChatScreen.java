@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class ChatScreen extends JFrame implements ActionListener{
+public class ChatScreen extends JFrame implements ActionListener{
     /* TODO:
     - fix colours
     - make chat panel scrollable
@@ -14,14 +14,13 @@ class ChatScreen extends JFrame implements ActionListener{
     - update event log after each event
     - add comments
      */
+    boolean reported = false;
 
     // initializing all buttons to be accessed both by actionPerformed and constructor
     JButton newGame; JButton send; JButton report; JButton back;
 
     // constructor for when a chat screen is opened
-    ChatScreen(){
-        String matchedUser = "";
-
+    public ChatScreen(String mainUser, String matchedUser){
         // Commonly used variables
         Color cream = new Color(247, 239, 215);
         Color yellowish = new Color(232, 220, 184);
@@ -29,7 +28,7 @@ class ChatScreen extends JFrame implements ActionListener{
 
         // Label to identify who you are currently chatting with
         JLabel label = new JLabel();
-        label.setText("MatchedUser"); //testing, change to variable of matched user real name after
+        label.setText("Speaking with " + matchedUser); //testing, change to variable of matched user real name after
         label.setVerticalAlignment(JLabel.TOP);
         label.setHorizontalAlignment(JLabel.CENTER);
 
@@ -81,7 +80,7 @@ class ChatScreen extends JFrame implements ActionListener{
 
         // Frame containing all the created objects
         JFrame frame = new JFrame();
-        frame.setTitle("Chat with "+matchedUser);
+        frame.setTitle(mainUser + "'s chat with " + matchedUser);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setSize(500,500);
@@ -106,18 +105,26 @@ class ChatScreen extends JFrame implements ActionListener{
         // TODO: Code for actions of each button
         if (e.getSource()==newGame){
             // will send a new ticktacktoe game to start with the matched user
-            System.out.println("hi");
+
         } else if (e.getSource()==send) {
             // will send the typed message in the text field
-
-
+            // add to text file and retrieve from text file
         } else if (e.getSource()==report) {
             // will use the report feature to send the chat data to be reported at the end of the day when chat ends
+            reported = true; // TODO: output to user that report went through?
 
         } else if (e.getSource()==back) {
             //leaves the chat screen
 
         }
+    }
+
+    public boolean getReported(){
+        return reported;
+    }
+
+    public void setReported(boolean update){
+        this.reported = update;
     }
 }
 
@@ -125,7 +132,7 @@ class runScreen{
     public static void main(String[] args){
         try
         {
-            ChatScreen chat = new ChatScreen();
+            ChatScreen chat = new ChatScreen("User1", "User2");
             chat.setVisible(true);
         }
         catch(Exception e)

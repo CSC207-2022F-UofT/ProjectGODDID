@@ -68,7 +68,7 @@ public class Report {
 
     }
 
-    public void CheckReport(String filename, User user1, User user2){
+    public void checkReport(String filename, User user1, User user2){
         ReadFile file = new ReadFile(filename);
         ArrayList<String> all_messages = file.ReadFiles();
         int index = all_messages.size() - 1;
