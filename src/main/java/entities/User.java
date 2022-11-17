@@ -2,27 +2,90 @@ package entities;
 
 import java.util.ArrayList;
 
+import static useCases.AccountManager.*;
+
 public class User {
     private ArrayList<User> friends;
-    private String username, email, password;
-    private Boolean premium;
-    private int points;
+    private String username, password;
+    public String acc_type;
+    public int points;
+    private ArrayList<User> blocked_friends;
+    private int num_strikes;
+
+    public User(String name, String acctype){
+        this.username = name;
+        this.acc_type = acctype;
+        points = 0;
+        friends = new ArrayList<User>();
+    }
+
+    public void setUsername(String name){
+        username = name;
+    }
 
 
+    public void setPassword(String pWord){
+        password = pWord;
+    }
+
+    public void setAccountType(String acc_type){
+        this.acc_type = acc_type;
+    }
+
+    public String getAccountType(){
+        return this.acc_type;
+    }
+
+    public void setFriends(ArrayList<User> friends) {
+        this.friends = friends;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public void setBlocked_friends(){
+        this.blocked_friends = new ArrayList<User>();
+    }
+
+    public void setNum_strikes(){
+        this.num_strikes = 0;
+    }
 
     public String getUsername() {
         return username;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
     public int getPoints() {
         return points;
     }
 
-    public Boolean getPremium() {
+    /*public Boolean getPremium() {
         return premium;
+    }*/
+
+    public String getPassword(  ){
+        return password;
+    }
+
+    public ArrayList<User> getBlocked_friends(){
+        return blocked_friends;
+    }
+
+    public ArrayList<User> getFriends() {
+        return friends;
+    }
+
+    public int getNum_strikes(){
+        return num_strikes;
+    }
+
+    public void addStrike(){
+        this.num_strikes += 1;
+    }
+
+    public void addblocked(User user){
+        blocked_friends.add(user);
     }
 }
