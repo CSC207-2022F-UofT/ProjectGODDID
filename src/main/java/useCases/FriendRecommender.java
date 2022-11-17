@@ -38,7 +38,7 @@ public class FriendRecommender {
         Map<User, Integer> friends = new HashMap<>();
         for (User i : allUsers.accounts.get(user)) {
             //friends.putIfAbsent(i, 0);
-            System.out.println(allUsers.accounts.get(i));
+            //System.out.println(allUsers.accounts.get(i));
             int counter = 0;
             for (User j : allUsers.accounts.get(i)) {
                 System.out.println(friends.containsKey(j));
