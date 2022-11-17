@@ -10,18 +10,22 @@ public class WriteFile implements Serializable{
 
         ArrayList<User> users = new ArrayList<User>();
 
-        FileOutputStream fos = new FileOutputStream("Users.ser");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
+
 
         try {
             ReadFile reader = new ReadFile();
             users = reader.readobject();
             users.add(user);
+
+            FileOutputStream fos = new FileOutputStream("Users.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(users);
 
             oos.close();
             fos.close();
         } catch (EOFException e){
+            FileOutputStream fos = new FileOutputStream("Users.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
             users.add(user);
 
             oos.writeObject(users);

@@ -14,7 +14,6 @@ public class ReadFile implements Serializable{
         ArrayList<User> users;
 
 
-
         users = (ArrayList<User>) ois.readObject();
 
         ois.close();

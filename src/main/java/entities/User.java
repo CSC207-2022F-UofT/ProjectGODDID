@@ -1,24 +1,20 @@
 package entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User implements Serializable {
+
+
+public class User {
     private ArrayList<User> friends;
     private String username, password;
-    private Boolean premium;
-    private int points;
+    public String acc_type;
+    public int points;
+    private ArrayList<User> blocked_friends;
+    private int num_strikes;
 
-    public User(String username, String password, ArrayList<User> friends){
-        this.username = username;
-        this.password = password;
-        points = 0;
-        this.friends = friends;
-    }
-
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
+    public User(String name, String acctype){
+        this.username = name;
+        this.acc_type = acctype;
         points = 0;
         friends = new ArrayList<User>();
     }
@@ -32,12 +28,12 @@ public class User implements Serializable {
         password = pWord;
     }
 
-    public String getPassword() {
-        return password;
+    public void setAccountType(String acc_type){
+        this.acc_type = acc_type;
     }
 
-    public void setPremium(Boolean prem){
-        premium = prem;
+    public String getAccountType(){
+        return this.acc_type;
     }
 
     public void setFriends(ArrayList<User> friends) {
@@ -48,20 +44,48 @@ public class User implements Serializable {
         this.points = points;
     }
 
+    public void setBlocked_friends(){
+        this.blocked_friends = new ArrayList<User>();
+    }
+
+    public void setNum_strikes(){
+        this.num_strikes = 0;
+    }
+
     public String getUsername() {
         return username;
     }
+
 
     public int getPoints() {
         return points;
     }
 
-    public Boolean getPremium() {
+    /*public Boolean getPremium() {
         return premium;
+    }*/
+
+    public String getPassword(  ){
+        return password;
     }
 
+    public ArrayList<User> getBlocked_friends(){
+        return blocked_friends;
+    }
 
     public ArrayList<User> getFriends() {
         return friends;
+    }
+
+    public int getNum_strikes(){
+        return num_strikes;
+    }
+
+    public void addStrike(){
+        this.num_strikes += 1;
+    }
+
+    public void addblocked(User user){
+        blocked_friends.add(user);
     }
 }

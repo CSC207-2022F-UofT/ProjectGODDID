@@ -106,7 +106,7 @@ public class LoginPage implements ActionListener{
                             if (!chatOpen.openChat(i).equals("false")){
                                 ChatUIGame chatui = new ChatUIGame();
                             } else {
-                                WelcomePage welcomePage = new WelcomePage(userID);
+                                WelcomePage welcomePage = new WelcomePage(i);
                             }
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
