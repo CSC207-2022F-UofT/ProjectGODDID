@@ -3,7 +3,9 @@ package UI;
 import Databases.ReadFile;
 
 import Databases.WriteFile;
+import entities.Graph;
 import entities.User;
+import useCases.AccountManager;
 import useCases.LoginMatcher;
 import useCases.UserCreator;
 
@@ -12,6 +14,7 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
+
 
 public class LoginPage implements ActionListener{
 
@@ -24,13 +27,11 @@ public class LoginPage implements ActionListener{
     JLabel userPasswordLabel = new JLabel("password:");
     JLabel messageLabel = new JLabel();
 
-
-
     LoginMatcher chatOpen = new LoginMatcher();
 
-    ArrayList<User> logininfos;
-    WriteFile userwr = new WriteFile();
-    ReadFile userrd = new ReadFile();
+    Graph logininfos;
+    AccountManager adder = new AccountManager();
+
 
     public LoginPage(){
 
@@ -71,28 +72,25 @@ public class LoginPage implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource()== signUp) {
-            UserCreator use = new UserCreator();
-            User user = use.CreateUser(userIDField.getText(), String.valueOf(userPasswordField.getPassword()));
-            try {
-                userwr.writefile(user);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
+
+            adder.addUser(userIDField.getText(),String.valueOf(userPasswordField.getPassword()), "casual");
+
+//            UserCreator use = new UserCreator();
+//            User user = use.CreateUser(userIDField.getText(), String.valueOf(userPasswordField.getPassword()));
+//            try {
+//                userwr.writefile(user);
+//            } catch (IOException ex) {
+//                throw new RuntimeException(ex);
+//            } catch (ClassNotFoundException ex) {
+//                throw new RuntimeException(ex);
+//            }
 
         }
 
 
         if(e.getSource()==loginButton) {
-            try {
-                logininfos = userrd.readobject();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
-            for (User i : logininfos) {
+            logininfos = adder.getGraph();
+            for (User i : logininfos.getUsers()) {
                 String userID = userIDField.getText();
                 String password = String.valueOf(userPasswordField.getPassword());
 
