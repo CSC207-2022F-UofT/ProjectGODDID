@@ -14,6 +14,7 @@ public class FriendRemover {
     public void remove(User currUser, User friend, AccountManager manager)
     {
         currUser.getFriends().remove(friend);
+        friend.getFriends().remove(currUser);
         manager.removeFriend(currUser, friend);
         //allUsers.removeEdge(currUser.getUsername(),currUser.getAccountType(), currUser, friend.getUsername(), friend.getAccountType(), friend);
     }

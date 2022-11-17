@@ -70,12 +70,12 @@ class LoginScreen extends JFrame implements ActionListener
         String passValue = textField2.getText();        //get user entered pasword from the textField2
 
         //check whether the credentials are authentic or not
-        User bob = new User();
+        User bob = new User("bob", "Casual");
         bob.setUsername("bob");
         bob.setPassword("123");
-        User joe = new User();
+        User joe = new User("joe", "Casual");
         joe.setUsername("joe");
-        User frank = new User();
+        User frank = new User("frank", "Casual");
         frank.setUsername("frank");
         ArrayList<User> users = new ArrayList<>();
         users.add(bob);

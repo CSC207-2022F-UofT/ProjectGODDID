@@ -3,7 +3,7 @@ import entities.User;
 
 public class UserCreator {
     public User CreateUser(String username, String password) {
-        User user = new User();
+        User user = new User(username, "Casual");
         user.setUsername(username);
         user.setPassword(password);
         user.setBlocked_friends();
