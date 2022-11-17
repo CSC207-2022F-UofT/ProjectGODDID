@@ -14,7 +14,7 @@ class FriendRecommenderTest {
 
     Graph graph;
 
-    AccountManager accountManager;
+    AccountManager accountManager = new AccountManager();
     User curUser, user2, user3, user4, user5;
 
     ArrayList<User> alphaFriends, deltaFriends;
@@ -60,7 +60,7 @@ class FriendRecommenderTest {
         curUser.setFriends(alphaFriends);
         //accountManager.addFriend(curUser, user2);
         //accountManager.addFriend(curUser,user3);
-        ArrayList<User> keys = new ArrayList<>(graph.accounts.keySet());
+        ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
         accountManager.addFriend(keys.get(0), keys.get(1));
         accountManager.addFriend(keys.get(0), keys.get(2));
         accountManager.addFriend(keys.get(0), keys.get(3));
@@ -87,7 +87,7 @@ class FriendRecommenderTest {
 
     @Test
     void getRecommendation() {
-        ArrayList<User> keys = new ArrayList<>(graph.accounts.keySet());
+        ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
         //System.out.println(graph.accounts.get(keys.get(0)));
         //System.out.println(user5.getFriends());
         FriendRecommender fRec = new FriendRecommender();
@@ -106,7 +106,7 @@ class FriendRecommenderTest {
 
     @Test
     void getRecommend() {
-        ArrayList<User> keys = new ArrayList<>(graph.accounts.keySet());
+        ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
         System.out.println(keys);
         FriendRecommender fRec = new FriendRecommender();
         User rec = fRec.getRecommend(keys.get(0), graph);
