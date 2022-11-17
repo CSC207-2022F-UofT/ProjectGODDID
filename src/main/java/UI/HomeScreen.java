@@ -158,7 +158,7 @@ public class HomeScreen extends JFrame implements ActionListener
 
     }
 
-    /*
+
     // main method
     public static void main(String argvs[])
     {
@@ -171,5 +171,5 @@ public class HomeScreen extends JFrame implements ActionListener
         crdl.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-     */
+
 }

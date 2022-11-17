@@ -16,8 +16,8 @@ class RegisterScreen extends JFrame implements ActionListener
     //initialize button, panel, label, and text field
     JButton b1;
     JPanel newPanel;
-    JLabel userLabel, emailLabel, passLabel, acc_typeLabel;
-    final JTextField  nameField, mailField, passField, acc_typeField;
+    JLabel userLabel, passLabel, acc_typeLabel;
+    final JTextField  nameField, passField, acc_typeField;
 
     //calling constructor
     RegisterScreen()
@@ -29,11 +29,6 @@ class RegisterScreen extends JFrame implements ActionListener
 
         //create text field to get username from the user
         nameField = new JTextField();    //set length of the text
-
-        emailLabel = new JLabel();
-        emailLabel.setText("Email");
-
-        mailField = new JTextField();
 
         //create label for password
         passLabel = new JLabel();
@@ -55,8 +50,6 @@ class RegisterScreen extends JFrame implements ActionListener
         newPanel = new JPanel(new GridLayout(5, 1));
         newPanel.add(userLabel);    //set username label to panel
         newPanel.add(nameField);   //set text field to panel
-        newPanel.add(emailLabel);    //set password label to panel
-        newPanel.add(mailField);
         newPanel.add(passLabel);    //set password label to panel
         newPanel.add(passField);   //set text field to panel
         newPanel.add(acc_typeLabel);    //set password label to panel
@@ -71,18 +64,21 @@ class RegisterScreen extends JFrame implements ActionListener
         setTitle("Register Form");         //set title to the login form
     }
 
+    public JPanel getPanel(){
+        return newPanel;
+    }
+
     //define abstract method actionPerformed() which will be called on button click
     public void actionPerformed(ActionEvent ae)     //pass action listener as a parameter
     {
         String userValue = nameField.getText();        //get user entered username from the textField1
         String passValue = passField.getText();        //get user entered password from the textField2
-        String mailValue = mailField.getText();
         String acc_typeValue = acc_typeField.getText();
 
         //check whether user already exists
         if (true) {  //if authentic, navigate user to a new page
             RegisterUIController regControl = new RegisterUIController();
-            regControl.performRegister(passValue, userValue, mailValue, acc_typeValue);
+            regControl.performRegister(passValue, userValue, acc_typeValue);
             //create instance of the NewPage
             HomeScreen home = new HomeScreen();
             //make page visible to the user
