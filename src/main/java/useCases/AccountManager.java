@@ -29,9 +29,12 @@ public class AccountManager{
     public void addUser(User user)
     {
         user_graph.accounts.putIfAbsent(user, new ArrayList<>());
+        System.out.println(user + " new user");
     }
 
     public void addFriend(User currUser, User friendToAdd) {
+        System.out.println(currUser);
+        System.out.println(friendToAdd);
         if(user_graph.accounts.containsKey(currUser))
         {
             ArrayList<User> users = user_graph.getUsers();

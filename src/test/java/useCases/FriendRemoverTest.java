@@ -17,41 +17,22 @@ public class FriendRemoverTest {
     AccountManager accountManager = new AccountManager();
     User user1, user2, user3, user4, user5;
 
-    ArrayList<User> alphaFriends, deltaFriends;
-
-
     @BeforeEach
     void setUp() {
-
-        user1 = new User("", "");
-        user1.setUsername("Alpha");
-        user1.setAccountType("casual");
+        user1 = new User("Alpha", "");
         accountManager.addUser(user1);
-        //accountManager.addUser("Alpha", "123","mail","Casual");
 
-        user2 = new User("", "");
-        user2.setUsername("Beta");
-        user2.setAccountType("casual");
+        user2 = new User("Beta", "");
         accountManager.addUser(user2);
-        //accountManager.addUser("Beta", "123","mail","Casual");
 
-        user3 = new User("", "");
-        user3.setUsername("Charlie");
-        user3.setAccountType("casual");
+        user3 = new User("Charlie", "");
         accountManager.addUser(user3);
-        //accountManager.addUser("Charlie", "123","mail","Casual");
 
-        user4 = new User("", "");
-        user4.setUsername("Delta");
-        user4.setAccountType("casual");
+        user4 = new User("Delta", "");
         accountManager.addUser(user4);
-        //accountManager.addUser("Delta", "123","mail","Casual");
 
-        user5 = new User("", "");
-        user5.setUsername("Echo");
-        user5.setAccountType("casual");
+        user5 = new User("Echo", "");
         accountManager.addUser(user5);
-        //accountManager.addUser("Echo", "123","mail","Casual");
 
     }
 
