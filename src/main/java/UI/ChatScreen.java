@@ -12,7 +12,6 @@ public class ChatScreen extends JFrame implements ActionListener{
     - code for actions after clicking each button
     - implement interactor
     - update event log after each event
-    - add comments
      */
     boolean reported = false;
 

@@ -10,7 +10,7 @@ public class ChatManager{
     String fileName = "";
     ChatScreen chat;
 
-    // TODO: add reference on previous page so that it can access this one
+    // TODO: add reference on previous page (of UI) so that it can access this one
     public ChatManager(User mainUser){
         this.mainUser = mainUser;
     }
