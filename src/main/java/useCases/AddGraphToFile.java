@@ -7,7 +7,7 @@ import java.io.*;
 public class AddGraphToFile {
 
     public void AddToFile(Graph graph) throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("src/Graph.txt", true));
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("src/Graph.txt", false));
         out.writeObject(graph);
     }
 

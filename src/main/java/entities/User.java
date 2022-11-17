@@ -12,7 +12,9 @@ public class User {
     private ArrayList<User> blocked_friends;
     private int num_strikes;
 
-    public User(){
+    public User(String name, String acctype){
+        this.username = name;
+        this.acc_type = acctype;
         points = 0;
         friends = new ArrayList<User>();
     }
@@ -57,16 +59,16 @@ public class User {
         return username;
     }
 
-    public Vertex getEqVertex(User user)
-    {
-        ArrayList<Vertex> users = user_graph.getVertices();
-        for(Vertex i: users)
-        {
-            if(i.curr_user.equals(user))
-                return i;
-        }
-        return null;
-    }
+//    public Vertex getEqVertex(User user)
+//    {
+//        ArrayList<Vertex> users = user_graph.getVertices();
+//        for(Vertex i: users)
+//        {
+//            if(i.curr_user.equals(user))
+//                return i;
+//        }
+//        return null;
+//    }
 
     public String getEmail() {
         return email;

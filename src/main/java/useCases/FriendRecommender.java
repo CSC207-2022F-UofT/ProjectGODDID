@@ -9,7 +9,7 @@ Automated friend recommender system where a friend is recommended based on mutua
 This use case occurs when a user interacts with the friend adder UI / interfaces.
 */
 public class FriendRecommender {
-    private Vertex recs;
+    private User recs; //Made change here
     public FriendRecommender(){
     }
 
@@ -70,5 +70,45 @@ public class FriendRecommender {
         }
         return recs;
     }
+
+//    public User getRecommend(User user, Graph allUsers){
+//        //Vertex recs = new Vertex("","",new User());
+//        Map<User, Integer> friends = new HashMap<>();
+//        for (User i : allUsers.accounts.get(user)) {
+//            //friends.putIfAbsent(i, 0);
+//            System.out.println(allUsers.accounts.get(i));
+//            int counter = 0;
+//            for (User j : allUsers.accounts.get(i)) {
+//                System.out.println(friends.containsKey(j));
+//                if (friends.containsKey(j) == false) {
+//                    friends.putIfAbsent(allUsers.accounts.get(i).get(counter), 0);
+//                } else {
+//                    friends.put(j, friends.get(j) + 1);
+//                }
+//                counter ++;
+//                //recs.add(user.getFriends().get(randomNum));
+//            }
+//        }
+//
+//        //System.out.println("working");
+//        System.out.println(friends.keySet());
+//        int currMax = 0;
+//        for (User a : friends.keySet()){
+//            if (a != user) {
+//                if (friends.get(a) >= currMax) {
+//                    System.out.println(friends.get(a));
+//                    currMax = friends.get(a);
+//                    System.out.println(currMax);
+//                    for (User keys : friends.keySet()) {
+//                        if (friends.get(keys).equals(friends.get(a))) {
+//                            recs = keys;
+//                            //System.out.println(recs);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return recs;
+//    }
 
 }
