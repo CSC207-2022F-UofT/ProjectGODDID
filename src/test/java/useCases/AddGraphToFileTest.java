@@ -2,23 +2,20 @@ package useCases;
 
 import entities.Graph;
 import entities.User;
+import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class FriendRecommenderTest {
-
+public class AddGraphToFileTest {
     Graph graph;
-
     AccountManager accountManager = new AccountManager();
     User curUser, user2, user3, user4, user5;
-
     ArrayList<User> alphaFriends, deltaFriends;
-
 
     @BeforeEach
     void setUp() {
@@ -81,36 +78,16 @@ class FriendRecommenderTest {
         //graph.addEdge("Delta", "Casual", user4, "Charlie","Casual",user3);
     }
 
-    @AfterEach
-    void tearDown() {
-    }
+//    @AfterEach
+//    void tearDown() {
+//    }
 
     @Test
-    void getRecommendation() {
-        ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
-        //System.out.println(graph.accounts.get(keys.get(0)));
-        //System.out.println(user5.getFriends());
-        FriendRecommender fRec = new FriendRecommender();
-        ArrayList<User> recs = new ArrayList<>();
-        recs = fRec.getRecommendation(user5);
-        ArrayList<User> friends = new ArrayList<>();
-        friends = user5.getFriends();
-        for (int i = 0; i < recs.size(); i++) {
-            //System.out.println(recs.get(i));
-            friends.add(recs.get(i));
-        }
-        //System.out.println(friends.size());
-        curUser.setFriends(friends);
-        assertEquals(5, curUser.getFriends().size()); //adds repeat friends????
-    }
-
-    @Test
-    void getRecommend() {
-        ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
-        System.out.println(keys);
-        FriendRecommender fRec = new FriendRecommender();
-        User rec = fRec.hetRecommended(keys.get(0));
-        assertEquals(keys.get(4), rec); //Get the most common friend between your friends
-
+    void ReadFromFileDemo() throws IOException, ClassNotFoundException {
+        Graph grap = accountManager.getGraph();
+        AddGraphToFile addfile = new AddGraphToFile();
+        addfile.AddToFile(grap);
+        Graph g2 = addfile.ReadFromFile();
+        assertEquals(grap, g2);
     }
 }
