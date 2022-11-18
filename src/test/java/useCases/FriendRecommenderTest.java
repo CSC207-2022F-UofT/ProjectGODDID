@@ -109,7 +109,7 @@ class FriendRecommenderTest {
         ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
         System.out.println(keys);
         FriendRecommender fRec = new FriendRecommender();
-        User rec = fRec.hetRecommended(keys.get(0));
+        User rec = fRec.getRecommend(keys.get(0), graph);
         assertEquals(keys.get(4), rec); //Get the most common friend between your friends
 
     }

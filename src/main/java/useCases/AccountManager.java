@@ -34,6 +34,7 @@ public class AccountManager{
             ArrayList<User> users = user_graph.getUsers();
             for (User i : users) {
                 if (i.equals(currUser)) {
+                    // check to see if friendtoadd is not in user's blocked friends list
                     user_graph.accounts.get(currUser).add(friendToAdd);
                     break;
                 }

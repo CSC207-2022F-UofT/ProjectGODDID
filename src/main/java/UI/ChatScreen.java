@@ -128,7 +128,7 @@ public class ChatScreen extends JFrame implements ActionListener{
             // will send the typed message in the text field
             // add to text file and retrieve from text file
             message = sendMessage.getText();
-            new AddToTextFile(message, mainUser.getUsername(), fileName);
+//            new AddToTextFile(message, mainUser.getUsername(), fileName);
 
         } else if (e.getSource()==report) {
             // will use the report feature to send the chat data to be reported at the end of the day when chat ends
@@ -159,7 +159,7 @@ public class ChatScreen extends JFrame implements ActionListener{
     }
 
     public void retrieveMessages(){
-        messages = new ReadFile(fileName).ReadFiles();
+//        messages = new ReadFile(fileName).ReadFiles();
     }
 }
 
@@ -206,10 +206,10 @@ class runScreen{
     public void endChat(){
         ArrayList <User> users = new ArrayList<User>();
         users.add(mainUser); users.add(matchedUser);
-        Report report = new Report();
+        Report report = new Report(mainUser, matchedUser);
 
         if (chat.getReported()){
-            report.checkReport(fileName, mainUser, matchedUser);
+            report.checkReport();
         }
 
         EventRepository.Event e = new Event("ChatEnd", users, false);

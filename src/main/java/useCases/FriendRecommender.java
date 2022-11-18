@@ -71,50 +71,50 @@ public class FriendRecommender {
         return recs;
     }
 
-    public User helper(HashMap<User, Integer> map, ArrayList<User> maxuserlist) throws IndexOutOfBoundsException{
-        Integer max = - 1;
-        maxuserlist.set(0, new User("Bob", "Casual"));
-        for (User user: map.keySet()){
-            if (map.get(user) > max) {
-                if (maxuserlist.size() > 0) {
-                    maxuserlist.set(0, user);
-                } else {
-                    maxuserlist.set(0, user);
-                }
-                max = map.get(user);
-            }
-        }
-        return maxuserlist.get(0);
-    }
-
-
-    public User hetRecommended(User user){
-        ArrayList<User> maxuserlist = new ArrayList<User>();
-        ArrayList<User> counterchecker = new ArrayList<User>();
-        HashMap<User, Integer> counter = new HashMap<User, Integer>();
-        ArrayList<User> friends = user.getFriends();
-        if (friends.size() != 0) {
-            for (User friend : friends) {
-                if (friend.getFriends().size() != 0) {
-                    ArrayList<User> mutuals = friend.getFriends();
-                    if (mutuals.size() > 0) {
-                        for (User mutual : mutuals) {
-                            if (!(friends.contains(mutual) && user != mutual)) {
-                                if (counterchecker.contains(mutual)) {
-                                    Integer temp = counter.get(mutual);
-                                    temp += 1;
-                                    counter.remove(mutual);
-                                    counter.put(mutual, temp);
-                                } else {
-                                    Integer x = 1;
-                                    counter.put(mutual, x);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return helper(counter, maxuserlist);
-    }
+//    public User helper(HashMap<User, Integer> map, ArrayList<User> maxuserlist) throws IndexOutOfBoundsException{
+//        Integer max = - 1;
+//        maxuserlist.set(0, new User("Bob", "Casual"));
+//        for (User user: map.keySet()){
+//            if (map.get(user) > max) {
+//                if (maxuserlist.size() > 0) {
+//                    maxuserlist.set(0, user);
+//                } else {
+//                    maxuserlist.set(0, user);
+//                }
+//                max = map.get(user);
+//            }
+//        }
+//        return maxuserlist.get(0);
+//    }
+//
+//
+//    public User hetRecommended(User user){
+//        ArrayList<User> maxuserlist = new ArrayList<User>();
+//        ArrayList<User> counterchecker = new ArrayList<User>();
+//        HashMap<User, Integer> counter = new HashMap<User, Integer>();
+//        ArrayList<User> friends = user.getFriends();
+//        if (friends.size() != 0) {
+//            for (User friend : friends) {
+//                if (friend.getFriends().size() != 0) {
+//                    ArrayList<User> mutuals = friend.getFriends();
+//                    if (mutuals.size() > 0) {
+//                        for (User mutual : mutuals) {
+//                            if (!(friends.contains(mutual) && user != mutual)) {
+//                                if (counterchecker.contains(mutual)) {
+//                                    Integer temp = counter.get(mutual);
+//                                    temp += 1;
+//                                    counter.remove(mutual);
+//                                    counter.put(mutual, temp);
+//                                } else {
+//                                    Integer x = 1;
+//                                    counter.put(mutual, x);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return helper(counter, maxuserlist);
+//    }
 }
