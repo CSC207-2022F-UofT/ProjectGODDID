@@ -33,7 +33,7 @@ public class GameUI extends JFrame implements ActionListener {
          * A frame is created for the Tic-Tac-Toe board
          * The frame is closed when the user closes the window
          */
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(800, 800);
         frame.getContentPane().setBackground(Color.white);
         frame.setLayout(new BorderLayout());

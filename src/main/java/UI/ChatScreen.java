@@ -8,10 +8,7 @@ import PointsSystem.PointsSystem;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -21,12 +18,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ChatScreen extends JFrame implements ActionListener, WindowListener{
-    boolean reported = false;
+public class ChatScreen extends JFrame implements ActionListener, KeyListener {
     public User mainUser;
     public User matchedUser;
 
     // initializing all buttons and text fields to be accessed both by actionPerformed and constructor
+    JFrame frame;
     JButton newGame; JButton send; JButton report; JButton back;
     JTextField sendMessage; JTextArea displayed;
 
@@ -45,6 +42,8 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
         label.setText("Speaking with " + matchedUser.getUsername());
         label.setVerticalAlignment(JLabel.TOP);
         label.setHorizontalAlignment(JLabel.CENTER);
+        label.setFocusable(true);
+        label.addKeyListener(this);
 
         displayed = new JTextArea();
         displayed.setEditable(false);
@@ -52,13 +51,19 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
         displayed.setFont(buttonFont);
         displayed.setForeground(Color.BLACK);
         displayed.setLineWrap(true);
+        displayed.setFocusable(true);
+        displayed.addKeyListener(this);
 
         JScrollPane scrollPane = new JScrollPane(displayed, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setFocusable(true);
+        scrollPane.addKeyListener(this);
 
         // Text field where the used inputs their message
-        sendMessage = new JTextField(20); //increase max?
+        sendMessage = new JTextField(); //increase max?
         sendMessage.setPreferredSize(new Dimension(320, 30));
+        sendMessage.setFocusable(true);
+        sendMessage.addKeyListener(this);
 
         // Button to send the message typed in the sendMessage text field
         send = new JButton();
@@ -66,8 +71,9 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
         send.setText("Send");
         send.setFont(buttonFont);
         send.setBounds(340, 390, 150, 40);
+        send.addKeyListener(this);
 
-        // Button to start a new game with the matched used
+        // Button to start a new game with the matched user
         newGame = new JButton();
         newGame.addActionListener(this);
         newGame.setText("Games");
@@ -78,6 +84,7 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
         report = new JButton();
         report.addActionListener(this);
         report.setText("Report");
+        report.setFocusable(false);
         report.setFont(buttonFont);
 
         // Button to return to HomeScreen window
@@ -92,6 +99,8 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
         JPanel topPanel = new JPanel();
         topPanel.setBackground(cream);
         topPanel.setBounds(0,0,500,25);
+        topPanel.setFocusable(true);
+        topPanel.addKeyListener(this);
 
         // Panel to contain all the text of the actual chat between the two users
         JPanel textPanel = new JPanel();
@@ -99,14 +108,18 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
         textPanel.setBounds(12, 30, 476, 350);
         textPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         textPanel.setLayout(new BorderLayout(0, 0));
+        textPanel.setFocusable(true);
+        textPanel.addKeyListener(this);
 
         // Panel to contain the typed message the user wants to send
         JPanel sendPanel = new JPanel();
         sendPanel.setBackground(cream);
         sendPanel.setBounds(12, 390, 325, 40);
+        sendPanel.setFocusable(true);
+        sendPanel.addKeyListener(this);
 
         // Frame containing all the created objects
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setTitle(mainUser.getUsername() + "'s chat with " + matchedUser.getUsername());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -114,7 +127,8 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
         ImageIcon image = new ImageIcon("Messaging logo.png");
         frame.setIconImage(image.getImage());
         frame.getContentPane().setBackground(yellowish);
-        frame.addWindowListener(this);
+        frame.setFocusable(true);
+        frame.addKeyListener(this);
         topPanel.add(label);
         topPanel.add(newGame);
         topPanel.add(report);
@@ -127,14 +141,14 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
         frame.add(send);
         frame.setLayout(null);
         frame.setVisible(true);
+        readFromTextFile(mainUser.getUsername(), matchedUser.getUsername());
     }
 
     @Override
     public void actionPerformed(ActionEvent e){
-        // TODO: Code for actions of each button
         if (e.getSource()==newGame){
             // will send a new ticktacktoe game to start with the matched user
-            GameUI game = new GameUI(mainUser, matchedUser);
+            new GameUI(mainUser, matchedUser);
 
         } else if (e.getSource()==send) {
             // will send the typed message in the text field
@@ -150,7 +164,13 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
                     "Report", JOptionPane.YES_NO_OPTION);
 
             if (answer == 0){
-                reported = true;
+                String s1 = "src/" + mainUser.getUsername() + matchedUser.getUsername() + ".txt";
+                String s2 = "src/" + matchedUser.getUsername() + mainUser.getUsername() + ".txt";
+                Report report = new Report();
+                // TODO: Speak w/ manit
+                report.checkReport(s1, mainUser, matchedUser);
+                report.checkReport(s2, mainUser, matchedUser);
+                endChat();
             }
 
         } else if (e.getSource()==back) {
@@ -159,14 +179,6 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
             //code to exit chat screen (goes back to the home screen)
             // MIGHT delete this part, comment out for now
         }
-    }
-
-    public boolean getReported(){
-        return reported;
-    }
-
-    public void setReported(boolean update){
-        this.reported = update;
     }
 
     public void addToTextFile(String messages, String username1, String username2){
@@ -225,6 +237,9 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
                 throw new RuntimeException(e);
             }
         }
+        if (list_of_messages.size() >= 20){
+            endChat();
+        }
         return list_of_messages;
     }
 
@@ -233,13 +248,10 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
         users.add(mainUser); users.add(matchedUser);
         String s1 = "src/" + mainUser.getUsername() + matchedUser.getUsername() + ".txt";
         String s2 = "src/" + matchedUser.getUsername() + mainUser.getUsername() + ".txt";
-        Report report = new Report();
 
-        if (reported){
-            // TODO: Manit check this
-            report.checkReport(s1, mainUser, matchedUser);
-            report.checkReport(s2, mainUser, matchedUser);
-        }
+        Event e = new Event("ChatEnd", users, false);
+        PointsSystem ps = new PointsSystem();
+        e.execute(ps);
 
         try {
             Files.deleteIfExists(Paths.get(s1));
@@ -251,47 +263,26 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-
-        Event e = new Event("ChatEnd", users, false);
-        PointsSystem ps = new PointsSystem();
-        e.execute(ps);
-
-        matchedUser = null;
-        reported = false;
+        JOptionPane.showMessageDialog(null, "Text limit reached. Chat will now end.");
+        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
     }
 
     @Override
-    public void windowOpened(WindowEvent e) {
+    public void keyTyped(KeyEvent e) {
 
     }
 
     @Override
-    public void windowClosing(WindowEvent e) {
-        endChat();
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 10){
+            addToTextFile(sendMessage.getText(), mainUser.getUsername(), matchedUser.getUsername());
+            readFromTextFile(mainUser.getUsername(), matchedUser.getUsername());
+            sendMessage.setText("");
+        }
     }
 
     @Override
-    public void windowClosed(WindowEvent e) {
-        endChat();
-    }
-
-    @Override
-    public void windowIconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeiconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowActivated(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeactivated(WindowEvent e) {
+    public void keyReleased(KeyEvent e) {
 
     }
 }
@@ -338,20 +329,31 @@ class runScreen{
             this.matchedUser = mainUser.getFriends().get(index);
         }
 
-        createTextFile(mainUser.getUsername(), matchedUser.getUsername());
-
         //opens a new chatscreen with the selected user
         chat = new ChatScreen(mainUser, matchedUser);
     }
+}
 
-    public void createTextFile(String username1, String username2) throws IOException {
-        String s = "src/" + username1 + username2 + ".txt";
-        File file = new File(s);
-        if (file.createNewFile()) {
-            System.out.println("File created: " + file.getName());
-        }
-        else {
-            System.out.println("File already exists.");
+class runScreen2 {
+    public static void main(String[] args) throws IOException {
+        ChatScreen testChat;
+        User user1 = new User("Arian", "Casual");
+        User user2 = new User("Manit", "Casual");
+
+        try {
+            String s = "src/" + user1.getUsername() + user2.getUsername() + ".txt";
+            File file = new File(s);
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+
+            testChat = new ChatScreen(user1, user2);
+            testChat.setVisible(true);
+        } catch (Exception e) {
+            //handle exception
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 }
