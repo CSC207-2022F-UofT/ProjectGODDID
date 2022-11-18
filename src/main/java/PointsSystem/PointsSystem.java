@@ -1,30 +1,32 @@
 package PointsSystem;
 
 import entities.User;
+
 import java.util.Hashtable;
 
 
 
 public class PointsSystem{
-    public static Hashtable<String, Integer> spendCases;
+    public Hashtable<String, Integer> spendCases = new Hashtable<>();
 
-    public static Hashtable<String, Integer> earnCases;
+    public Hashtable<String, Integer> earnCases = new Hashtable<>();
 
-    public static void loadSpendCases(){ // leaves scope for future developers to incorporate newer methods to spend points
+
+    public void loadSpendCases(){ // leaves scope for future developers to incorporate newer methods to spend points
         spendCases.put("SpendSkip", 10);
         spendCases.put("SpendChoose", 20);
         spendCases.put("SpendExtend", 20);
     }
-    public static void loadEarnCases(){ // leaves scope to incorporate newer methods of earning points
+    public void loadEarnCases(){ // leaves scope to incorporate newer methods of earning points
         earnCases.put("ChatEnd", 10);
         earnCases.put("GameChatEnd", 15);
     }
 
 
 
-    public static String PointSpender(User X, String spendCase){
-        if (! spendCases.contains(spendCase)){
-            return "Invalid choice for spending points";
+    public void PointSpender(User X, String spendCase){
+        if (! spendCases.containsKey(spendCase)){
+            throw new java.lang.Error("Invalid spend case");
         }
 
         else{
@@ -32,21 +34,14 @@ public class PointsSystem{
 
             if (X.points >= pointsRequired){
                 X.points -= pointsRequired;
-                return "Spend successful";
             }
 
         }
-        return "Inadequate Points ";
     }
-    public static String PointRenewer(User X, String earnCase){
-        if (! earnCases.contains(earnCase)){
-            return "Invalid way to earn points";
-        }
-
-        else{
-            int newPoints = earnCases.get(earnCase);
-            X.points += newPoints;
-            return "Points renewed successfully";
+    public void PointRenewer(User X, String earnCase) {
+        if (earnCases.containsKey(earnCase)){
+        int newPoints = earnCases.get(earnCase);
+        X.points += newPoints;
         }
     }
 

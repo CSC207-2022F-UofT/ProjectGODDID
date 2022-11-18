@@ -40,7 +40,7 @@ public class ChatTextFiles {
     }
 
     public void CreateTextFile(String username1, String username2) throws IOException {
-        String s = "src/" + username1 + username2 + ".txt";
+        String s = username1 + username2 + ".txt";
         File file = new File(s);
             if (file.createNewFile()) {
                 System.out.println("File created: " + file.getName());
@@ -50,7 +50,6 @@ public class ChatTextFiles {
             }
 
     }
-
 
     public ArrayList<String> ReadFiles(String username1, String username2) {
         ArrayList<String> list_of_messages = new ArrayList<String>();
@@ -84,9 +83,6 @@ public class ChatTextFiles {
         }
         return list_of_messages;
     }
-
-
-
 
     public void DeleteTextFile(String username1, String username2) throws IOException {
         String s = "src/" + username1 + username2 + ".txt";
