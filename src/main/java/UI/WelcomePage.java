@@ -1,11 +1,14 @@
 package UI;
 
+import controllers.AddFriendController;
 import entities.User;
+import useCases.AccountManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class WelcomePage extends JFrame implements ActionListener {
     JFrame frame = new JFrame();
@@ -17,9 +20,11 @@ public class WelcomePage extends JFrame implements ActionListener {
     TextField text = new TextField();
 
     JButton recommendButton, activeButton;
+    User user1;
 
 
-    public WelcomePage(User user){
+    public WelcomePage(User user) throws IOException, ClassNotFoundException {
+        user1 = user;
 
         recommendButton = new JButton();
         recommendButton.setBounds(200, 35, 200, 50);
@@ -78,6 +83,22 @@ public class WelcomePage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == friends){
+            FriendsPage friends = new FriendsPage(user1);
+        }
+
+        if (e.getSource() == addfriend){
+            String friend_to_add = text.getText();
+            AddFriendController friend_con = new AddFriendController();
+            try {
+                friend_con.AddFriendCon(user1, friend_to_add);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
 
     }
 }
