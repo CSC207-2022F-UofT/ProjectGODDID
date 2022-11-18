@@ -163,7 +163,8 @@ public class HomeScreen extends JFrame implements ActionListener
     public static void main(String argvs[])
     {
 // creating an object of the class CardLayoutExample1
-        HomeScreen crdl = new HomeScreen();
+        //HomeScreen crdl = new HomeScreen();
+        WelcomePage crdl = new WelcomePage(new User("Bob",""));
 
 // size is 300 * 300
         crdl.setSize(300, 300);

@@ -9,11 +9,19 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+/**
+ * Test the FriendAdder use case and see if it succesfully adds a user to current users friends list
+ * and adds edge between the two user vertices in the graph
+ */
 public class FriendAdderTest {
 
         AccountManager accountManager = new AccountManager();
         User user1, user2, user3, user4, user5;
 
+    /**
+     * To test use case:
+     * 1)
+     */
     @BeforeEach
         void setUp() {
         user1 = new User("Alpha", "");
