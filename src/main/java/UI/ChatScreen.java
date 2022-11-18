@@ -164,12 +164,11 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
                     "Report", JOptionPane.YES_NO_OPTION);
 
             if (answer == 0){
-                String s1 = "src/" + mainUser.getUsername() + matchedUser.getUsername() + ".txt";
-                String s2 = "src/" + matchedUser.getUsername() + mainUser.getUsername() + ".txt";
-                Report report = new Report();
+//                String s1 = "src/" + mainUser.getUsername() + matchedUser.getUsername() + ".txt";
+//                String s2 = "src/" + matchedUser.getUsername() + mainUser.getUsername() + ".txt";
+                Report report = new Report(mainUser, matchedUser);
                 // TODO: Speak w/ manit
-                report.checkReport(s1, mainUser, matchedUser);
-                report.checkReport(s2, mainUser, matchedUser);
+                report.checkReport();
                 endChat();
             }
 
