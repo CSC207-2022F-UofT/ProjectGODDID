@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+/**
+ * Test the FriendRemover use case and see if it succesfully removes a user to current users friends list
+ * and deletes edge between the two user vertices in the graph
+ */
 public class FriendRemoverTest {
 
     AccountManager accountManager = new AccountManager();
@@ -37,6 +40,16 @@ public class FriendRemoverTest {
     void tearDown() {
     }
 
+    /**
+     * To test use case:
+     * 1) Create 5 users and add them to the graph
+     * 2) Typically we call a controller as this function is controlled by a UI
+     * but here we can bypass the controller and just directly call the FriendAdder
+     * use case for testing purposes
+     * 3) Add the friends to various users using FriendAdder
+     * 4) Remove friends from user1 using FriendRemover
+     * 5) Check that right friends are removed from the corresponding users
+     */
     @Test
     void removeFriend() {
         FriendRemover fr = new FriendRemover();

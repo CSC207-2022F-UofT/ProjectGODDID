@@ -9,6 +9,11 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test the FriendRecommender use case and see if it succesfully recommends a user for current user
+ * to add to their friends via the random method or using an algorithim that determines
+ * the best user to recommend based on mutual friend count based on neighbours in the graph.
+ */
 class FriendRecommenderTest {
 
     AccountManager accountManager = new AccountManager();
@@ -16,6 +21,22 @@ class FriendRecommenderTest {
 
     ArrayList<User> alphaFriends, deltaFriends;
 
+    /**
+     * To test use case:
+     * 1) Create 5 users and add them to the graph
+     * 2) Typically we call a controller as this function is controlled by a UI
+     * but here we can bypass the controller and just directly call the FriendAdder
+     * use case for testing purposes
+     * 3) Add the friends to various users
+     * 4) Call FriendRecommender.getRecommendRandom for user 5 to get 3 randomly
+     * selected users from user5's friend list
+     * 5) Check to see if 3 users are succesfully added to curUsers friend list which
+     * already includes 2 users
+     * 6) Call FriendRecommender.getRecommend for curUser to get most common friend among
+     * their neighbours / friends
+     * 7) Check to see if recommended friend is user5 who is the most common shared friend
+     * among user3 and user4 who are both in curUsers friend list / neighbours
+     */
     @BeforeEach
     void setUp() {
         curUser = new User("Alpha", "");
@@ -57,7 +78,7 @@ class FriendRecommenderTest {
     }
 
     @Test
-    void getRecommendation() {
+    void getRecommendRandom() {
         FriendRecommender fRec = new FriendRecommender();
         ArrayList<User> recs = new ArrayList<>();
         recs = fRec.getRecommendRandom(user5);
