@@ -17,7 +17,7 @@ public class FriendRecommender {
     /*
     Given a user, randomly select three of their friends to recommend back to the current user.
     */
-    public ArrayList<User> getRecommendation(User user) {
+    public ArrayList<User> getRecommendRandom(User user) {
         if (user.getFriends().size() >= 1) {
             ArrayList<User> recs = new ArrayList<>();
             for (int i = 0; i < 3; i++) {

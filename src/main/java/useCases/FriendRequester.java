@@ -16,7 +16,7 @@ public class FriendRequester {
         for (User i : currUser.getFriends())
             if (i.getUsername().equals(friend.getUsername())){
                 FriendRecommender friendRecommender = new FriendRecommender();
-                recommendations = friendRecommender.getRecommendation(friend);
+                recommendations = friendRecommender.getRecommendRandom(friend);
             }
     }
 

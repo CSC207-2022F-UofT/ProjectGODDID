@@ -60,7 +60,7 @@ class FriendRecommenderTest {
     void getRecommendation() {
         FriendRecommender fRec = new FriendRecommender();
         ArrayList<User> recs = new ArrayList<>();
-        recs = fRec.getRecommendation(user5);
+        recs = fRec.getRecommendRandom(user5);
         ArrayList<User> friends = new ArrayList<>();
         friends = curUser.getFriends();
         for (int i = 0; i < recs.size(); i++) {
