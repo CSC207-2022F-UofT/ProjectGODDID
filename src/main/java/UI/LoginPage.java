@@ -73,7 +73,13 @@ public class LoginPage implements ActionListener{
 
         if(e.getSource()== signUp) {
 
-            adder.addUser(userIDField.getText(),String.valueOf(userPasswordField.getPassword()), "casual");
+            try {
+                adder.addUser(userIDField.getText(),String.valueOf(userPasswordField.getPassword()), "casual");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
 
 //            UserCreator use = new UserCreator();
 //            User user = use.CreateUser(userIDField.getText(), String.valueOf(userPasswordField.getPassword()));
@@ -89,7 +95,13 @@ public class LoginPage implements ActionListener{
 
 
         if(e.getSource()==loginButton) {
-            logininfos = adder.getGraph();
+            try {
+                logininfos = adder.getGraph();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
             for (User i : logininfos.getUsers()) {
                 String userID = userIDField.getText();
                 String password = String.valueOf(userPasswordField.getPassword());
@@ -99,15 +111,8 @@ public class LoginPage implements ActionListener{
                         messageLabel.setForeground(Color.green);
                         messageLabel.setText("Login successful");
                         frame.dispose();
+                        WelcomePage welcomePage = new WelcomePage(i);
 
-                        try {
-                            if (!chatOpen.openChat(i).equals("false")){
-                                ChatUIGame chatui = new ChatUIGame();
-                            } else {
-                                WelcomePage welcomePage = new WelcomePage(i);
-                            }
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
                         }
                     } else {
                         messageLabel.setForeground(Color.red);
@@ -115,9 +120,7 @@ public class LoginPage implements ActionListener{
                     }
                 }
             }
-        } else {
-            messageLabel.setForeground(Color.red);
-            messageLabel.setText("username not found");
-        }
+
+
     }
 }
