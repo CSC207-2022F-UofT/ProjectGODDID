@@ -17,6 +17,7 @@ public class WelcomePage extends JFrame implements ActionListener {
     JButton friends = new JButton();
     JButton addfriend = new JButton();
     JButton removefriend = new JButton();
+    JButton skipchat = new JButton();
     TextField text = new TextField();
 
     JButton recommendButton, activeButton;
@@ -54,6 +55,11 @@ public class WelcomePage extends JFrame implements ActionListener {
         startchat.setText("Start Chat");
         startchat.setFocusable(false);
 
+        skipchat.setBounds(350, 100, 100, 50);
+        skipchat.addActionListener(this);
+        skipchat.setText("Skip");
+        startchat.setFocusable(false);
+
         friends.setBounds(250, 250, 100, 50);
         friends.addActionListener(this);
         friends.setText("Friends");
@@ -78,13 +84,20 @@ public class WelcomePage extends JFrame implements ActionListener {
         frame.add(text);
         frame.add(addfriend);
         frame.add(removefriend);
+        frame.add(skipchat);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == friends){
-            FriendsPage friends = new FriendsPage(user1);
+            try {
+                FriendsPage friends = new FriendsPage(user1);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
         if (e.getSource() == addfriend){
@@ -97,8 +110,14 @@ public class WelcomePage extends JFrame implements ActionListener {
             } catch (ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
+        }
+
+//        if (e.getSource() == skipchat){
+//
+//        }
+
 
         }
 
-    }
+
 }
