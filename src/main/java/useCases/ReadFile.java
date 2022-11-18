@@ -14,13 +14,13 @@ public class ReadFile {
     public ArrayList<String> ReadFiles() {
         ArrayList<String> list_of_messages = new ArrayList<String>();
         try{
-        File file = new File(files);
-        Scanner sc = new Scanner(file);
-        while (sc.hasNextLine()){
-            String data = sc.nextLine();
-            list_of_messages.add(data);
-        }
-        sc.close();
+            File file = new File(files);
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()){
+                String data = sc.nextLine();
+                list_of_messages.add(data);
+            }
+            sc.close();
         } catch (FileNotFoundException error){
             error.printStackTrace();
         }

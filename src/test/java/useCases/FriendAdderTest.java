@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +22,7 @@ public class FriendAdderTest {
 
 
     @BeforeEach
-        void setUp() {
+        void setUp() throws IOException, ClassNotFoundException {
 
             user1 = new User("", "");
             user1.setUsername("Alpha");
@@ -61,7 +62,7 @@ public class FriendAdderTest {
         }
 
         @Test
-        void addFriend() {
+        void addFriend() throws IOException, ClassNotFoundException {
             FriendAdder fd = new FriendAdder();
             fd.addFriend(user1, user2, accountManager);
             fd.addFriend(user2, user1, accountManager);

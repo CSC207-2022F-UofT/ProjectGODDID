@@ -1,21 +1,23 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static useCases.AccountManager.*;
 
-public class User {
+public class User implements Serializable {
     private ArrayList<User> friends;
     private String username, password;
     public String acc_type;
-    public int points;
+
+    private String points;
     private ArrayList<User> blocked_friends;
     private int num_strikes;
 
     public User(String name, String acctype){
         this.username = name;
         this.acc_type = acctype;
-        points = 0;
+        //points = 0;
         friends = new ArrayList<User>();
     }
 
@@ -40,8 +42,9 @@ public class User {
         this.friends = friends;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
+    public void setPoints(int p) {
+
+        this.points = String.valueOf(p);
     }
 
     public void setBlocked_friends(){
@@ -57,8 +60,8 @@ public class User {
     }
 
 
-    public int getPoints() {
-        return points;
+    public String getPoints() {
+        return this.points;
     }
 
     /*public Boolean getPremium() {

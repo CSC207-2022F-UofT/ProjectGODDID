@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +22,7 @@ class FriendRecommenderTest {
 
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException, ClassNotFoundException {
         //graph = new Graph();
 
         curUser = new User("", "");
@@ -81,7 +82,7 @@ class FriendRecommenderTest {
     }
 
     @Test
-    void getRecommendation() {
+    void getRecommendation() throws IOException, ClassNotFoundException {
         ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
         FriendRecommender fRec = new FriendRecommender();
         ArrayList<User> recs = new ArrayList<>();
@@ -98,7 +99,7 @@ class FriendRecommenderTest {
     }
 
     @Test
-    void getRecommend() {
+    void getRecommend() throws IOException, ClassNotFoundException {
         ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
         System.out.println(keys);
         FriendRecommender fRec = new FriendRecommender();
