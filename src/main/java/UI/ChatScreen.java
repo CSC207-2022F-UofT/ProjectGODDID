@@ -196,9 +196,9 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
     public ArrayList<String> readFromTextFile(String username1, String username2) {
         displayed.setText("");
         ArrayList<String> list_of_messages = new ArrayList<String>();
-        String s = "src/" + username1 + username2 + ".txt";
-        String s1 = "src/" + username2 + username1 + ".txt";
-        File f = new File(s);
+        String file1 = "src/" + username1 + username2 + ".txt";
+        String file2 = "src/" + username2 + username1 + ".txt";
+        File f = new File(file1);
         if (f.exists()) {
             try {
                 Scanner sc = new Scanner(f);
@@ -213,7 +213,7 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
             }
         } else {
             try {
-                File file = new File(s1);
+                File file = new File(file2);
                 Scanner sc = new Scanner(file);
                 while (sc.hasNextLine()) {
                     String data = sc.nextLine();
@@ -233,12 +233,11 @@ public class ChatScreen extends JFrame implements ActionListener, WindowListener
         users.add(mainUser); users.add(matchedUser);
         String s1 = "src/" + mainUser.getUsername() + matchedUser.getUsername() + ".txt";
         String s2 = "src/" + matchedUser.getUsername() + mainUser.getUsername() + ".txt";
-        Report report = new Report();
+        Report report = new Report(mainUser, matchedUser);
 
         if (reported){
             // TODO: Manit check this
-            report.checkReport(s1, mainUser, matchedUser);
-            report.checkReport(s2, mainUser, matchedUser);
+            report.checkReport();
         }
 
         try {
