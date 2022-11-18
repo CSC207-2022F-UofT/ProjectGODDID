@@ -1,13 +1,15 @@
 package UI;
 
-import useCases.AddToTextFile;
-import useCases.ChatManager;
+import EventRepository.Event;
+import entities.User;
+import useCases.Report;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLOutput;
+import java.io.File;
+import java.util.ArrayList;
 
 public class ChatScreen extends JFrame implements ActionListener{
     /* TODO:
@@ -20,12 +22,18 @@ public class ChatScreen extends JFrame implements ActionListener{
     boolean reported = false;
     String message = "";
 
+    public User mainUser;
+    public User matchedUser;
+    ArrayList<String> messages;
+    String fileName = "";
+
+
     // initializing all buttons and text fields to be accessed both by actionPerformed and constructor
     JButton newGame; JButton send; JButton report; JButton back;
     JTextField sendMessage;
 
     // constructor for when a chat screen is opened
-    public ChatScreen(String mainUser, String matchedUser){
+    public ChatScreen(String user1, String user2){
         // Commonly used variables
         Color cream = new Color(247, 239, 215);
         Color yellowish = new Color(232, 220, 184);
@@ -114,11 +122,13 @@ public class ChatScreen extends JFrame implements ActionListener{
         // TODO: Code for actions of each button
         if (e.getSource()==newGame){
             // will send a new ticktacktoe game to start with the matched user
+            GameUI game = new GameUI(mainUser, matchedUser);
 
         } else if (e.getSource()==send) {
             // will send the typed message in the text field
             // add to text file and retrieve from text file
             message = sendMessage.getText();
+            new AddToTextFile(message, mainUser.getUsername(), fileName);
 
         } else if (e.getSource()==report) {
             // will use the report feature to send the chat data to be reported at the end of the day when chat ends
@@ -132,7 +142,7 @@ public class ChatScreen extends JFrame implements ActionListener{
         } else if (e.getSource()==back) {
             //leaves the chat screen
             HomeScreen home = new HomeScreen();
-            //code to exit chat screen
+            //code to exit chat screen (goes back to the home screen)
         }
     }
 
@@ -144,22 +154,71 @@ public class ChatScreen extends JFrame implements ActionListener{
         this.reported = update;
     }
 
-    public String getMessage(){
-        return message;
+    public void setFileName(String fileName){
+        this.fileName = fileName;
+    }
+
+    public void retrieveMessages(){
+        messages = new ReadFile(fileName).ReadFiles();
     }
 }
 
 class runScreen{
+    ChatScreen chat;
+    User mainUser;
+    User matchedUser;
+    String fileName;
+
     public static void main(String[] args){
         try
         {
-            ChatScreen chat = new ChatScreen("User1", "User2");
-            chat.setVisible(true);
+            ChatScreen testChat = new ChatScreen("User1", "User2");
+            testChat.setVisible(true);
         }
         catch(Exception e)
         {
             //handle exception
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }
+
+    public void startChat(boolean usedPoints, User mainUser){
+        this.mainUser = mainUser;
+
+        // if-else to execute the correct code depending on if the main user used their points
+        if (usedPoints){
+            //matchedUser = ; // TODO: get selected user from points manager class
+        } else {
+            int index = (int)(Math.random() * mainUser.getFriends().size());
+            this.matchedUser = mainUser.getFriends().get(index);
+        }
+
+        // creates and names a new file storing the messages in the chat
+        String textFileName = mainUser.getUsername() + " chat with " + matchedUser.getUsername() + ".txt";
+        this.fileName = textFileName;
+        File file = new File(textFileName);
+
+        //opens a new chatscreen with the selected user
+        chat = new ChatScreen(mainUser.getUsername(), matchedUser.getUsername());
+        chat.setFileName(textFileName);
+    }
+
+    public void endChat(){
+        ArrayList <User> users = new ArrayList<User>();
+        users.add(mainUser); users.add(matchedUser);
+        Report report = new Report();
+
+        if (chat.getReported()){
+            report.checkReport(fileName, mainUser, matchedUser);
+        }
+
+        EventRepository.Event e = new Event("ChatEnd", users, false);
+        e.execute();
+
+        // delete text file and reset instance attributes after (speak w/ mert)
+        matchedUser = null;
+        fileName = "";
+        chat.setReported(false);
+        chat = null;
     }
 }
