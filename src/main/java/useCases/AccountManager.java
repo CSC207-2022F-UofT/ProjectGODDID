@@ -35,8 +35,18 @@ public class AccountManager{
             for (User i : users) {
                 if (i.equals(currUser)) {
                     // check to see if friendtoadd is not in user's blocked friends list
-                    user_graph.accounts.get(currUser).add(friendToAdd);
-                    break;
+                    ArrayList<User> blocked = currUser.getBlocked_friends();
+                    boolean b = true;
+                    for (User user : blocked) {
+                        if (friendToAdd == user) {
+                            b = false;
+                            break;
+                        }
+                    }
+                    if (b) {
+                        user_graph.accounts.get(currUser).add(friendToAdd);
+                        break;
+                    }
                 }
             }
         }
@@ -59,6 +69,10 @@ public class AccountManager{
     {
         if(user_graph.accounts.containsKey(userToBeRemoved))
         {
+            ArrayList<User> friends = userToBeRemoved.getFriends();
+            for (User friend : friends) {
+                friend.getFriends().remove(userToBeRemoved);
+            }
             user_graph.accounts.values().forEach(e -> e.remove(userToBeRemoved));
             user_graph.accounts.remove(userToBeRemoved);
         }
