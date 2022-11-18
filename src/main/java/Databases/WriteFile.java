@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class WriteFile implements Serializable{
     public void writefile(Graph users) throws IOException, ClassNotFoundException {
 
-            FileOutputStream fos = new FileOutputStream("Users.ser");
+            FileOutputStream fos = new FileOutputStream("Users.ser", false);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
             oos.writeObject(users);
