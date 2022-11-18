@@ -69,8 +69,8 @@ public class Report {
     }
 
     public void checkReport(String filename, User user1, User user2){
-        ReadFile file = new ReadFile(filename);
-        ArrayList<String> all_messages = file.ReadFiles();
+        ChatTextFiles chatTextFiles = new ChatTextFiles();
+        ArrayList<String> all_messages = chatTextFiles.ReadFiles(user1.getUsername(), user2.getUsername());
         int index = all_messages.size() - 1;
         while (index >= 0) {
             String s = all_messages.get(index);
