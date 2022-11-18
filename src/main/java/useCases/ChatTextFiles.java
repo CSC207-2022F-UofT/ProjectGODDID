@@ -52,6 +52,7 @@ public class ChatTextFiles {
             }
             sc.close();
         }
+
         return list_of_messages;
     }
 
