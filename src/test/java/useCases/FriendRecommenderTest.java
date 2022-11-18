@@ -1,6 +1,5 @@
 package useCases;
 
-import entities.Graph;
 import entities.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +15,6 @@ class FriendRecommenderTest {
     User curUser, user2, user3, user4, user5;
 
     ArrayList<User> alphaFriends, deltaFriends;
-
 
     @BeforeEach
     void setUp() {
@@ -39,52 +37,45 @@ class FriendRecommenderTest {
         alphaFriends.add(user2);
         alphaFriends.add(user3);
         curUser.setFriends(alphaFriends);
-        ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
+
         accountManager.addFriend(curUser, user2);
         accountManager.addFriend(curUser, user3);
         accountManager.addFriend(curUser, user4);
-        //accountManager.addFriend(keys.get(0), keys.get(1));
-        //accountManager.addFriend(keys.get(0), keys.get(2));
-        //accountManager.addFriend(keys.get(0), keys.get(3));
 
         deltaFriends = new ArrayList<>();
         deltaFriends.add(user3);
         deltaFriends.add(user5);
         user5.setFriends(deltaFriends);
+
         accountManager.addFriend(user4, user5);
         accountManager.addFriend(user4, user3);
         accountManager.addFriend(user3, user5);
-        //accountManager.addFriend(keys.get(3), keys.get(4));
-        //accountManager.addFriend(keys.get(3), keys.get(2));
-        //accountManager.addFriend(keys.get(2), keys.get(4));
     }
 
     @AfterEach
     void tearDown() {
     }
 
-    /*@Test
+    @Test
     void getRecommendation() {
-        ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
         FriendRecommender fRec = new FriendRecommender();
         ArrayList<User> recs = new ArrayList<>();
         recs = fRec.getRecommendation(user5);
         ArrayList<User> friends = new ArrayList<>();
-        friends = user5.getFriends();
+        friends = curUser.getFriends();
         for (int i = 0; i < recs.size(); i++) {
             friends.add(recs.get(i));
         }
         curUser.setFriends(friends);
         assertEquals(5, curUser.getFriends().size()); //adds repeat friends????
-    }*/
+    }
 
     @Test
     void getRecommend() {
-        ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
-        System.out.println(keys);
         FriendRecommender fRec = new FriendRecommender();
-        User rec = fRec.getRecommend(keys.get(0), accountManager.getGraph());
-        assertEquals(keys.get(4), rec); //Get the most common friend between your friends
+        User rec = fRec.getRecommend(curUser, accountManager.getGraph());
+        System.out.println(rec);
+        assertEquals(user5, rec); //Get the most common friend between your friends
     }
 }
 

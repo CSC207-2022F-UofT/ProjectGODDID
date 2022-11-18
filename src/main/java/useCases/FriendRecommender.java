@@ -39,11 +39,8 @@ public class FriendRecommender {
         if (user != null && allUsers != null) {
             Map<User, Integer> friends = new HashMap<>();
             for (User i : allUsers.accounts.get(user)) {
-                //friends.putIfAbsent(i, 0);
-               // System.out.println(allUsers.accounts.get(i));
                 int counter = 0;
                 for (User j : allUsers.accounts.get(i)) {
-                    //System.out.println(friends.containsKey(j));
                     if (friends.containsKey(j) == false) {
                         friends.putIfAbsent(allUsers.accounts.get(i).get(counter), 0);
                     } else {
@@ -53,19 +50,13 @@ public class FriendRecommender {
                     //recs.add(user.getFriends().get(randomNum));
                 }
             }
-
-            //System.out.println("working");
-            //System.out.println(friends.keySet());
             int currMax = 0;
             for (User a : friends.keySet()) {
                 if (friends.get(a) >= currMax) {
-                    //System.out.println(friends.get(a));
                     currMax = friends.get(a);
-                    //System.out.println(currMax);
                     for (User keys : friends.keySet()) {
                         if (friends.get(keys).equals(friends.get(a))) {
                             recs = keys;
-                            //System.out.println(recs);
                         }
                     }
                 }
