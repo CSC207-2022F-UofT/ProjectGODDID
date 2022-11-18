@@ -1,11 +1,14 @@
 package useCases;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ChatTextFiles {
 
@@ -33,6 +36,23 @@ public class ChatTextFiles {
                 System.out.println("File already exists.");
             }
 
+    }
+
+
+    public ArrayList<String> ReadFiles(String username1, String username2) {
+        ArrayList<String> list_of_messages = new ArrayList<String>();
+        String s = "src/" + username1 + username2;
+        String s1 = "src/" + username2 + username1;
+        try{
+            File file = Paths.get(s);
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()){
+                String data = sc.nextLine();
+                list_of_messages.add(data);
+            }
+            sc.close();
+        }
+        return list_of_messages;
     }
 
 
