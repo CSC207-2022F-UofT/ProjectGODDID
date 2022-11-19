@@ -21,6 +21,7 @@ import java.util.Scanner;
 public class ChatScreen extends JFrame implements ActionListener, KeyListener {
     public User mainUser;
     public User matchedUser;
+    public int numExtended = 0;
 
     // initializing all buttons and text fields to be accessed both by actionPerformed and constructor
     JFrame frame;
@@ -237,8 +238,16 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
                 throw new RuntimeException(e);
             }
         }
-        if (list_of_messages.size() >= 20){
-            endChat();
+        if ((list_of_messages.size() - (numExtended * 20)) >= 20){
+            int answer = JOptionPane.showConfirmDialog(null, "Do you want to extend this chat" +
+                    " (use 20 points)? You have " + mainUser.getPoints() + " points.", "",
+                    JOptionPane.YES_NO_OPTION);
+            if (answer == 0){
+                // call points manager to use the points
+                numExtended += 1;
+            } else {
+                endChat();
+            }
         }
         return list_of_messages;
     }
@@ -287,12 +296,8 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
     }
 }
 
-class runScreen{
-    ChatScreen chat;
-    User mainUser;
-    User matchedUser;
-
-    public static void main(String[] args) throws IOException {
+class testUser1{
+    public static void main(String[] args) {
         ChatScreen testChat;
         User user1 = new User("Manit", "Casual");
         User user2 = new User("Arian", "Casual");
@@ -307,35 +312,20 @@ class runScreen{
             else {
                 System.out.println("File already exists.");
             }
-
-            testChat = new ChatScreen(user1, user2);
-            testChat.setVisible(true);
         }
         catch(Exception e)
         {
             //handle exception
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    }
 
-    public void startChat(boolean usedPoints, User mainUser) throws IOException {
-        this.mainUser = mainUser;
-
-        // if-else to execute the correct code depending on if the main user used their points
-        if (usedPoints){
-            //matchedUser = ; // TODO: get selected user from points manager class
-        } else {
-            int index = (int)(Math.random() * mainUser.getFriends().size());
-            this.matchedUser = mainUser.getFriends().get(index);
-        }
-
-        //opens a new chatscreen with the selected user
-        chat = new ChatScreen(mainUser, matchedUser);
+        testChat = new ChatScreen(user1, user2);
+        testChat.setVisible(true);
     }
 }
 
-class runScreen2 {
-    public static void main(String[] args) throws IOException {
+class testUser2 {
+    public static void main(String[] args) {
         ChatScreen testChat;
         User user1 = new User("Arian", "Casual");
         User user2 = new User("Manit", "Casual");
@@ -348,12 +338,12 @@ class runScreen2 {
             } else {
                 System.out.println("File already exists.");
             }
-
-            testChat = new ChatScreen(user1, user2);
-            testChat.setVisible(true);
         } catch (Exception e) {
             //handle exception
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+
+        testChat = new ChatScreen(user1, user2);
+        testChat.setVisible(true);
     }
 }

@@ -44,8 +44,4 @@ public class PointsSystem{
         X.points += newPoints;
         }
     }
-
-
-
-
 }
