@@ -1,6 +1,6 @@
 package UI;
 
-import controllers.AddFriendController;
+
 import entities.User;
 import useCases.AccountManager;
 
@@ -18,6 +18,7 @@ public class WelcomePage extends JFrame implements ActionListener {
     JButton addfriend = new JButton();
     JButton removefriend = new JButton();
     JButton skipchat = new JButton();
+    JButton match = new JButton();
     TextField text = new TextField();
 
     JButton recommendButton, activeButton;
@@ -50,6 +51,11 @@ public class WelcomePage extends JFrame implements ActionListener {
         frame.setLayout(null);
         frame.setVisible(true);
 
+        match.setBounds(150, 100, 100, 50);
+        match.addActionListener(this);
+        match.setText("Start Chat");
+        match.setFocusable(false);
+
         startchat.setBounds(250, 100, 100, 50);
         startchat.addActionListener(this);
         startchat.setText("Start Chat");
@@ -58,7 +64,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         skipchat.setBounds(350, 100, 100, 50);
         skipchat.addActionListener(this);
         skipchat.setText("Skip");
-        startchat.setFocusable(false);
+        skipchat.setFocusable(false);
 
         friends.setBounds(250, 250, 100, 50);
         friends.addActionListener(this);
@@ -85,6 +91,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         frame.add(addfriend);
         frame.add(removefriend);
         frame.add(skipchat);
+        frame.add(match);
 
     }
 
@@ -100,17 +107,17 @@ public class WelcomePage extends JFrame implements ActionListener {
             }
         }
 
-        if (e.getSource() == addfriend){
-            String friend_to_add = text.getText();
-            AddFriendController friend_con = new AddFriendController();
-            try {
-                friend_con.AddFriendCon(user1, friend_to_add);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
+//        if (e.getSource() == addfriend){
+//            String friend_to_add = text.getText();
+//            AddFriendController friend_con = new AddFriendController();
+//            try {
+//                friend_con.AddFriendCon(user1, friend_to_add);
+//            } catch (IOException ex) {
+//                throw new RuntimeException(ex);
+//            } catch (ClassNotFoundException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//        }
 
 //        if (e.getSource() == skipchat){
 //
