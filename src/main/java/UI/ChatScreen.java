@@ -3,8 +3,7 @@ package UI;
 import EventPackage.Event;
 import entities.User;
 import useCases.Report;
-import PointsSystem.PointsSystem;
-
+import PointSystem.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -16,7 +15,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 public class ChatScreen extends JFrame implements ActionListener, KeyListener {
@@ -179,7 +177,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
 
         } else if (e.getSource()==back) {
             //leaves the chat screen
-            HomeScreen home = new HomeScreen();
+            new HomeScreen();
             //code to exit chat screen (goes back to the home screen)
             // MIGHT delete this part, comment out for now
         } else {
@@ -212,7 +210,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
 
     public void readFromTextFile(String username1, String username2) {
         displayed.setText("");
-        ArrayList<String> list_of_messages = new ArrayList<String>();
+        ArrayList<String> list_of_messages = new ArrayList<>();
         String s = "src/" + username1 + username2 + ".txt";
         String s1 = "src/" + username2 + username1 + ".txt";
         File f = new File(s);
@@ -243,10 +241,14 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
             }
         }
         if ((list_of_messages.size() - (numExtended * 20)) >= 20){
+            ArrayList<User> main = new ArrayList<>();
             int answer = JOptionPane.showConfirmDialog(null, "Do you want to extend this chat" +
                             " (use 20 points)? You have " + mainUser.getPoints() + " points.", "",
                     JOptionPane.YES_NO_OPTION);
             if (answer == 0){
+                Event e = new Event("SpendExtend", main);
+                PointSystemS ps = new PointSystemS();
+                e.execute(ps);
                 numExtended += 1;
             } else {
                 endChat();
@@ -261,8 +263,8 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
         String s1 = "src/" + mainUser.getUsername() + matchedUser.getUsername() + ".txt";
         String s2 = "src/" + matchedUser.getUsername() + mainUser.getUsername() + ".txt";
 
-        Event e = new Event("ChatEnd", users, false);
-        PointsSystem ps = new PointsSystem();
+        Event e = new Event("ChatEnd", users);
+        PointSystemR ps = new PointSystemR();
         e.execute(ps);
 
         try {
