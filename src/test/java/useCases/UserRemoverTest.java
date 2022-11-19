@@ -6,22 +6,22 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class UserCreatorTest {
+public class UserRemoverTest {
 
     AccountManager accountManager = new AccountManager();
     User user1, user2, user3, user4, user5;
 
-    ArrayList<User> alphaFriends, deltaFriends;
 
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException, ClassNotFoundException {
 
         user1 = new User("", "");
         user1.setUsername("Alpha");
@@ -61,15 +61,14 @@ public class UserCreatorTest {
     }
 
     @Test
-    void addUser() {
+    void removeUser() throws IOException, ClassNotFoundException {
         AccountManager am = new AccountManager();
         AccountManager.user_graph.accounts.clear();
-        System.out.println(am.getGraph().getUsers());
         am.addUser(user1);
         am.addUser(user2);
+        am.removeUser(user2);
         System.out.println(am.getGraph().getUsers());
-        assert(am.getGraph().getUsers().size() == 2);
-
+        assert(am.getGraph().getUsers().size() == 1);
     }
 
 }

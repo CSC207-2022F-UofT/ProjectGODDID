@@ -1,4 +1,4 @@
-package controllers;
+/*package controllers;
 
 import useCases.FriendRequester;
 import entities.User;
@@ -8,4 +8,4 @@ public class RequestUIController {
         FriendRequester friendRequester = new FriendRequester();
         friendRequester.request(currUser, friend, amount);
     }
-}
+}*/

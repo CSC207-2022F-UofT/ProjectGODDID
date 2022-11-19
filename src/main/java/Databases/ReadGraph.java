@@ -1,14 +1,10 @@
 package Databases;
 
 import entities.Graph;
-import entities.User;
-import useCases.UserCreator;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
-public class ReadFile implements Serializable{
+public class ReadGraph implements Serializable{
 
     public Graph readobject() throws IOException, ClassNotFoundException {
         Graph users = new Graph();
@@ -20,13 +16,14 @@ public class ReadFile implements Serializable{
 
             ois.close();
             fis.close();
+            return users;
         } catch (EOFException e){
-            users = new Graph();
+            //users = new Graph();
             return users;
         }
 
 
-        return users;
+        //return users;
 
 
 
