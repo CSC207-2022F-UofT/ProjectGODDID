@@ -1,4 +1,3 @@
-/*
 package UI;
 
 import EventPackage.Event;
@@ -169,7 +168,13 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
 //                String s2 = "src/" + matchedUser.getUsername() + mainUser.getUsername() + ".txt";
                 Report report = new Report(mainUser, matchedUser);
                 // TODO: Speak w/ manit
-                report.checkReport();
+                try {
+                    report.checkReport();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
                 endChat();
             }
 
@@ -178,15 +183,6 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
             HomeScreen home = new HomeScreen();
             //code to exit chat screen (goes back to the home screen)
             // MIGHT delete this part, comment out for now
-        }
-    }
-
-    public void createTextFile(String username1, String username2) throws IOException {
-        String s = "src/" + username1 + username2 + ".txt";
-        if (!new File(s).exists()) {
-            String v = "src/" + username1 + username2 + ".txt";
-        } else {
-            System.out.println("File already exists.");
         }
     }
 
@@ -352,4 +348,4 @@ class runScreen2 {
         testChat = new ChatScreen(user1, user2);
         testChat.setVisible(true);
     }
-}*/
+}
