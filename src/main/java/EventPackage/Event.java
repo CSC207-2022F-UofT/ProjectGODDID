@@ -11,7 +11,7 @@ public class Event {
      * Everytime an event involving spending/renewing points occurs, an Event object is created. This Event object contains
      * the users involved in the event and the type of Event (Spending/Renewing and subtypes thereof).
      * Executing this instance of the Event class calls the PointSystem and makes the requisite changes to the points of
-     * the users involved.
+     * the users involved .
      */
     private String eventType;
     // eventType can be one of ChatEnd, GameChatEnd, SpendSkip, SpendChoose or SpendExtend

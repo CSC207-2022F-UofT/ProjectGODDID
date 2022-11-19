@@ -7,7 +7,7 @@ import java.util.Hashtable;
 public class PointSystemS extends PointSystem{
     /**
      * PointSystemS, subclass of the abstract PointSystem Class, is meant to handle the point manipulation methods
-     * related to Spending points (via skipping, choosing preference or extending chat).
+     * related to Spending points (via skipping, choosing preference or extending chat) .
      */
     public Hashtable<String, Integer> spendCases = new Hashtable<>();
 
