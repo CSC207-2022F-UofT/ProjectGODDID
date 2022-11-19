@@ -1,3 +1,4 @@
+/*
 package useCases;
 
 import entities.Graph;
@@ -114,3 +115,4 @@ class FriendRecommenderTest {
 
     }
 }
+*/

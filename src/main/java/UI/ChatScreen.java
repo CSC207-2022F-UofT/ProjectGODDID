@@ -1,3 +1,4 @@
+/*
 package UI;
 
 import EventPackage.Event;
@@ -355,4 +356,4 @@ class runScreen2 {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-}
+}*/
