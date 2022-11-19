@@ -69,6 +69,7 @@ public class FriendAdderTest {
             fd.addFriend(user5, user1, accountManager);
             fd.addFriend(user3, user4, accountManager);
             fd.addFriend(user3, user5, accountManager);
+            System.out.println(accountManager.getGraph().accounts.get(user3.getUsername()).getFriends().size());
             assert(user1.getFriends().contains(user2));
             assert(user2.getFriends().contains(user1));
             assert(user5.getFriends().contains(user1));

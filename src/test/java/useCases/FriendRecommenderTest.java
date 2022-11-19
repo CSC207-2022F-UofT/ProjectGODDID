@@ -1,4 +1,4 @@
-/*
+
 package useCases;
 
 import entities.Graph;
@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +23,7 @@ class FriendRecommenderTest {
 
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException, ClassNotFoundException {
         graph = new Graph();
 
         curUser = new User("", "");
@@ -58,28 +59,32 @@ class FriendRecommenderTest {
         alphaFriends = new ArrayList<>();
         alphaFriends.add(user2);
         alphaFriends.add(user3);
-        curUser.setFriends(alphaFriends);
+        //curUser.setFriends(alphaFriends);
         //accountManager.addFriend(curUser, user2);
         //accountManager.addFriend(curUser,user3);
-        ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
-        accountManager.addFriend(keys.get(0), keys.get(1));
-        accountManager.addFriend(keys.get(0), keys.get(2));
-        accountManager.addFriend(keys.get(0), keys.get(3));
+        //ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
+        FriendAdder fd = new FriendAdder();
+        fd.addFriend(curUser, user2, accountManager);
+        fd.addFriend(curUser,user3, accountManager);
+        fd.addFriend(curUser,user4, accountManager);
+
         //System.out.println(graph.getVertices());
         //graph.addEdge("Alpha", "Casual", curUser, "Beta","Casual",user2);
         //graph.addEdge("Alpha", "Casual", curUser, "Charlie","Casual",user3);
 
         deltaFriends = new ArrayList<>();
-        deltaFriends.add(user3);
-        deltaFriends.add(user5);
-        user5.setFriends(deltaFriends);
+        //deltaFriends.add(user3);
+        //deltaFriends.add(user5);
+        //user5.setFriends(deltaFriends);
+        fd.addFriend(user4, user3, accountManager);
+        fd.addFriend(user4,user5, accountManager);
+        fd.addFriend(user3,user5, accountManager);
         //accountManager.addFriend(user4, user3);
         //accountManager.addFriend(user4,user5);
-        accountManager.addFriend(keys.get(3), keys.get(4));
-        accountManager.addFriend(keys.get(3), keys.get(2));
-        accountManager.addFriend(keys.get(2), keys.get(4));
-        //graph.addEdge("Delta", "Casual", user4, "Echo","Casual",user5);
-        //graph.addEdge("Delta", "Casual", user4, "Charlie","Casual",user3);
+        //accountManager.addFriend(keys.get(3), keys.get(4));
+        //accountManager.addFriend(keys.get(3), keys.get(2));
+        //accountManager.addFriend(keys.get(2), keys.get(4));
+
     }
 
     @AfterEach
@@ -88,31 +93,35 @@ class FriendRecommenderTest {
 
     @Test
     void getRecommendation() {
-        ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
+        //ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
         //System.out.println(graph.accounts.get(keys.get(0)));
         //System.out.println(user5.getFriends());
+        System.out.println(curUser.getFriends());
+        System.out.println(accountManager.getGraph().accounts.size());
         FriendRecommender fRec = new FriendRecommender();
-        ArrayList<User> recs = new ArrayList<>();
-        recs = fRec.getRecommendation(user5);
+        ArrayList<String> recs = new ArrayList<>();
+        recs = fRec.getRecommendation(curUser);
+        System.out.println(recs.size());
         ArrayList<User> friends = new ArrayList<>();
-        friends = user5.getFriends();
+        friends = user4.getFriends();
         for (int i = 0; i < recs.size(); i++) {
             //System.out.println(recs.get(i));
-            friends.add(recs.get(i));
+            friends.add(accountManager.getGraph().getUser(recs.get(i)));
         }
         //System.out.println(friends.size());
-        curUser.setFriends(friends);
+        user4.setFriends(friends);
+        System.out.println(user4.getFriends());
         assertEquals(5, curUser.getFriends().size()); //adds repeat friends????
     }
 
     @Test
     void getRecommend() {
-        ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
-        System.out.println(keys);
+        //ArrayList<User> keys = new ArrayList<>(accountManager.getGraph().accounts.keySet());
+        //System.out.println(keys);
         FriendRecommender fRec = new FriendRecommender();
-        User rec = fRec.getRecommend(keys.get(0), graph);
-        assertEquals(keys.get(4), rec); //Get the most common friend between your friends
+        String rec = fRec.getRecommend(curUser, graph);
+        assertEquals(user4.getUsername(), rec); //Get the most common friend between your friends
 
     }
 }
-*/
+
