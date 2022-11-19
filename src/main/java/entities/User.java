@@ -77,7 +77,7 @@ public class User implements Serializable {
     }
 
     public ArrayList<User> getFriends() {
-        return friends;
+        return this.friends;
     }
 
     public int getNum_strikes(){
