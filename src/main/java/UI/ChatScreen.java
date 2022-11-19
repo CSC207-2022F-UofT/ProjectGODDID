@@ -243,7 +243,6 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
                     " (use 20 points)? You have " + mainUser.getPoints() + " points.", "",
                     JOptionPane.YES_NO_OPTION);
             if (answer == 0){
-                // call points manager to use the points
                 numExtended += 1;
             } else {
                 endChat();
