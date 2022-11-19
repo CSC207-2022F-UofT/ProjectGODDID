@@ -5,9 +5,6 @@ import entities.Graph;
 import java.io.*;
 
 public class AddGraphToFile {
-    public AddGraphToFile(){
-
-    }
 
     public void AddToFile(Graph graph) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("src/Graph.txt", false));
@@ -22,3 +19,8 @@ public class AddGraphToFile {
 }
 
 
+//class AddGraphToFileDemo{
+//    public static void main(String[] args) {
+//
+//    }
+//}

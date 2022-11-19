@@ -5,6 +5,7 @@ import controllers.RegisterUIController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.lang.Exception;
 import useCases.*;
 
@@ -78,7 +79,13 @@ class RegisterScreen extends JFrame implements ActionListener
         //check whether user already exists
         if (true) {  //if authentic, navigate user to a new page
             RegisterUIController regControl = new RegisterUIController();
-            regControl.performRegister(passValue, userValue, acc_typeValue);
+            try {
+                regControl.performRegister(passValue, userValue, acc_typeValue);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             //create instance of the NewPage
             HomeScreen home = new HomeScreen();
             //make page visible to the user

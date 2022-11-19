@@ -1,3 +1,4 @@
+/*
 package UI;
 
 import EventPackage.Event;
@@ -351,4 +352,4 @@ class runScreen2 {
         testChat = new ChatScreen(user1, user2);
         testChat.setVisible(true);
     }
-}
+}*/

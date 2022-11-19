@@ -1,6 +1,7 @@
 package useCases;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 import entities.User;
@@ -121,7 +122,7 @@ public class Report {
     suitable action. First the messages file is read and then messages sent by matched user is checked to see if it is
      offensive or not. If any message is oofensive then strike is added to the matched user, he/she is blocked and
      removed as friend and if there are more than 3 strikes then matched user is removed from graph (banned).*/
-    public void checkReport(){
+    public void checkReport() throws IOException, ClassNotFoundException {
         ArrayList<String> all_messages = readFiles();
         int index = all_messages.size() - 1;
         while (index >= 0) {
