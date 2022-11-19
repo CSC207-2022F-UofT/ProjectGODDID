@@ -21,7 +21,6 @@ import java.util.Scanner;
 public class ChatScreen extends JFrame implements ActionListener, KeyListener {
     public User mainUser;
     public User matchedUser;
-    public int numExtended = 0;
 
     // initializing all buttons and text fields to be accessed both by actionPerformed and constructor
     JFrame frame;
@@ -165,12 +164,17 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
                     "Report", JOptionPane.YES_NO_OPTION);
 
             if (answer == 0){
-                String s1 = "src/" + mainUser.getUsername() + matchedUser.getUsername() + ".txt";
-                String s2 = "src/" + matchedUser.getUsername() + mainUser.getUsername() + ".txt";
-                Report report = new Report();
+//                String s1 = "src/" + mainUser.getUsername() + matchedUser.getUsername() + ".txt";
+//                String s2 = "src/" + matchedUser.getUsername() + mainUser.getUsername() + ".txt";
+                Report report = new Report(mainUser, matchedUser);
                 // TODO: Speak w/ manit
-                report.checkReport(s1, mainUser, matchedUser);
-                report.checkReport(s2, mainUser, matchedUser);
+                try {
+                    report.checkReport();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
                 endChat();
             }
 
@@ -185,8 +189,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
     public void addToTextFile(String messages, String username1, String username2){
         String s = "src/" + username1 + username2 + ".txt";
         String s1 = "src/" + username2 + username1 + ".txt";
-        File f = new File(s);
-        if (f.exists()) {
+        if (new File(s).exists()) {
             try {
                 FileWriter writer = new FileWriter(s, true);
                 writer.write(username1 + ": " + messages + "\n");
@@ -197,7 +200,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
         }
         else{
             try {
-                FileWriter writer = new FileWriter(s1);
+                FileWriter writer = new FileWriter(s1, true);
                 writer.write(username1 + ": " + messages + "\n");
                 writer.close();
             } catch (IOException error) {
@@ -211,9 +214,9 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
         ArrayList<String> list_of_messages = new ArrayList<String>();
         String s = "src/" + username1 + username2 + ".txt";
         String s1 = "src/" + username2 + username1 + ".txt";
-        File f = new File(s);
-        if (f.exists()) {
+        if (new File(s).exists()) {
             try {
+                File f = new File(s);
                 Scanner sc = new Scanner(f);
                 while (sc.hasNextLine()) {
                     String data = sc.nextLine();
@@ -238,15 +241,8 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
                 throw new RuntimeException(e);
             }
         }
-        if ((list_of_messages.size() - (numExtended * 20)) >= 20){
-            int answer = JOptionPane.showConfirmDialog(null, "Do you want to extend this chat" +
-                    " (use 20 points)? You have " + mainUser.getPoints() + " points.", "",
-                    JOptionPane.YES_NO_OPTION);
-            if (answer == 0){
-                numExtended += 1;
-            } else {
-                endChat();
-            }
+        if (list_of_messages.size() >= 20){
+            endChat();
         }
         return list_of_messages;
     }
@@ -295,53 +291,60 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
     }
 }
 
-class testUser1{
-    public static void main(String[] args) {
+class runScreen{
+    ChatScreen chat;
+    User mainUser;
+    User matchedUser;
+
+    public static void main(String[] args) throws IOException {
         ChatScreen testChat;
         User user1 = new User("Manit", "Casual");
         User user2 = new User("Arian", "Casual");
-
-        try
-        {
-            String s = "src/" + user1.getUsername() + user2.getUsername() + ".txt";
-            File file = new File(s);
-            if (file.createNewFile()) {
-                System.out.println("File created: " + file.getName());
-            }
-            else {
-                System.out.println("File already exists.");
-            }
-        }
-        catch(Exception e)
-        {
-            //handle exception
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-
-        testChat = new ChatScreen(user1, user2);
-        testChat.setVisible(true);
-    }
-}
-
-class testUser2 {
-    public static void main(String[] args) {
-        ChatScreen testChat;
-        User user1 = new User("Arian", "Casual");
-        User user2 = new User("Manit", "Casual");
-
-        try {
-            String s = "src/" + user1.getUsername() + user2.getUsername() + ".txt";
-            File file = new File(s);
-            if (file.createNewFile()) {
-                System.out.println("File created: " + file.getName());
+        String s1 = "src/" + user1.getUsername() + user2.getUsername() + ".txt";
+        String s2 = "src/" + user2.getUsername() + user1.getUsername() + ".txt";
+        if (!new File(s2).exists() && !new File(s1).exists()){
+            File f = new File(s1);
+            if (f.createNewFile()) {
+                System.out.println("File created: " + f.getName());
             } else {
                 System.out.println("File already exists.");
             }
-        } catch (Exception e) {
-            //handle exception
-            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        testChat = new ChatScreen(user1, user2);
+        testChat.setVisible(true);
+    }
+
+    public void startChat(boolean usedPoints, User mainUser) throws IOException {
+        this.mainUser = mainUser;
+
+        // if-else to execute the correct code depending on if the main user used their points
+        if (usedPoints){
+            //matchedUser = ; // TODO: get selected user from points manager class
+        } else {
+            int index = (int)(Math.random() * mainUser.getFriends().size());
+            this.matchedUser = mainUser.getFriends().get(index);
         }
 
+        //opens a new chatscreen with the selected user
+        chat = new ChatScreen(mainUser, matchedUser);
+    }
+}
+
+class runScreen2 {
+    public static void main(String[] args) throws IOException {
+        ChatScreen testChat;
+        User user1 = new User("Arian", "Casual");
+        User user2 = new User("Manit", "Casual");
+        String s1 = "src/" + user1.getUsername() + user2.getUsername() + ".txt";
+        String s2 = "src/" + user2.getUsername() + user1.getUsername() + ".txt";
+        if (!new File(s2).exists() && !new File(s1).exists()){
+            File f = new File(s1);
+            if (f.createNewFile()) {
+                System.out.println("File created: " + f.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        }
         testChat = new ChatScreen(user1, user2);
         testChat.setVisible(true);
     }

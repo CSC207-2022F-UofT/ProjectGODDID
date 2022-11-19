@@ -32,7 +32,7 @@ public class PointsSystem{
         else{
             int pointsRequired = spendCases.get(spendCase);
 
-            if (X.points >= pointsRequired){
+            if (X.getPoints() >= pointsRequired){
                 X.points -= pointsRequired;
             }
 
