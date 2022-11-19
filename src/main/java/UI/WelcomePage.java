@@ -3,6 +3,9 @@ package UI;
 
 import entities.User;
 import useCases.AccountManager;
+import useCases.FriendAdder;
+import useCases.FriendRecommender;
+import useCases.FriendRemover;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,10 +25,12 @@ public class WelcomePage extends JFrame implements ActionListener {
     TextField text = new TextField();
 
     JButton recommendButton, activeButton;
-    User user1;
+    User user1, friend;
+
+    AccountManager accountManager;
 
 
-    public WelcomePage(User user) throws IOException, ClassNotFoundException {
+    public WelcomePage(User user)  {
         user1 = user;
 
         recommendButton = new JButton();
@@ -97,15 +102,37 @@ public class WelcomePage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == friends){
-            try {
-                FriendsPage friends = new FriendsPage(user1);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
+        if(e.getSource() == friends) //add friend
+        {
+            FriendsPage friends = new FriendsPage(user1);
         }
+        if(e.getSource() == addfriend) //add friend
+        {
+            friend = new User(text.getText(), "");
+            FriendAdder friendAdder = new FriendAdder();
+            FriendRecommender friendRecommender = new FriendRecommender();
+            //User rand = friendRecommender.getRecommendRandom(user1);
+            friendAdder.addFriend(user1,friend,accountManager);
+        }
+        if(e.getSource() == removefriend) //add friend
+        {
+            for (User i:user1.getFriends()){
+                if (i.getUsername().equals(text.getText())){
+                    friend = i;
+                }
+            }
+            FriendRemover friendRemover = new FriendRemover();
+            friendRemover.remove(user1,friend,accountManager);
+        }
+        //if (e.getSource() == friends){
+            //try {
+
+            //}catch (IOException ex) {
+                //throw new RuntimeException(ex);
+                // } catch (ClassNotFoundException ex) {
+               // throw new RuntimeException(ex);
+           // }
+        //}
 
 //        if (e.getSource() == addfriend){
 //            String friend_to_add = text.getText();

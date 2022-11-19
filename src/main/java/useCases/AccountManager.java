@@ -31,15 +31,15 @@ public class AccountManager{
         user_graph.accounts.putIfAbsent(user, new ArrayList<>());
     }
 
-    public void addFriend(User currUser, User friendToAdd) throws IOException, ClassNotFoundException {
-        user_graph = reader.readobject();
+    public void addFriend(User currUser, User friendToAdd) {
+        //user_graph = reader.readobject();
         if(user_graph.accounts.containsKey(currUser))
         {
             ArrayList<User> users = user_graph.getUsers();
             for (User i : users) {
                 if (i.equals(currUser)) {
                     user_graph.accounts.get(currUser).add(friendToAdd);
-                    writer.writefile(user_graph);
+                    //writer.writefile(user_graph);
                     break;
                 }
             }

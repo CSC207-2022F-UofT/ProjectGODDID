@@ -3,6 +3,7 @@ package UI;
 
 import controllers.*;
 import entities.User;
+import UI.*;
 
 import java.awt.*;
 import javax.swing.*;
@@ -164,7 +165,15 @@ public class HomeScreen extends JFrame implements ActionListener
     {
 // creating an object of the class CardLayoutExample1
         //HomeScreen crdl = new HomeScreen();
-        WelcomePage crdl = new WelcomePage(new User("Bob",""));
+        User bob = new User("Bob","");
+        ArrayList friends = new ArrayList();
+        User user1 = new User("Alpha", "");
+        User user2 = new User("Beta", "");
+        friends.add(user2);
+        friends.add(user1);
+        bob.setFriends(friends);
+
+        WelcomePage crdl = new WelcomePage(bob);
 
 // size is 300 * 300
         crdl.setSize(300, 300);
