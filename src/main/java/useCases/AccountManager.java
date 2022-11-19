@@ -19,22 +19,22 @@ public class AccountManager{
             new_user.setAccountType(acc_type);
             new_user.setNum_strikes();
             new_user.setBlocked_friends();
-            user_graph.accounts.putIfAbsent(new_user, new ArrayList<>());
+            user_graph.accounts.putIfAbsent(name, new_user);
         }
     }
 
     public void addUser(User user)
     {
-        user_graph.accounts.putIfAbsent(user, new ArrayList<>());
+        user_graph.accounts.putIfAbsent(user.getUsername() ,user);
     }
 
     public void addFriend(User currUser, User friendToAdd) {
-        if(user_graph.accounts.containsKey(currUser))
+        if(user_graph.accounts.containsKey(currUser.getUsername()))
         {
             ArrayList<User> users = user_graph.getUsers();
             for (User i : users) {
                 if (i.equals(currUser)) {
-                    user_graph.accounts.get(currUser).add(friendToAdd);
+                    currUser.friends.add(friendToAdd);
                     break;
                 }
             }
@@ -42,12 +42,12 @@ public class AccountManager{
     }
 
     public void removeFriend(User currUser, User friendToRemove) {
-        if(user_graph.accounts.containsKey(currUser))
+        if(user_graph.accounts.containsKey(currUser.getUsername()))
         {
             ArrayList<User> users = user_graph.getUsers();
             for (User i : users) {
                 if (i.equals(currUser)) {
-                    user_graph.accounts.get(currUser).remove(friendToRemove);
+                    currUser.friends.remove(friendToRemove);
                     break;
                 }
             }
@@ -56,10 +56,9 @@ public class AccountManager{
 
     public void removeUser(User userToBeRemoved)
     {
-        if(user_graph.accounts.containsKey(userToBeRemoved))
+        if(user_graph.accounts.containsKey(userToBeRemoved.getUsername()))
         {
-            user_graph.accounts.values().forEach(e -> e.remove(userToBeRemoved));
-            user_graph.accounts.remove(userToBeRemoved);
+            user_graph.accounts.remove(userToBeRemoved.getUsername());
         }
     }
 

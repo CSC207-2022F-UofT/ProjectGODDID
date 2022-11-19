@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import static useCases.AccountManager.*;
 
 public class User implements Serializable {
-    private ArrayList<User> friends;
+    public ArrayList<User> friends;
     private String username, password;
     public String acc_type;
 
-    private String points;
+    public int points;
     private ArrayList<User> blocked_friends;
     private int num_strikes;
 
@@ -44,7 +44,7 @@ public class User implements Serializable {
 
     public void setPoints(int p) {
 
-        this.points = String.valueOf(p);
+        this.points = p;
     }
 
     public void setBlocked_friends(){
@@ -60,7 +60,7 @@ public class User implements Serializable {
     }
 
 
-    public String getPoints() {
+    public int getPoints() {
         return this.points;
     }
 
