@@ -26,7 +26,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
     JFrame frame;
     JButton newGame; JButton send; JButton report; JButton back;
     JTextField sendMessage; JTextArea displayed;
-    Timer timer = new Timer(1000, this);
+    Timer timer = new Timer(500, this);
 
     // constructor for when a chat screen is opened
     public ChatScreen(User user1, User user2){
@@ -62,7 +62,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
         scrollPane.addKeyListener(this);
 
         // Text field where the used inputs their message
-        sendMessage = new JTextField(); //increase max?
+        sendMessage = new JTextField();
         sendMessage.setPreferredSize(new Dimension(320, 30));
         sendMessage.setFocusable(true);
         sendMessage.addKeyListener(this);
