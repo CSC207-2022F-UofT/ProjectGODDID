@@ -112,7 +112,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 
             //User rand = friendRecommender.getRecommendRandom(user1);
             try {
-                friendAdder.addFriend(user1,friend,accountManager);
+                friendAdder.addFriend(user1,friend);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             } catch (ClassNotFoundException ex) {
