@@ -17,8 +17,8 @@ public class ChatManager {
 
         // Depending on the cases calls the appropriate method and sets the matchedUser to the returned user
         switch (typeUse) {
-            case "skip" -> this.matchedUser = skipMatch(otherUser);
-            case "choose", "extend" -> this.matchedUser = choseMatch(otherUser);
+//            case "skip" -> this.matchedUser = skipMatch(otherUser);
+//            case "choose", "extend" -> this.matchedUser = choseMatch(otherUser);
         }
     }
 
