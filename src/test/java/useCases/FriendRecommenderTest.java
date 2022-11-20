@@ -1,5 +1,8 @@
 package useCases;
 
+import EventPackage.Event;
+import PointSystem.PointSystemR;
+import PointSystem.PointSystemS;
 import entities.Graph;
 import entities.User;
 import org.junit.jupiter.api.AfterEach;
@@ -8,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FriendRecommenderTest {
 
@@ -112,6 +115,40 @@ class FriendRecommenderTest {
         User rec = fRec.getRecommend(keys.get(0), graph);
         assertEquals(keys.get(4), rec); //Get the most common friend between your friends
 
+    }
+
+    @Test
+    void RenewTest(){
+        ArrayList<User> userlist = new ArrayList<>();
+        userlist.add(user2);
+        userlist.add(user3);
+        PointSystemR testPS = new PointSystemR();
+
+        Event e1 = new Event("ChatEnd", userlist);
+        e1.execute(testPS);
+
+        assertEquals(user2.points, 10);
+        assertEquals(user3.points, 10);
+    }
+
+    @Test
+    void SpendTest(){  // also tests that non-involved user vertices are not touched
+        ArrayList<User> userlist = new ArrayList<>();
+        userlist.add(user2);
+        userlist.add(user3);
+        PointSystemR testPS = new PointSystemR();
+
+        Event e1 = new Event("ChatEnd", userlist);
+        e1.execute(testPS);
+
+        ArrayList<User> ul2 = new ArrayList<User>();
+        PointSystemS t = new PointSystemS();
+        ul2.add(user2);
+        Event e2 =  new Event("SpendSkip", ul2);
+        e2.execute(t);
+
+        assertEquals(user2.points, 0);
+        assertEquals(user3.points, 10);
     }
 }
 
@@ -302,4 +339,6 @@ class FriendRecommenderTest {
 //        assertEquals(keys.get(4),rec); //Get the most common friend between your friends
 //
 //    }
+
+
 
