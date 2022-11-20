@@ -106,7 +106,11 @@ public class WelcomePage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == friends){
-            FriendsPage friends = new FriendsPage(user1);
+            try {
+                new FriendsPage(user1);
+            } catch (IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
         if (e.getSource() == addfriend){
@@ -114,36 +118,27 @@ public class WelcomePage extends JFrame implements ActionListener {
 
             try {
                 adder.AddFriendCon(user1, friend_to_add);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (IOException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
         }
 
-        User matched_user = null;
         if (e.getSource() == match){
-            matched_user = chat.randomMatch();
-            System.out.println(matched_user.getUsername());
+            chat.randomMatch();
+            System.out.println(chat.getMatchedUser().getUsername());
         }
 
         if (e.getSource() == skipchat){
-            matched_user = chat.skipMatch(matched_user);
-            System.out.println(matched_user.getUsername());
+            chat.skipMatch(chat.getMatchedUser());
+            System.out.println(chat.getMatchedUser().getUsername());
         }
 
         if (e.getSource() == startchat){
             try {
-                chat.openChat(user1, matched_user);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (InterruptedException ex) {
+                chat.openChat();
+            } catch (IOException | InterruptedException ex) {
                 throw new RuntimeException(ex);
             }
         }
-
-
-        }
-
-
+    }
 }
