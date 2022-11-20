@@ -1,6 +1,5 @@
 package useCases;
 
-import entities.Graph;
 import entities.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -18,7 +16,6 @@ public class FriendAdderTest {
         AccountManager accountManager = new AccountManager();
         User user1, user2, user3, user4, user5;
 
-        ArrayList<User> alphaFriends, deltaFriends;
 
 
     @BeforeEach
@@ -63,17 +60,33 @@ public class FriendAdderTest {
 
         @Test
         void addFriend() throws IOException, ClassNotFoundException {
-            FriendAdder fd = new FriendAdder();
-            fd.addFriend(user1, user2, accountManager);
-            fd.addFriend(user2, user1, accountManager);
-            fd.addFriend(user5, user1, accountManager);
-            fd.addFriend(user3, user4, accountManager);
-            fd.addFriend(user3, user5, accountManager);
+            //FriendAdder fd = new FriendAdder();
+            AccountManager am = new AccountManager();
+            System.out.println("user1:"+user1.getFriends());
+           /* fd.addFriend(user1, user2);
+            fd.addFriend(user2, user1);
+            fd.addFriend(user5, user1);
+            fd.addFriend(user3, user4);
+            fd.addFriend(user3, user5);
+            fd.addFriend(user4, user1);*/
+
+            am.addFriend(user1, user2);
+            am.addFriend(user2, user1);
+            am.addFriend(user5, user1);
+            am.addFriend(user3, user4);
+            am.addFriend(user3, user5);
+            am.addFriend(user4, user1);
+            System.out.println(user2);
+            System.out.println("user1:"+user1.getFriends());
+            System.out.println("user3:"+user3.getFriends());
+            System.out.println("user4:"+user4.getFriends());
+            System.out.println("user5:"+user5.getFriends());
             assert(user1.getFriends().contains(user2));
             assert(user2.getFriends().contains(user1));
             assert(user5.getFriends().contains(user1));
             assert(user3.getFriends().contains(user4));
             assert(user3.getFriends().contains(user5));
+            assert(user4.getFriends().contains(user1));
         }
 
     }

@@ -49,8 +49,8 @@ public class Report {
         return list_of_messages;
     }
 
-    /* Helper method to convert the hatewords in hatewords.txt (file downloaded from a repository online) as well and
-    some generic hatewords into a List<String> so it can itterated through in the report checkreport function. */
+    /* Helper method to convert the hatewords in hatewords.txt (file downloaded from a repoistory online) as well and
+    some generic hatewords into a List<String> so it can iterated through in the report checkreport function. */
     public List<String> hatewords(){
         List<String> hate_words = new ArrayList<String>();
         try {
@@ -120,7 +120,7 @@ public class Report {
 
     /* The main method in Report class that is called in ChatUI to check is the report is valid or not and take a
     suitable action. First the messages file is read and then messages sent by matched user is checked to see if it is
-     offensive or not. If any message is ofensive then strike is added to the matched user, he/she is blocked and
+     offensive or not. If any message is oofensive then strike is added to the matched user, he/she is blocked and
      removed as friend and if there are more than 3 strikes then matched user is removed from graph (banned).*/
     public void checkReport() throws IOException, ClassNotFoundException {
         ArrayList<String> all_messages = readFiles();
