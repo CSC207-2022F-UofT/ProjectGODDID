@@ -4,6 +4,7 @@ package UI;
 import controllers.*;
 import entities.User;
 import UI.*;
+import useCases.FriendAdder;
 
 import java.awt.*;
 import javax.swing.*;
