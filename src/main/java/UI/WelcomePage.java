@@ -3,7 +3,6 @@ package UI;
 
 import controllers.AddFriendController;
 import entities.User;
-import useCases.AccountManager;
 import useCases.ChatManager;
 
 import javax.swing.*;
@@ -50,8 +49,8 @@ public class WelcomePage extends JFrame implements ActionListener {
 
         welcomeLabel.setBounds(0,0,400,35);
         welcomeLabel.setFont(new Font(null,Font.PLAIN,20));
-        Integer points = (Integer) user.getPoints();
-        welcomeLabel.setText("Hello "+ user.getUsername() + ", you have " + points.toString() + " points");
+        int points = user.getPoints();
+        welcomeLabel.setText("Hello "+ user.getUsername() + ", you have " + points + " points");
 
         frame.add(welcomeLabel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -136,7 +135,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         if (e.getSource() == startchat){
             try {
                 chat.openChat();
-            } catch (IOException | InterruptedException ex) {
+            } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         }
