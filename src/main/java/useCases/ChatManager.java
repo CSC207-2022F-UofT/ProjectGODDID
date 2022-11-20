@@ -5,47 +5,25 @@ import entities.User;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * This class contains methods for the WelcomePage and FriendsPage pages in the GUI to interact with so that they can
- * select the user that the main user (mainUser) is matched with (matchedUser), as well as get the information of whom
- * the user has been matched with if matchedUser has been randomized, and finally open the actual chat with the user.
- *
- * @author Arian Khademi
- * @version 1.0
- * @since November 20th, 2022
- */
 public class ChatManager {
+    // Declaring instance attributes
     User mainUser;
     User matchedUser;
 
-    /**
-     * Constructor for ChatManager.
-     * This is the constructor for the ChatManager class, which sets the instance attribute mainUser to the user
-     * passed into the constructor, and calls randomMatch to also set the instance attribute matchedUser.
-     *
-     * @param mainUser the user which is accessing the GUI and looking for a user to match with.
-     */
+    // Constructor w/ 1 parameter
     public ChatManager(User mainUser){
+        // Sets the mainUser instance attribute to the one passed and the matchedUser to a random user
         this.mainUser = mainUser;
         randomMatch();
     }
 
-    /**
-     * Method to randomly select matchedUser.
-     * This method selects a random user from the mainUser's friend list and sets matchedUser to the result.
-     */
+    // Method randomly finds a matched user
     public void randomMatch(){
         int index = (int)(Math.random() * this.mainUser.getFriends().size());
         this.matchedUser = mainUser.getFriends().get(index);
     }
 
-    /**
-     * Method to skip previous matchedUser.
-     * This method calls randomMatch to select a random user from the user's friend list and set it as the matchedUser,
-     * however, it also keeps finding a randomMatch until the matchedUser is not the same as the user passed in.
-     *
-     * @param otherUser the user that the mainUser does not want to be matched with.
-     */
+    // Method randomly finds a matched user which is not the skipped user
     public void skipMatch(User otherUser){
         User tempUser = otherUser;
 
@@ -55,31 +33,17 @@ public class ChatManager {
         }
     }
 
-    /**
-     * Method to set matchedUser to chosen user.
-     * This method sets the matchedUser instance attribute to the user passed to the method, for when the mainUser has
-     * specifically chosen to speak with the user that is passed in.
-     *
-     * @param otherUser the user that the mainUser has chosen to be matched with.
-     */
+    // Method returns the user chosen / extended with (redundant for now but will not be when cases are edited)
     public void choseMatch(User otherUser){
         this.matchedUser = otherUser;
     }
 
-    /**
-     * Getter for matchedUser instance attribute.
-     * @return the matched user (matchedUser).
-     */
     public User getMatchedUser(){
         return this.matchedUser;
     }
 
-
-    /**
-     * Creates a new ChatScreen, and text file to store messages, so the users can chat with each other.
-     * @throws IOException if createNewFile fails
-     */
-    public void openChat() throws IOException {
+    // Starts a new chat between the mainUser and matchedUser
+    public void openChat() throws IOException, InterruptedException {
         String s1 = "src/" + this.mainUser.getUsername() + this.matchedUser.getUsername() + ".txt";
         String s2 = "src/" + this.matchedUser.getUsername() + this.mainUser.getUsername() + ".txt";
 
