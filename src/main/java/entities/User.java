@@ -9,14 +9,15 @@ public class User implements Serializable {
     public String acc_type;
 
     public int points;
-    private ArrayList<User> blocked_friends;
-    private int num_strikes;
+    public ArrayList<User> blocked_friends;
+    public int num_strikes;
 
     public User(String name, String acctype){
         this.username = name;
         this.acc_type = acctype;
         //points = 0;
-        friends = new ArrayList<User>();
+        this.friends = new ArrayList<User>();
+        this.blocked_friends = new ArrayList<User>();
     }
 
     public void setUsername(String name){
@@ -70,12 +71,12 @@ public class User implements Serializable {
         return password;
     }
 
-    public ArrayList<User> getBlocked_friends(){
-        return blocked_friends;
-    }
-
     public ArrayList<User> getFriends() {
         return friends;
+    }
+
+    public ArrayList<User> getBlocked_friends() {
+        return blocked_friends;
     }
 
     public int getNum_strikes(){
@@ -87,6 +88,6 @@ public class User implements Serializable {
     }
 
     public void addblocked(User user){
-        blocked_friends.add(user);
+        this.blocked_friends.add(user);
     }
 }

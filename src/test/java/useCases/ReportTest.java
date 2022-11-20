@@ -1,7 +1,7 @@
 package useCases;
 
 import entities.User;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -19,20 +19,23 @@ public class ReportTest {
         manager.addUser(user1);
         manager.addUser(user2);
         manager.addFriend(user1, user2);
-
     }
 
     @AfterEach
     void tearDown(){
-
     }
 
     @Test
     public void testReport() throws IOException, ClassNotFoundException {
         Report report = new Report(user1, user2);
         report.checkReport();
-        ArrayList<User> l1 = user1.getBlocked_friends();
-        assert(l1.contains(user2));
+        ArrayList<User> l2 = user1.getBlocked_friends();
+        assert(report.readFiles().size() == 4);
+        assert(report.hateWords().size() == 60);
+        assert(report.convertToListOfStrings("Bob: ").contains(":"));
+        assert(report.checkOffensive("Fuck yourself"));
+        assert(l2.contains(user2));
+        assert(user2.getNum_strikes() == 1);
     }
 
 }
