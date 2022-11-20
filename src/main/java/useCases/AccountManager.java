@@ -39,6 +39,7 @@ public class AccountManager{
         {
             currUser.friends.add(friendToAdd);
             friendToAdd.friends.add(currUser);
+            user_graph = temp;
         }
     }
 
