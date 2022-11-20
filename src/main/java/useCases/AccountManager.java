@@ -1,66 +1,73 @@
 package useCases;
-import Databases.ReadFile;
-import Databases.WriteFile;
+import Databases.ReadGraph;
+import Databases.WriteGraph;
 import entities.*;
 import UI.*;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.*;
 
 //public class AccountManager extends User {
-public class AccountManager implements Serializable {
-    public static Graph user_graph = new Graph();//so that every time a new user is registered (while doing this
+public class AccountManager{
+
+    WriteGraph wg = new WriteGraph();
+    static ReadGraph rg = new ReadGraph();
+    public static Graph user_graph; //so that every time a new user is registered (while doing this
+
+    static {
+        try {
+            user_graph = rg.readobject();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
     //an object of account manager is created), each object of account manager refers to the same graph.
-    ReadFile reader = new ReadFile();
-    WriteFile writer = new WriteFile();
+
+
+    public AccountManager() throws IOException, ClassNotFoundException {
+    }
 
     public void addUser(String name, String pWord, String acc_type) throws IOException, ClassNotFoundException {
         User new_user = new User(name, acc_type);
-        user_graph = reader.readobject();
-        if(!user_graph.accounts.containsKey(new_user))
+        if(!user_graph.accounts.containsKey(name))
         {
             new_user.setUsername(name);
             new_user.setPassword(pWord);
             new_user.setAccountType(acc_type);
             new_user.setNum_strikes();
             new_user.setBlocked_friends();
-            user_graph.accounts.putIfAbsent(new_user, new ArrayList<>());
-            writer.writefile(user_graph);
+            user_graph.accounts.putIfAbsent(name, new_user);
+            wg.writeGraph(user_graph);
         }
     }
 
     public void addUser(User user) throws IOException, ClassNotFoundException {
-        user_graph = reader.readobject();
-        user_graph.accounts.putIfAbsent(user, new ArrayList<>());
-        writer.writefile(user_graph);
+
+        user_graph.accounts.putIfAbsent(user.getUsername() ,user);
+        wg.writeGraph(user_graph);
     }
 
     public void addFriend(User currUser, User friendToAdd) throws IOException, ClassNotFoundException {
-        user_graph = reader.readobject();
-        if(user_graph.accounts.containsKey(currUser))
+        if(user_graph.accounts.containsKey(currUser.getUsername()))
         {
-            ArrayList<User> users = user_graph.getUsers();
-            for (User i : users) {
-                if (i.equals(currUser)) {
-                    user_graph.accounts.get(currUser).add(friendToAdd);
-                    writer.writefile(user_graph);
-                    break;
-                }
-            }
+            currUser.getFriends().add(friendToAdd);
+            user_graph.accounts.put(currUser.getUsername(), currUser);
+            wg.writeGraph(user_graph);
+
         }
     }
 
     public void removeFriend(User currUser, User friendToRemove) throws IOException, ClassNotFoundException {
-        user_graph = reader.readobject();
-        if(user_graph.accounts.containsKey(currUser))
+        if(user_graph.accounts.containsKey(currUser.getUsername()))
         {
             ArrayList<User> users = user_graph.getUsers();
             for (User i : users) {
                 if (i.equals(currUser)) {
-                    user_graph.accounts.get(currUser).remove(friendToRemove);
-                    writer.writefile(user_graph);
+                    currUser.friends.remove(friendToRemove);
+                    wg.writeGraph(user_graph);
                     break;
                 }
             }
@@ -68,27 +75,20 @@ public class AccountManager implements Serializable {
     }
 
     public void removeUser(User userToBeRemoved) throws IOException, ClassNotFoundException {
-        user_graph = reader.readobject();
-        if(user_graph.accounts.containsKey(userToBeRemoved))
-        {
-            user_graph.accounts.values().forEach(e -> e.remove(userToBeRemoved));
-            user_graph.accounts.remove(userToBeRemoved);
-            writer.writefile(user_graph);
-        }
+        user_graph.accounts.remove(userToBeRemoved.getUsername());
+        userToBeRemoved.friends.clear();
+        wg.writeGraph(user_graph);
     }
 
     public void blockUser(User user1, User user2) throws IOException, ClassNotFoundException {
-        user_graph = reader.readobject();
         user_graph.getUsers();
         this.removeFriend(user1, user2);
         user1.addblocked(user2);
-        writer.writefile(user_graph);
+        wg.writeGraph(user_graph);
     }
 
-    public Graph getGraph() throws IOException, ClassNotFoundException {
-        user_graph = reader.readobject();
+    public Graph getGraph() {
         return user_graph;
     }
 
 }
-
