@@ -1,18 +1,15 @@
 package UI;
 
-import Databases.ReadFile;
-
-import Databases.WriteFile;
+import Databases.ReadGraph;
 import entities.Graph;
 import entities.User;
 import useCases.AccountManager;
-import useCases.LoginMatcher;
-import useCases.UserCreator;
+
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
 import javax.swing.*;
 
 
@@ -27,9 +24,10 @@ public class LoginPage implements ActionListener{
     JLabel userPasswordLabel = new JLabel("password:");
     JLabel messageLabel = new JLabel();
 
-    LoginMatcher chatOpen = new LoginMatcher();
 
-    Graph logininfos;
+    ReadGraph rg = new ReadGraph();
+
+    Graph logininfos = new Graph();
     AccountManager adder = new AccountManager();
 
 
@@ -75,11 +73,11 @@ public class LoginPage implements ActionListener{
 
             try {
                 adder.addUser(userIDField.getText(),String.valueOf(userPasswordField.getPassword()), "casual");
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (IOException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
+            messageLabel.setForeground(Color.green);
+            messageLabel.setText("Sign Up Successful");
 
 //            UserCreator use = new UserCreator();
 //            User user = use.CreateUser(userIDField.getText(), String.valueOf(userPasswordField.getPassword()));
@@ -96,36 +94,34 @@ public class LoginPage implements ActionListener{
 
         if(e.getSource()==loginButton) {
             try {
-                logininfos = adder.getGraph();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
+                logininfos = rg.readobject();
+            } catch (IOException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
-            for (User i : logininfos.getUsers()) {
-                String userID = userIDField.getText();
-                String password = String.valueOf(userPasswordField.getPassword());
 
-                if (i.getUsername().equals(userID)) {
-                    if (i.getPassword().equals(password)) {
-                        messageLabel.setForeground(Color.green);
-                        messageLabel.setText("Login successful");
-                        frame.dispose();
-                        try {
-                            WelcomePage welcomePage = new WelcomePage(i);
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (ClassNotFoundException ex) {
-                            throw new RuntimeException(ex);
-                        }
+            String userID = userIDField.getText();
+            String password = String.valueOf(userPasswordField.getPassword());
 
+            if (logininfos.accounts.get(userID).getUsername().equals(userID)) {
+                if (logininfos.accounts.get(userID).getPassword().equals(password)) {
+                    messageLabel.setForeground(Color.green);
+                    messageLabel.setText("Login successful");
+                    frame.dispose();
+                    try {
+                        WelcomePage welcomePage = new WelcomePage(logininfos.accounts.get(userID));
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (ClassNotFoundException ex) {
+                        throw new RuntimeException(ex);
                     }
-                    } else {
-                        messageLabel.setForeground(Color.red);
-                        messageLabel.setText("Wrong password");
-                    }
+
                 }
+            } else {
+                messageLabel.setForeground(Color.red);
+                messageLabel.setText("Wrong password");
             }
+
+        }
 
 
     }
