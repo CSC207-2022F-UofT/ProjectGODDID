@@ -2,10 +2,8 @@ package useCases;
 import Databases.ReadGraph;
 import Databases.WriteGraph;
 import entities.*;
-import UI.*;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 //public class AccountManager extends User {
@@ -34,7 +32,7 @@ public class AccountManager{
     }
 
     public void addFriend(User currUser, User friendToAdd) throws IOException, ClassNotFoundException {
-        if(user_graph.accounts.containsKey(currUser.getUsername()))
+        if(user_graph.accounts.containsKey(currUser.getUsername()) && user_graph.accounts.containsKey(friendToAdd.getUsername()))
         {
             ArrayList<User> users = user_graph.getUsers();
             for (User i : users) {
@@ -48,26 +46,22 @@ public class AccountManager{
     }
 
     public void removeFriend(User currUser, User friendToRemove) throws IOException, ClassNotFoundException {
+
         if(user_graph.accounts.containsKey(currUser.getUsername()))
         {
-            ArrayList<User> users = user_graph.getUsers();
-            for (User i : users) {
-                if (i.equals(currUser)) {
-                    currUser.friends.remove(friendToRemove);
-                    wg.writeGraph(user_graph);
-                    break;
-                }
-            }
+            currUser.friends.remove(friendToRemove);
         }
     }
 
     public void removeUser(User userToBeRemoved) throws IOException, ClassNotFoundException {
+
         user_graph.accounts.remove(userToBeRemoved.getUsername());
         userToBeRemoved.friends.clear();
         wg.writeGraph(user_graph);
     }
 
     public void blockUser(User user1, User user2) throws IOException, ClassNotFoundException {
+
         user_graph.getUsers();
         this.removeFriend(user1, user2);
         user1.addblocked(user2);
