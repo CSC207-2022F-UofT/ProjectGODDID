@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.lang.Exception;
+import useCases.*;
 
 //create CreateLoginForm class to create login form
 //class extends JFrame to create a window where our component add

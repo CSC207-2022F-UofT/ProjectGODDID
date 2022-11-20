@@ -31,7 +31,7 @@ public class LoginPage implements ActionListener{
     AccountManager adder = new AccountManager();
 
 
-    public LoginPage() throws IOException, ClassNotFoundException {
+    public LoginPage(){
 
 //        logininfo = loginInfoOriginal;
 

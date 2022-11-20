@@ -1,5 +1,7 @@
 
+import UI.ChatUIGame;
 import UI.GameUI;
+import UI.LoginPage;
 import entities.User;
 
 
@@ -12,6 +14,14 @@ public class GameMain {
         User user1 = new User("mert", "casual");
         User user2 = new User("manit", "casual");
 
-        new GameUI(user1, user2);
+        GameUI game = new GameUI(user1, user2);
+
+
+        LoginPage loginPage = new LoginPage();
+
+
     }
+
+
+
 }
