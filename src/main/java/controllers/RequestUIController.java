@@ -1,4 +1,4 @@
-/*package controllers;
+package controllers;/*package controllers;
 
 import useCases.FriendRequester;
 import entities.User;

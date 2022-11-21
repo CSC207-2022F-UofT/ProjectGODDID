@@ -56,9 +56,9 @@ public class FriendRemoverTest {
     void removeFriend() throws IOException, ClassNotFoundException {
         FriendRemover fr = new FriendRemover();
         FriendAdder fd = new FriendAdder();
-        fd.addFriend(user1, user2);
-        fd.addFriend(user1, user3);
-        fd.addFriend(user1, user4);
+        fd.addFriend(user1, user2, accountManager);
+        fd.addFriend(user1, user3, accountManager);
+        fd.addFriend(user1, user4, accountManager);
 
         fr.remove(user1, user2, accountManager);
         fr.remove(user1, user3, accountManager);

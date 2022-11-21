@@ -20,7 +20,7 @@ public class PointSystemS extends PointSystem{
     @Override
     public void adjustPoints(User X, String spendCase){
         if (! spendCases.containsKey(spendCase)){
-            throw new java.lang.Error("Invalid spend case");
+            throw new Error("Invalid spend case");
         }
 
         else{
