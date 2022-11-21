@@ -67,6 +67,7 @@ public class GameUI extends JFrame implements ActionListener {
             buttons[i] = new JButton();
             button_panel.add(buttons[i]);
             buttons[i].setFocusable(false);
+            buttons[i].setFont(new Font(null,Font.PLAIN,100));
             buttons[i].addActionListener(this);
         }
 
@@ -77,12 +78,22 @@ public class GameUI extends JFrame implements ActionListener {
     }
 
 
+    /**
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
         for (int i = 0; i < 9; i++) {
             GameController winner = new GameController(textfield, buttons);
             if (e.getSource() == buttons[i]) {
+                /**
+                 * If player1_turn is true the first if body is executed
+                 * In the body only a move can be made if the grid is empty
+                 * The player one (x) is red and (o) is blue
+                 * Move tracker converts the moves in the buttons to an arraylist to check the board to see if
+                 * there is a winner
+                 */
                 if (player1_turn) {
                     if (buttons[i].getText().equals("")) {
                         buttons[i].setForeground(Color.red);
@@ -91,6 +102,10 @@ public class GameUI extends JFrame implements ActionListener {
                         board = move_cont.moves(board, i, "X");
                         player1_turn = false;
                         textfield.setText("O(" + player2.getUsername() + ") turn");
+                        /**
+                         * Calls the controller to check the winner and the controller calls the usecase which
+                         * follows the Clean Architecture and Dependency inversion principle
+                         */
                         winner.Wins(board, player1, player2);
                     }
                 } else {
