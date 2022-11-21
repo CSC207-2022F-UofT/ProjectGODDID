@@ -5,6 +5,7 @@ import java.util.*;
 public class Graph  implements Serializable {
     public Map<String, User> accounts = new HashMap<>();
 
+
     public ArrayList<User> getUsers()
     {
         return new ArrayList<>(this.accounts.values());

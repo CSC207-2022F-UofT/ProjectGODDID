@@ -48,8 +48,7 @@ class NewPage extends JFrame implements ActionListener
         cPane.add("b", btn2); // first card is the button btn2
         cPane.add("c", btn3);  // first card is the button btn3
 
-        setDefaultCloseOperation(javax.swing.
-                WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Welcome");
         setSize(500, 500);
 

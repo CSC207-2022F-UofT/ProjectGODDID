@@ -14,15 +14,17 @@ public class AccountManager{
     ReadGraph rg = new ReadGraph();
     public void addUser(String name, String pWord, String acc_type) throws IOException, ClassNotFoundException {
         User new_user = new User(name, acc_type);
-        if(!user_graph.accounts.containsKey(name))
+        Graph temp = rg.readobject();
+        if(!temp.accounts.containsKey(name))
         {
             new_user.setUsername(name);
             new_user.setPassword(pWord);
             new_user.setAccountType(acc_type);
             new_user.setNum_strikes();
             new_user.setBlocked_friends();
-            user_graph.accounts.putIfAbsent(name, new_user);
-            wg.writeGraph(user_graph);
+            temp.accounts.putIfAbsent(name, new_user);
+            user_graph = temp;
+            wg.writeGraph(temp);
         }
     }
 
@@ -32,40 +34,34 @@ public class AccountManager{
     }
 
     public void addFriend(User currUser, User friendToAdd) throws IOException, ClassNotFoundException {
-        if(user_graph.accounts.containsKey(currUser.getUsername()))
+        Graph temp = rg.readobject();
+        if(temp.accounts.containsKey(currUser.getUsername()) && temp.accounts.containsKey(friendToAdd.getUsername()))
         {
-            ArrayList<User> users = user_graph.getUsers();
-            for (User i : users) {
-                if (i.equals(currUser)) {
-                    currUser.friends.add(friendToAdd);
-                    wg.writeGraph(user_graph);
-                    break;
-                }
-            }
+            currUser.friends.add(friendToAdd);
+            friendToAdd.friends.add(currUser);
+            user_graph = temp;
+            wg.writeGraph(user_graph);
         }
     }
 
     public void removeFriend(User currUser, User friendToRemove) throws IOException, ClassNotFoundException {
+
         if(user_graph.accounts.containsKey(currUser.getUsername()))
         {
-            ArrayList<User> users = user_graph.getUsers();
-            for (User i : users) {
-                if (i.equals(currUser)) {
-                    currUser.friends.remove(friendToRemove);
-                    wg.writeGraph(user_graph);
-                    break;
-                }
-            }
+            currUser.friends.remove(friendToRemove);
+            wg.writeGraph(user_graph);
         }
     }
 
     public void removeUser(User userToBeRemoved) throws IOException, ClassNotFoundException {
+
         user_graph.accounts.remove(userToBeRemoved.getUsername());
         userToBeRemoved.friends.clear();
         wg.writeGraph(user_graph);
     }
 
     public void blockUser(User user1, User user2) throws IOException, ClassNotFoundException {
+
         user_graph.getUsers();
         this.removeFriend(user1, user2);
         user1.addblocked(user2);
