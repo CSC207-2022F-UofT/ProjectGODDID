@@ -1,8 +1,10 @@
 package UI;
 
 
+import controllers.AddFriendController;
 import entities.User;
 import useCases.AccountManager;
+import useCases.ChatManager;
 import useCases.FriendAdder;
 import useCases.FriendRemover;
 
@@ -23,6 +25,10 @@ public class WelcomePage extends JFrame implements ActionListener {
     JButton match = new JButton();
     TextField text = new TextField();
 
+    AddFriendController adder = new AddFriendController();
+
+    ChatManager chat;
+
     JButton recommendButton, activeButton;
     User user1, friend;
 
@@ -31,6 +37,8 @@ public class WelcomePage extends JFrame implements ActionListener {
 
     public WelcomePage(User user)  {
         user1 = user;
+
+        chat = new ChatManager(user1);
 
         recommendButton = new JButton();
         recommendButton.setBounds(200, 35, 200, 50);
@@ -57,7 +65,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 
         match.setBounds(150, 100, 100, 50);
         match.addActionListener(this);
-        match.setText("Start Chat");
+        match.setText("Match");
         match.setFocusable(false);
 
         startchat.setBounds(250, 100, 100, 50);
@@ -101,6 +109,15 @@ public class WelcomePage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == friends){
+            FriendsPage friends = new FriendsPage(user1);
+        }
+
+        if (e.getSource() == addfriend){
+            String friend_to_add = text.getText();
+
+            try {
+                adder.AddFriendCon(user1, friend_to_add);
         if(e.getSource() == friends) //add friend
         {
             FriendsPage friends = new FriendsPage(user1);
@@ -145,21 +162,26 @@ public class WelcomePage extends JFrame implements ActionListener {
         // }
         //}
 
-//        if (e.getSource() == addfriend){
-//            String friend_to_add = text.getText();
-//            AddFriendController friend_con = new AddFriendController();
-//            try {
-//                friend_con.AddFriendCon(user1, friend_to_add);
-//            } catch (IOException ex) {
-//                throw new RuntimeException(ex);
-//            } catch (ClassNotFoundException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//        }
+        User matched_user = null;
+        if (e.getSource() == match){
+            matched_user = chat.randomMatch();
+            System.out.println(matched_user.getUsername());
+        }
 
-//        if (e.getSource() == skipchat){
-//
-//        }
+        if (e.getSource() == skipchat){
+            matched_user = chat.skipMatch(matched_user);
+            System.out.println(matched_user.getUsername());
+        }
+
+        if (e.getSource() == startchat){
+            try {
+                chat.openChat(user1, matched_user);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
 
 
     }
