@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-class ChatUI extends JFrame implements ActionListener {
+public class ChatUI extends JFrame implements ActionListener {
     String person = "James";
     String person2 = "Lana";
     String person3 = "Melissa";

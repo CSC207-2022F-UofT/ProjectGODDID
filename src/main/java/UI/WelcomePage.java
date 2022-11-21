@@ -1,18 +1,21 @@
 package UI;
 
 
-import controllers.AddFriendController;
 import entities.User;
-import useCases.AccountManager;
-import useCases.ChatManager;
+import useCases.*;
+import useCases.FriendAdder;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import Databases.*;
+
+import useCases.FriendRemover;
 
 public class WelcomePage extends JFrame implements ActionListener {
+    ChatManager chat;
     JFrame frame = new JFrame();
     JLabel welcomeLabel = new JLabel("Hello!");
     JButton startchat = new JButton();
@@ -23,19 +26,17 @@ public class WelcomePage extends JFrame implements ActionListener {
     JButton match = new JButton();
     TextField text = new TextField();
 
-    AddFriendController adder = new AddFriendController();
-
-    ChatManager chat;
+    JLabel messageLabel = new JLabel();
 
     JButton recommendButton, activeButton;
     User user1;
 
+    ReadGraph rg = new ReadGraph();
+
 
     public WelcomePage(User user) throws IOException, ClassNotFoundException {
         user1 = user;
-
         chat = new ChatManager(user1);
-
         recommendButton = new JButton();
         recommendButton.setBounds(200, 35, 200, 50);
         recommendButton.addActionListener(this);
@@ -50,7 +51,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 
         welcomeLabel.setBounds(0,0,400,35);
         welcomeLabel.setFont(new Font(null,Font.PLAIN,20));
-        Integer points = (Integer) user.getPoints();
+        Integer points = (Integer) user1.getPoints();
         welcomeLabel.setText("Hello "+ user.getUsername() + ", you have " + points.toString() + " points");
 
         frame.add(welcomeLabel);
@@ -101,23 +102,52 @@ public class WelcomePage extends JFrame implements ActionListener {
         frame.add(skipchat);
         frame.add(match);
 
+        messageLabel.setBounds(250,360,250,45);
+        messageLabel.setFont(new Font(null,Font.ITALIC,25));
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == friends){
             try {
-                new FriendsPage(user1);
+                FriendsPage friends = new FriendsPage(user1);
             } catch (IOException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
         }
 
-        if (e.getSource() == addfriend){
-            String friend_to_add = text.getText();
-
+        if(e.getSource() == addfriend){
+            String friendToAdd = text.getText();
+            System.out.println(friendToAdd);
+            //FriendAdder fd = new FriendAdder();
+            AccountManager am= new AccountManager();
             try {
-                adder.AddFriendCon(user1, friend_to_add);
+                System.out.println(rg.readobject().getUsers());
+            } catch (IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+            try {
+                //System.out.println("hi");
+                System.out.println("before:"+user1.getFriends());
+                am.addFriend(user1, rg.readobject().getUser(friendToAdd));
+                System.out.println("after:"+user1.getFriends());
+                messageLabel.setForeground(Color.green);
+                System.out.println("hi");
+                messageLabel.setText(friendToAdd+" is successfuly added to your friend's list");
+            } catch (IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
+        if(e.getSource() == removefriend){
+            String friendToAdd = text.getText();
+            //FriendRemover fd = new FriendRemover();
+            AccountManager am = new AccountManager();
+            try {
+                am.removeFriend(user1, rg.readobject().getUser(friendToAdd));
+                messageLabel.setForeground(Color.green);
+                messageLabel.setText(friendToAdd+" is successfuly removed from your friend's list");
             } catch (IOException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
@@ -140,5 +170,11 @@ public class WelcomePage extends JFrame implements ActionListener {
                 throw new RuntimeException(ex);
             }
         }
+
+
+
+
     }
+
+
 }

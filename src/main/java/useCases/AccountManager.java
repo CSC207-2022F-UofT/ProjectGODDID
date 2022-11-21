@@ -40,6 +40,7 @@ public class AccountManager{
             currUser.friends.add(friendToAdd);
             friendToAdd.friends.add(currUser);
             user_graph = temp;
+            wg.writeGraph(user_graph);
         }
     }
 
@@ -48,6 +49,7 @@ public class AccountManager{
         if(user_graph.accounts.containsKey(currUser.getUsername()))
         {
             currUser.friends.remove(friendToRemove);
+            wg.writeGraph(user_graph);
         }
     }
 

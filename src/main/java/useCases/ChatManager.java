@@ -4,6 +4,7 @@ import UI.ChatScreen;
 import entities.User;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class ChatManager {
     // Declaring instance attributes
@@ -19,8 +20,12 @@ public class ChatManager {
 
     // Method randomly finds a matched user
     public void randomMatch(){
-        int index = (int)(Math.random() * this.mainUser.getFriends().size());
-        this.matchedUser = mainUser.getFriends().get(index);
+        //int index = (int)((Math.random() * this.mainUser.getFriends().size()));
+        if(mainUser.getFriends().size() >= 1) {
+            Random rg = new Random();
+            int index = rg.nextInt(this.mainUser.getFriends().size());
+            this.matchedUser = mainUser.getFriends().get(index);
+        }
     }
 
     // Method randomly finds a matched user which is not the skipped user
