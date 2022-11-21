@@ -107,6 +107,7 @@ public class LoginPage implements ActionListener{
                     messageLabel.setForeground(Color.green);
                     messageLabel.setText("Login successful");
                     frame.dispose();
+
                     try {
                         WelcomePage welcomePage = new WelcomePage(logininfos.accounts.get(userID));
                     } catch (IOException ex) {
@@ -114,6 +115,8 @@ public class LoginPage implements ActionListener{
                     } catch (ClassNotFoundException ex) {
                         throw new RuntimeException(ex);
                     }
+                    
+                    WelcomePage welcomePage = new WelcomePage(logininfos.accounts.get(userID));
 
                 }
             } else {

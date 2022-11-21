@@ -11,6 +11,7 @@ import java.util.*;
 //public class AccountManager extends User {
 public class AccountManager{
 
+
     WriteGraph wg = new WriteGraph();
     static ReadGraph rg = new ReadGraph();
     public static Graph user_graph; //so that every time a new user is registered (while doing this
@@ -29,6 +30,7 @@ public class AccountManager{
 
     public AccountManager() throws IOException, ClassNotFoundException {
     }
+
 
     public void addUser(String name, String pWord, String acc_type) throws IOException, ClassNotFoundException {
         User new_user = new User(name, acc_type);
@@ -56,7 +58,6 @@ public class AccountManager{
             currUser.getFriends().add(friendToAdd);
             user_graph.accounts.put(currUser.getUsername(), currUser);
             wg.writeGraph(user_graph);
-
         }
     }
 
@@ -90,5 +91,4 @@ public class AccountManager{
     public Graph getGraph() {
         return user_graph;
     }
-
 }

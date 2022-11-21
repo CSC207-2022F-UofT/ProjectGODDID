@@ -83,23 +83,3 @@ class LoginScreen extends JFrame implements ActionListener
     }
 }
 
-//create the main class
-class LoginFormDemo
-{
-    //main() method start
-    public static void main(String arg[])
-    {
-        try
-        {
-            //create instance of the CreateLoginForm
-            LoginScreen form = new LoginScreen();
-            form.setSize(500,200);  //set size of the frame
-            form.setVisible(true);  //make form visible to the user
-        }
-        catch(Exception e)
-        {
-            //handle exception
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }
-}
