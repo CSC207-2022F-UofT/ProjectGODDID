@@ -49,12 +49,12 @@ public class Report {
         return list_of_messages;
     }
 
-    /* Helper method to convert the hatewords in hatewords.txt (file downloaded from a repoistory online) as well and
-    some generic hatewords into a List<String> so it can iterated through in the report checkreport function. */
-    public List<String> hatewords(){
+    /* Helper method to convert the hatewords in hatewords.txt (file downloaded from a repository online) as well and
+    some generic hatewords into a List<String> so it can itterated through in the report checkreport function. */
+    public List<String> hateWords(){
         List<String> hate_words = new ArrayList<String>();
         try {
-            File file = new File("hate_keywords.txt");
+            File file = new File("src/Databases/hate_keywords.txt");
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()){
                 String data = sc.nextLine();
@@ -87,7 +87,7 @@ public class Report {
     /* Helper method to check if any of the messages sent by the reported user is offensive or not. This is done by
     going through the string of messages and checking is any offensive word is used */
     public boolean checkOffensive(String s){
-        List<String> hate_words = hatewords();
+        List<String> hate_words = hateWords();
         String s1 = removeWeirdCharacters(s);
         String s2 = s1.toLowerCase();
         List<String> message = convertToListOfStrings(s2);
@@ -120,7 +120,7 @@ public class Report {
 
     /* The main method in Report class that is called in ChatUI to check is the report is valid or not and take a
     suitable action. First the messages file is read and then messages sent by matched user is checked to see if it is
-     offensive or not. If any message is oofensive then strike is added to the matched user, he/she is blocked and
+     offensive or not. If any message is ofensive then strike is added to the matched user, he/she is blocked and
      removed as friend and if there are more than 3 strikes then matched user is removed from graph (banned).*/
     public void checkReport() throws IOException, ClassNotFoundException {
         ArrayList<String> all_messages = readFiles();
