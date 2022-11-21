@@ -1,12 +1,12 @@
 package useCases;
+
 import Databases.ReadGraph;
 import Databases.WriteGraph;
-import entities.*;
-import UI.*;
+import entities.Graph;
+import entities.User;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
 
 //public class AccountManager extends User {
 public class AccountManager{
