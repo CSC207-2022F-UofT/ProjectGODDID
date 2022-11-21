@@ -3,6 +3,8 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static useCases.AccountManager.*;
+
 public class User implements Serializable {
     public ArrayList<User> friends;
     private String username, password;
@@ -75,7 +77,7 @@ public class User implements Serializable {
     }
 
     public ArrayList<User> getFriends() {
-        return this.friends;
+        return friends;
     }
 
     public int getNum_strikes(){

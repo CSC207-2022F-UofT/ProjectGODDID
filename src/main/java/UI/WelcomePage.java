@@ -1,17 +1,16 @@
 package UI;
 
 
+import controllers.AddFriendController;
 import entities.User;
 import useCases.AccountManager;
-import useCases.FriendAdder;
+import useCases.ChatManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import Databases.*;
-import useCases.FriendRemover;
 
 public class WelcomePage extends JFrame implements ActionListener {
     JFrame frame = new JFrame();
@@ -24,16 +23,18 @@ public class WelcomePage extends JFrame implements ActionListener {
     JButton match = new JButton();
     TextField text = new TextField();
 
-    JLabel messageLabel = new JLabel();
+    AddFriendController adder = new AddFriendController();
+
+    ChatManager chat;
 
     JButton recommendButton, activeButton;
     User user1;
 
-    ReadGraph rg = new ReadGraph();
-
 
     public WelcomePage(User user) throws IOException, ClassNotFoundException {
         user1 = user;
+
+        chat = new ChatManager(user1);
 
         recommendButton = new JButton();
         recommendButton.setBounds(200, 35, 200, 50);
@@ -49,7 +50,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 
         welcomeLabel.setBounds(0,0,400,35);
         welcomeLabel.setFont(new Font(null,Font.PLAIN,20));
-        Integer points = (Integer) user1.getPoints();
+        Integer points = (Integer) user.getPoints();
         welcomeLabel.setText("Hello "+ user.getUsername() + ", you have " + points.toString() + " points");
 
         frame.add(welcomeLabel);
@@ -60,7 +61,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 
         match.setBounds(150, 100, 100, 50);
         match.addActionListener(this);
-        match.setText("Start Chat");
+        match.setText("Match");
         match.setFocusable(false);
 
         startchat.setBounds(250, 100, 100, 50);
@@ -100,57 +101,44 @@ public class WelcomePage extends JFrame implements ActionListener {
         frame.add(skipchat);
         frame.add(match);
 
-        messageLabel.setBounds(250,360,250,45);
-        messageLabel.setFont(new Font(null,Font.ITALIC,25));
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == friends){
-            FriendsPage friends = new FriendsPage(user1);
-        }
-
-        if(e.getSource() == addfriend){
-            String friendToAdd = text.getText();
-            System.out.println(friendToAdd);
-            //FriendAdder fd = new FriendAdder();
-            AccountManager am= new AccountManager();
             try {
-                System.out.println(rg.readobject().getUsers());
-            } catch (IOException | ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
-            try {
-                //System.out.println("hi");
-                System.out.println("before:"+user1.getFriends());
-                am.addFriend(user1, rg.readobject().getUser(friendToAdd));
-                System.out.println("after:"+user1.getFriends());
-                messageLabel.setForeground(Color.green);
-                System.out.println("hi");
-                messageLabel.setText(friendToAdd+" is successfuly added to your friend's list");
+                new FriendsPage(user1);
             } catch (IOException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
         }
 
-        if(e.getSource() == removefriend){
-            String friendToAdd = text.getText();
-            //FriendRemover fd = new FriendRemover();
-            AccountManager am = new AccountManager();
+        if (e.getSource() == addfriend){
+            String friend_to_add = text.getText();
+
             try {
-                am.removeFriend(user1, rg.readobject().getUser(friendToAdd));
-                messageLabel.setForeground(Color.green);
-                messageLabel.setText(friendToAdd+" is successfuly removed from your friend's list");
+                adder.AddFriendCon(user1, friend_to_add);
             } catch (IOException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
         }
 
+        if (e.getSource() == match){
+            chat.randomMatch();
+            System.out.println(chat.getMatchedUser().getUsername());
+        }
 
+        if (e.getSource() == skipchat){
+            chat.skipMatch(chat.getMatchedUser());
+            System.out.println(chat.getMatchedUser().getUsername());
+        }
 
-
+        if (e.getSource() == startchat){
+            try {
+                chat.openChat();
+            } catch (IOException | InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     }
-
-
 }

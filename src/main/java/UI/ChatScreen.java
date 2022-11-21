@@ -201,7 +201,11 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
 
         // Will return to the home secreen
         else if (e.getSource()==back) {
-            new HomeScreen();
+            try {
+                new WelcomePage(mainUser);
+            } catch (IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
         // Used by the timer to keep reading from the text file

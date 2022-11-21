@@ -18,10 +18,11 @@ public class GameUI extends JFrame implements ActionListener {
     JPanel button_panel = new JPanel();
     JLabel textfield = new JLabel();
     JButton[] buttons = new JButton[9];
-    User user1;
-    User user2;
+    User player1;
+    User player2;
     boolean player1_turn = true;
     ArrayList<String> board = new ArrayList<String>(Arrays.asList("", "", "", "", "", "", "", "", ""));
+
 
 
     /**
@@ -29,6 +30,10 @@ public class GameUI extends JFrame implements ActionListener {
      * @param user2
      */
     public GameUI(User user1, User user2) {
+
+        player1 = user1;
+        player2 = user2;
+
         /**
          * A frame is created for the Tic-Tac-Toe board
          * The frame is closed when the user closes the window
@@ -62,6 +67,7 @@ public class GameUI extends JFrame implements ActionListener {
             buttons[i] = new JButton();
             button_panel.add(buttons[i]);
             buttons[i].setFocusable(false);
+            buttons[i].setFont(new Font(null,Font.PLAIN,100));
             buttons[i].addActionListener(this);
         }
 
@@ -69,16 +75,25 @@ public class GameUI extends JFrame implements ActionListener {
         frame.add(title_panel, BorderLayout.NORTH);
         frame.add(button_panel);
 
-//        firstTurn();
     }
 
 
+    /**
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
         for (int i = 0; i < 9; i++) {
             GameController winner = new GameController(textfield, buttons);
             if (e.getSource() == buttons[i]) {
+                /**
+                 * If player1_turn is true the first if body is executed
+                 * In the body only a move can be made if the grid is empty
+                 * The player one (x) is red and (o) is blue
+                 * Move tracker converts the moves in the buttons to an arraylist to check the board to see if
+                 * there is a winner
+                 */
                 if (player1_turn) {
                     if (buttons[i].getText().equals("")) {
                         buttons[i].setForeground(Color.red);
@@ -86,8 +101,12 @@ public class GameUI extends JFrame implements ActionListener {
                         MoveTracker move_cont = new MoveTracker();
                         board = move_cont.moves(board, i, "X");
                         player1_turn = false;
-                        textfield.setText("O(" + user2.getUsername() + ")turn");
-                        winner.Wins(board, user1, user2);
+                        textfield.setText("O(" + player2.getUsername() + ") turn");
+                        /**
+                         * Calls the controller to check the winner and the controller calls the usecase which
+                         * follows the Clean Architecture and Dependency inversion principle
+                         */
+                        winner.Wins(board, player1, player2);
                     }
                 } else {
                     if (buttons[i].getText().equals("")) {
@@ -96,41 +115,12 @@ public class GameUI extends JFrame implements ActionListener {
                         MoveTracker move_cont = new MoveTracker();
                         board = move_cont.moves(board, i, "O");
                         player1_turn = true;
-                        textfield.setText("O(" + user1.getUsername() + ")turn");
-                        winner.Wins(board, user1, user2);
+                        textfield.setText("X(" + player1.getUsername() + ") turn");
+                        winner.Wins(board, player1, player2);
                     }
                 }
             }
         }
     }
-
-//    public void firstTurn() {
-//
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//
-//        if (random.nextInt(2) == 0) {
-//            player1_turn = true;
-//            textfield.setText("X turn");
-//        } else {
-//            player1_turn = false;
-//            textfield.setText("O turn");
-//        }
-//    }
-
-
-
-//    public ArrayList<String> moves(ArrayList<String> board, int i, String piece) {
-//
-//        board.set(i, piece);
-//        return board;
-//
-//    }
-
-
 
 }
