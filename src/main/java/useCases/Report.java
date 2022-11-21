@@ -58,7 +58,9 @@ public class Report {
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()){
             String data = sc.nextLine();
-            hate_words.add(data);
+            if (!data.startsWith("#")) {
+                hate_words.add(data);
+            }
         }
         String[] array = {"fuck", "shit", "bitch", "pussy", "cunt", "dick", "twat", "cock", "cuck"};
         hate_words.addAll(Arrays.asList(array));
@@ -68,10 +70,11 @@ public class Report {
     /* Helper method to remove all weird characters that can be sued to replace alphabets such as using  a dollar sign
     in place of s */
     public String removeWeirdCharacters(String s){
-        s.replace("$", "s");
-        s.replace("4", "a");
-        s.replace("3", "e");
-        s.replace("1", "i");
+        s = s.replace("$", "s");
+        s = s.replace("4", "a");
+        s = s.replace("3", "e");
+        s = s.replace("1", "i");
+        s = s.replace(" ", "");
         return s;
     }
 
