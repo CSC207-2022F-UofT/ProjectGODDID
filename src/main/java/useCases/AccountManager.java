@@ -1,15 +1,16 @@
 package useCases;
+
 import Databases.ReadGraph;
 import Databases.WriteGraph;
-import entities.*;
-import UI.*;
+import entities.Graph;
+import entities.User;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
 
 //public class AccountManager extends User {
 public class AccountManager{
+
 
     WriteGraph wg = new WriteGraph();
     static ReadGraph rg = new ReadGraph();
@@ -29,6 +30,7 @@ public class AccountManager{
 
     public AccountManager() throws IOException, ClassNotFoundException {
     }
+
 
     public void addUser(String name, String pWord, String acc_type) throws IOException, ClassNotFoundException {
         User new_user = new User(name, acc_type);
@@ -56,7 +58,6 @@ public class AccountManager{
             currUser.getFriends().add(friendToAdd);
             user_graph.accounts.put(currUser.getUsername(), currUser);
             wg.writeGraph(user_graph);
-
         }
     }
 
@@ -90,5 +91,4 @@ public class AccountManager{
     public Graph getGraph() {
         return user_graph;
     }
-
 }
