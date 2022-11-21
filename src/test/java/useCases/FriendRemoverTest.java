@@ -4,6 +4,8 @@ import entities.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +20,7 @@ public class FriendRemoverTest {
     User user1, user2, user3, user4, user5;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException, ClassNotFoundException {
         user1 = new User("Alpha", "");
         accountManager.addUser(user1);
 
@@ -51,12 +53,12 @@ public class FriendRemoverTest {
      * 5) Check that right friends are removed from the corresponding users
      */
     @Test
-    void removeFriend() {
+    void removeFriend() throws IOException, ClassNotFoundException {
         FriendRemover fr = new FriendRemover();
         FriendAdder fd = new FriendAdder();
-        fd.addFriend(user1, user2, accountManager);
-        fd.addFriend(user1, user3, accountManager);
-        fd.addFriend(user1, user4, accountManager);
+        fd.addFriend(user1, user2);
+        fd.addFriend(user1, user3);
+        fd.addFriend(user1, user4);
 
         fr.remove(user1, user2, accountManager);
         fr.remove(user1, user3, accountManager);

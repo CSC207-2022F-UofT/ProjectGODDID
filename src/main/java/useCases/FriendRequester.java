@@ -1,3 +1,4 @@
+/*
 package useCases;
 
 import entities.User;
@@ -16,7 +17,7 @@ public class FriendRequester {
         for (User i : currUser.getFriends())
             if (i.getUsername().equals(friend.getUsername())){
                 FriendRecommender friendRecommender = new FriendRecommender();
-                recommendations = friendRecommender.getRecommendRandom(friend);
+                recommendations = friendRecommender.getRecommendation(friend);
             }
     }
 
@@ -24,3 +25,4 @@ public class FriendRequester {
         return amountWanted;
     }
 }
+*/

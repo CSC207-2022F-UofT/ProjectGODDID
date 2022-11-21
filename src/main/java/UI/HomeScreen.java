@@ -4,6 +4,7 @@ package UI;
 import controllers.*;
 import entities.User;
 import UI.*;
+import useCases.FriendAdder;
 
 import java.awt.*;
 import javax.swing.*;
@@ -132,27 +133,27 @@ public class HomeScreen extends JFrame implements ActionListener
 
     public void actionPerformed(ActionEvent event)
     {
-         if(event.getSource() == btn1) //add friend
-         {
-             System.out.println("Add friend");
-         }
-         else if(event.getSource() == btn2)//remove friend
-         {
-             System.out.println("remove friend");
-         }
-         else if(event.getSource() == btn3)//create new account
-         {
-             RegisterScreen reg = new RegisterScreen();
-             reg.setVisible(true);
-         }
-         else if(event.getSource() == btn4)//delete existing account
-         {
-             System.out.println("delete account");
-         }
-         else // start chat
-         {
+        if(event.getSource() == btn1) //add friend
+        {
+            System.out.println("Add friend");
+        }
+        else if(event.getSource() == btn2)//remove friend
+        {
+            System.out.println("remove friend");
+        }
+        else if(event.getSource() == btn3)//create new account
+        {
+            RegisterScreen reg = new RegisterScreen();
+            reg.setVisible(true);
+        }
+        else if(event.getSource() == btn4)//delete existing account
+        {
+            System.out.println("delete account");
+        }
+        else // start chat
+        {
 
-         }
+        }
 
 
 

@@ -56,7 +56,7 @@ class NewPage extends JFrame implements ActionListener
         mainPane = getContentPane();
         mainPane.setLayout(new BorderLayout());
         mainPane.add(userLabel, BorderLayout.PAGE_START);
-        //mainPane.add(cPane, BorderLayout.CENTER);
+        mainPane.add(cPane, BorderLayout.CENTER);
         //newPanel = new JPanel(new GridLayout(2, 1));
         //newPanel.add(cPane);    //set username label to panel
         //newPanel.add(userLabel);   //set text field to panel

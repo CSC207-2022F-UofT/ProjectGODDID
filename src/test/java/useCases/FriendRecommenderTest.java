@@ -1,13 +1,14 @@
 package useCases;
 
-import entities.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+        import entities.User;
+        import org.junit.jupiter.api.AfterEach;
+        import org.junit.jupiter.api.BeforeEach;
+        import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+        import java.io.IOException;
+        import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+        import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test the FriendRecommender use case and see if it succesfully recommends a user for current user
@@ -38,7 +39,7 @@ class FriendRecommenderTest {
      * among user3 and user4 who are both in curUsers friend list / neighbours
      */
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException, ClassNotFoundException {
         curUser = new User("Alpha", "");
         accountManager.addUser(curUser);
 
@@ -80,12 +81,12 @@ class FriendRecommenderTest {
     @Test
     void getRecommendRandom() {
         FriendRecommender fRec = new FriendRecommender();
-        ArrayList<User> recs = new ArrayList<>();
+        ArrayList<String> recs = new ArrayList<>();
         recs = fRec.getRecommendRandom(user5);
         ArrayList<User> friends = new ArrayList<>();
         friends = curUser.getFriends();
         for (int i = 0; i < recs.size(); i++) {
-            friends.add(recs.get(i));
+            friends.add(accountManager.getGraph().getUser(recs.get(i)));
         }
         curUser.setFriends(friends);
         assertEquals(5, curUser.getFriends().size()); //adds repeat friends????
@@ -94,11 +95,9 @@ class FriendRecommenderTest {
     @Test
     void getRecommend() {
         FriendRecommender fRec = new FriendRecommender();
-        User rec = fRec.getRecommend(curUser, accountManager.getGraph());
+        String rec = fRec.getRecommend(curUser, accountManager.getGraph());
         System.out.println(rec);
-        assertEquals(user5, rec); //Get the most common friend between your friends
+        assertEquals(user5.getUsername(), rec); //Get the most common friend between your friends
     }
 }
-
-
 

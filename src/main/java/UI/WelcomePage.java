@@ -4,7 +4,6 @@ package UI;
 import entities.User;
 import useCases.AccountManager;
 import useCases.FriendAdder;
-import useCases.FriendRecommender;
 import useCases.FriendRemover;
 
 import javax.swing.*;
@@ -110,9 +109,15 @@ public class WelcomePage extends JFrame implements ActionListener {
         {
             friend = new User(text.getText(), "");
             FriendAdder friendAdder = new FriendAdder();
-            FriendRecommender friendRecommender = new FriendRecommender();
+
             //User rand = friendRecommender.getRecommendRandom(user1);
-            friendAdder.addFriend(user1,friend,accountManager);
+            try {
+                friendAdder.addFriend(user1,friend);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         if(e.getSource() == removefriend) //add friend
         {
@@ -122,16 +127,22 @@ public class WelcomePage extends JFrame implements ActionListener {
                 }
             }
             FriendRemover friendRemover = new FriendRemover();
-            friendRemover.remove(user1,friend,accountManager);
+            try {
+                friendRemover.remove(user1,friend,accountManager);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         //if (e.getSource() == friends){
-            //try {
+        //try {
 
-            //}catch (IOException ex) {
-                //throw new RuntimeException(ex);
-                // } catch (ClassNotFoundException ex) {
-               // throw new RuntimeException(ex);
-           // }
+        //}catch (IOException ex) {
+        //throw new RuntimeException(ex);
+        // } catch (ClassNotFoundException ex) {
+        // throw new RuntimeException(ex);
+        // }
         //}
 
 //        if (e.getSource() == addfriend){
@@ -151,7 +162,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 //        }
 
 
-        }
+    }
 
 
 }
