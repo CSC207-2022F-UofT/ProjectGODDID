@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import static org.junit.Assert.assertArrayEquals;
 
-import static org.junit.Assert.*;
-
 public class GameManagerTests {
     @Before
     public void setUp() {
