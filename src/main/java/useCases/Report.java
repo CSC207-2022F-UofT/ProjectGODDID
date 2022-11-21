@@ -1,4 +1,5 @@
 package useCases;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -49,19 +50,17 @@ public class Report {
         return list_of_messages;
     }
 
-    /* Helper method to convert the hatewords in hatewords.txt (file downloaded from a repository online) as well and
+    /* Helper method to convert the hatewords in keywords.txt (file downloaded from a repository online) as well and
     some generic hatewords into a List<String> so it can itterated through in the report checkreport function. */
-    public List<String> hatewords(){
-        List<String> hate_words = new ArrayList<String>();
-        try {
-            File file = new File("hate_keywords.txt");
-            Scanner sc = new Scanner(file);
-            while (sc.hasNextLine()){
-                String data = sc.nextLine();
+    public ArrayList<String> hateWords() throws FileNotFoundException {
+        ArrayList<String> hate_words = new ArrayList<String>();
+        File f = new File("/Users/manit/IdeaProjects/course-project-project-goddid/src/keywords.txt");
+        Scanner sc = new Scanner(f);
+        while (sc.hasNextLine()){
+            String data = sc.nextLine();
+            if (!data.startsWith("#")) {
                 hate_words.add(data);
             }
-        } catch (FileNotFoundException error){
-            error.printStackTrace();
         }
         String[] array = {"fuck", "shit", "bitch", "pussy", "cunt", "dick", "twat", "cock", "cuck"};
         hate_words.addAll(Arrays.asList(array));
@@ -71,39 +70,43 @@ public class Report {
     /* Helper method to remove all weird characters that can be sued to replace alphabets such as using  a dollar sign
     in place of s */
     public String removeWeirdCharacters(String s){
-        s.replace("$", "s");
-        s.replace("4", "a");
-        s.replace("3", "e");
-        s.replace("1", "i");
+        s = s.replace("$", "s");
+        s = s.replace("4", "a");
+        s = s.replace("3", "e");
+        s = s.replace("1", "i");
+        s = s.replace(" ", "");
         return s;
     }
 
     /* This helper method is used to convert a string to a list of its individual characters */
-    public List<String> convertToListOfStrings(String s){
-        String[] array1 = s.split("");
-        return new ArrayList<String>(Arrays.asList(array1));
+    public ArrayList<String> convertToListOfStrings(String s){
+        ArrayList<String> chars = new ArrayList<>();
+        for (char ch : s.toCharArray()) {
+            chars.add(Character.toString(ch));
+        }
+        return chars;
     }
 
     /* Helper method to check if any of the messages sent by the reported user is offensive or not. This is done by
     going through the string of messages and checking is any offensive word is used */
-    public boolean checkOffensive(String s){
-        List<String> hate_words = hatewords();
+    public boolean checkOffensive(String s) throws FileNotFoundException {
+        ArrayList<String> hate_words = hateWords();
         String s1 = removeWeirdCharacters(s);
         String s2 = s1.toLowerCase();
-        List<String> message = convertToListOfStrings(s2);
-        int length = hate_words.size();
-        for (int index = 0; index < length; index++){
-            String cuss_word = hate_words.get(index);
-            List<String> cuss_word_array = convertToListOfStrings(cuss_word);
+        ArrayList<String> message = convertToListOfStrings(s2);
+        for (String cuss_word : hate_words) {
+            ArrayList<String> cuss_word_array = convertToListOfStrings(cuss_word);
             int length_of_cuss_word = cuss_word_array.size();
             int count = 0;
-            for (int j_index = 0; j_index < message.size(); j_index++){
-                if (Objects.equals(cuss_word_array.get(count), message.get(j_index))){
+            for (String value : message) {
+                if (Objects.equals(cuss_word_array.get(count), value)) {
                     count = count + 1;
-                    if (count == length_of_cuss_word){
+                    if (count == length_of_cuss_word) {
                         return true;
                     }
-                count = 0;
+                }
+                else {
+                    count = 0;
                 }
             }
         }

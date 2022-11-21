@@ -1,4 +1,5 @@
 TestAdam: Hi
 Bob: Hello
 TestAdam: how are u
-Bob: Fuck yourself
+Bob: Fu ck you
+TestAdam: Why so mean?
