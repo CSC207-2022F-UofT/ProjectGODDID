@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 import useCases.GameManager;
+//import useCases.PointsSystem;
 
 
 public class GameController {
@@ -24,6 +25,8 @@ public class GameController {
         this.textfield = textfield;
         this.buttons = buttons;
     }
+
+    //PointsSystem gameEarn = new PointsSystem();
 
     GameManager checker = new GameManager();
 
@@ -61,12 +64,14 @@ public class GameController {
              * If O (user2) wins their name is printed as the winner
              */
             if (wins[3] == 1) {
-                textfield.setText(user1.getUsername() + "wins");
+                textfield.setText(user1.getUsername() + " wins");
+                //gameEarn.PointRenewer(user1, "GameChatEnd");
+
             } else if (wins[3] == 0) {
-                textfield.setText(user2.getUsername() + "wins");
+                textfield.setText(user2.getUsername() + " wins");
+                //gameEarn.PointRenewer(user2, "GameChatEnd");
             }
         }
     }
-
 
 }
