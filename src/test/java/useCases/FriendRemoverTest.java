@@ -7,34 +7,50 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * Test the FriendRemover use case and see if it succesfully removes a user to current users friends list
- * and deletes edge between the two user vertices in the graph
- */
+
 public class FriendRemoverTest {
 
     AccountManager accountManager = new AccountManager();
     User user1, user2, user3, user4, user5;
 
+    ArrayList<User> alphaFriends, deltaFriends;
+
+
     @BeforeEach
     void setUp() throws IOException, ClassNotFoundException {
-        user1 = new User("Alpha", "");
+
+        user1 = new User("", "");
+        user1.setUsername("Alpha");
+        user1.setAccountType("casual");
         accountManager.addUser(user1);
+        //accountManager.addUser("Alpha", "123","mail","Casual");
 
-        user2 = new User("Beta", "");
+        user2 = new User("", "");
+        user2.setUsername("Beta");
+        user2.setAccountType("casual");
         accountManager.addUser(user2);
+        //accountManager.addUser("Beta", "123","mail","Casual");
 
-        user3 = new User("Charlie", "");
+        user3 = new User("", "");
+        user3.setUsername("Charlie");
+        user3.setAccountType("casual");
         accountManager.addUser(user3);
+        //accountManager.addUser("Charlie", "123","mail","Casual");
 
-        user4 = new User("Delta", "");
+        user4 = new User("", "");
+        user4.setUsername("Delta");
+        user4.setAccountType("casual");
         accountManager.addUser(user4);
+        //accountManager.addUser("Delta", "123","mail","Casual");
 
-        user5 = new User("Echo", "");
+        user5 = new User("", "");
+        user5.setUsername("Echo");
+        user5.setAccountType("casual");
         accountManager.addUser(user5);
+        //accountManager.addUser("Echo", "123","mail","Casual");
 
     }
 
@@ -42,23 +58,13 @@ public class FriendRemoverTest {
     void tearDown() {
     }
 
-    /**
-     * To test use case:
-     * 1) Create 5 users and add them to the graph
-     * 2) Typically we call a controller as this function is controlled by a UI
-     * but here we can bypass the controller and just directly call the FriendAdder
-     * use case for testing purposes
-     * 3) Add the friends to various users using FriendAdder
-     * 4) Remove friends from user1 using FriendRemover
-     * 5) Check that right friends are removed from the corresponding users
-     */
     @Test
     void removeFriend() throws IOException, ClassNotFoundException {
         FriendRemover fr = new FriendRemover();
         FriendAdder fd = new FriendAdder();
-        fd.addFriend(user1, user2, accountManager);
-        fd.addFriend(user1, user3, accountManager);
-        fd.addFriend(user1, user4, accountManager);
+        fd.addFriend(user1, user2);
+        fd.addFriend(user1, user3);
+        fd.addFriend(user1, user4);
 
         fr.remove(user1, user2, accountManager);
         fr.remove(user1, user3, accountManager);

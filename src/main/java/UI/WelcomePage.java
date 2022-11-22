@@ -166,7 +166,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         if (e.getSource() == startchat){
             try {
                 chat.openChat();
-            } catch (IOException | InterruptedException ex) {
+            } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         }
