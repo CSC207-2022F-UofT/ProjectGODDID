@@ -9,7 +9,7 @@ Go to the loginpagemain file under src/main. Run the class loginpagemain. Once d
 
 ### Mert - Game Feature
 
-The game that we implemented is a Tic - Tac - Toe game. In order to play the game from the user interface, first create an account and login. You will be directed to the welcome page. In order to play the game, first you should have a friend that you added among the other existing users. After you have friends in your friends list, you should press match to get matched with one of your friends. Then, press Start Chat and the chat user interface will be displaced to you. At the top of the chat user interface, there is a button called Game. Press that button to start the game. The game will continue between the two users until it ends. When one of the users win, the points of that user will be incremented by 15.
+The game that we implemented is a Tic - Tac - Toe (Planning to make it Connect 4 game for final submission) game. In order to play the game from the user interface, first create an account and login. You will be directed to the welcome page. In order to play the game, first you should have a friend that you added among the other existing users. After you have friends in your friends list, you should press match to get matched with one of your friends. Then, press Start Chat and the chat user interface will be displaced to you. At the top of the chat user interface, there is a button called Game. Press that button to start the game. The game will continue between the two users until it ends. When one of the users win, the points of that user will be incremented by 15.
 
 There are 4 main classes for the game: GameManager (Use case), MoveTracker (Use case), GameController (Controller), GameUI (UI)
 
