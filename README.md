@@ -1,7 +1,6 @@
 # Project Description and Information
 ## Description of app and how to use
-Social media chatting app that allows users to randomly chat with someone in their contact list. Users can add and remove friends by username. They can chat with their friends to gain points based on _____. They can also earn points to play games like tic-tac-toe _____
-
+Social media chatting app that allows users to randomly chat with someone in their contact list. Users can add and remove friends by username. They can chat with their friends to gain points based on the length of their conversation. They can also earn points by playing tic-tac-toe.
 
 ### How to use the app <br/>
 Go to the loginpagemain file under src/main. Run the class loginpagemain. Once done you will be prompted with a sign in/ sign up screen where you can create user with a username and paasword of your choice. Click sign up and then once shown the message click login. From here you will reach the welcome page. There is a textbox add the bottom with an add friend button. Type in Bob (since this is an existing hardcoded user for testing purposes) and then add friend. Once done you can click on the friends tab where you will find Bob. Dont shut this window or the program will shut (still need to fix that issue). Thne click match where you will be matched with Bob since he is your only friend. Once you click start chat it is pretty obvious.
