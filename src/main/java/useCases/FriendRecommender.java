@@ -44,7 +44,7 @@ public class FriendRecommender {
             int counter = 0;
             for (User j : allUsers.accounts.get(i.getUsername()).getFriends()) {
                 System.out.println(j.getUsername());
-                if (friends.containsKey(j.getUsername()) == false) {
+                if (!friends.containsKey(j.getUsername())) {
                     friends.putIfAbsent(j.getUsername(), 0);
                 } else {
                     friends.put(j.getUsername(), friends.get(j.getUsername()) + 1);

@@ -15,7 +15,7 @@ public class FriendsPage extends JFrame implements ActionListener {
     User user;
 
 
-    public FriendsPage(User user1) {
+    public FriendsPage(User user1) throws IOException, ClassNotFoundException {
 
         user = user1;
 

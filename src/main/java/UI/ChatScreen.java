@@ -17,6 +17,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class contains code for the GUI for ChatScreen, as well as code for editing the text file containing the chat
+ * between the two users, reading from the text file containing the chat between the two users, and ending the chat
+ * after the message limit has been reached.
+ *
+ * @author Arian Khademi
+ * @version 1.0
+ * @since November 20th, 2022
+ */
 public class ChatScreen extends JFrame implements ActionListener, KeyListener {
     // Declaring instance attributes
     public User mainUser;
@@ -29,8 +38,17 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
     JTextField sendMessage; JTextArea displayed;
     Timer timer = new Timer(500, this);
 
-    // Constructor for when a chat screen is opened
-    public ChatScreen(User user1, User user2) throws InterruptedException {
+    /**
+     * This is the constructor for when a new ChatScreen is opened.
+     * Below, the constructor contains a lot of code for creating and styling components of the GUI, such as: labels,
+     * buttons, and panels. The code also sets the instance attributes mainUser and matchedUser to user1 and user2
+     * respectively. There is also code to start the timer to constantly update the display, to edit the frame's
+     * properties, and for a KeyListener which detects if the enter key has been pressed.
+     *
+     * @param user1 the main user who is accessing the GUI.
+     * @param user2 the user the main user is matched with and will be messaging.
+     */
+    public ChatScreen(User user1, User user2) {
         // Setting instance attributes to users passed into the ChatScreen constructor
         this.mainUser = user1;
         this.matchedUser = user2;
@@ -51,7 +69,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
         label.setFocusable(true);
         label.addKeyListener(this);
 
-        // TextArea to contain and display all of the text within the chat
+        // TextArea to contain and display all the text within the chat
         displayed = new JTextArea();
         displayed.setEditable(false);
         displayed.setBackground(cream);
@@ -150,12 +168,19 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
         frame.add(send);
         frame.setLayout(null);
         frame.setVisible(true);
-        readFromTextFile(mainUser.getUsername(), matchedUser.getUsername());
+        readFromTextFile();
     }
 
+    /**
+     * Method to execute code after event.
+     * This method contains code to be executed depending on whether a specific button was clicked, or whether it is
+     * the timer which constantly updates the display accessing it.
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e){
-        // Will start a new tictactoe game with the matched user if the game button is clicked
+        // Will start a new ticktacktoe game with the matched user if the game button is clicked
         if (e.getSource()==newGame){
             new GameUI(mainUser, matchedUser);
 
@@ -163,12 +188,8 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
 
         // Will send the typed message in the text field if the user clicks send or presses enter
         else if (e.getSource()==send) {
-            addToTextFile(sendMessage.getText(), mainUser.getUsername(), matchedUser.getUsername());
-            try {
-                readFromTextFile(mainUser.getUsername(), matchedUser.getUsername());
-            } catch (InterruptedException ex) {
-                throw new RuntimeException(ex);
-            }
+            addToTextFile(sendMessage.getText());
+            readFromTextFile();
             sendMessage.setText("");
         }
 
@@ -187,19 +208,14 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
                     throw new RuntimeException(ex);
                 }
 
-                while (true){
-                    try {
-                        if (!(readFromTextFile(mainUser.getUsername(), matchedUser.getUsername()) < 20)) break;
-                    } catch (InterruptedException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    addToTextFile("REPORTED_DELETE", mainUser.getUsername(), matchedUser.getUsername());
+                while (readFromTextFile() < 20){
+                    addToTextFile("REPORTED_DELETE");
                 }
             }
 
         }
 
-        // Will return to the home secreen
+        // Will return to the home screen
         else if (e.getSource()==back) {
             try {
                 new WelcomePage(mainUser);
@@ -210,53 +226,59 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
 
         // Used by the timer to keep reading from the text file
         else {
-            try {
-                readFromTextFile(mainUser.getUsername(), matchedUser.getUsername());
-            } catch (InterruptedException ex) {
-                throw new RuntimeException(ex);
-            }
+            readFromTextFile();
         }
     }
 
-    // Writes the types message by the main user to the text file
-    public void addToTextFile(String messages, String username1, String username2){
+    /**
+     * Writes the message that mainUser has typed to the text file storing the conversation.
+     *
+     * @param message the message that mainUser has typed.
+     */
+    public void addToTextFile(String message){
         // Two strings to check for either type of file name
-        String s = "src/" + username1 + username2 + ".txt";
-        String s1 = "src/" + username2 + username1 + ".txt";
-        if (new File(s).exists()) {
-            try {
-                FileWriter writer = new FileWriter(s, true);
-                if (messages.equals("REPORTED_DELETE")){
-                    writer.write("\n");
-                } else{
-                    writer.write(username1 + ": " + messages + "\n");
-                }
-                writer.close();
-            } catch (IOException error) {
-                error.printStackTrace();
-            }
+        String fileName1 = "src/" + mainUser.getUsername() + matchedUser.getUsername() + ".txt";
+        String fileName2 = "src/" + matchedUser.getUsername() + mainUser.getUsername() + ".txt";
+        if (new File(fileName1).exists()) {
+            addTextHelper(message, fileName1);
         }
         else{
-            try {
-                FileWriter writer = new FileWriter(s1, true);
-                if (messages.equals("REPORTED_DELETE")){
-                    writer.write("\n");
-                } else{
-                    writer.write(username1 + ": " + messages + "\n");
-                }
-                writer.close();
-            } catch (IOException error) {
-                error.printStackTrace();
-            }
+            addTextHelper(message, fileName2);
         }
     }
 
-    // Reads from the chat text file to display it to the users
-    public int readFromTextFile(String username1, String username2) throws InterruptedException {
+    /**
+     * Helper method called with the relevant file name to add the message to the file containing the conversation.
+     *
+     * @param message the message that mainUser has typed.
+     * @param fileName the name of the file.
+     */
+    private void addTextHelper(String message, String fileName) {
+        try {
+            FileWriter writer = new FileWriter(fileName, true);
+            if (message.equals("REPORTED_DELETE")){
+                writer.write("\n");
+            } else{
+                writer.write(mainUser.getUsername() + ": " + message + "\n");
+            }
+            writer.close();
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
+    }
+
+    /**
+     * Reads conversation between users.
+     * Reads the data in from the text file that contains the conversation between the two users, and simultaneously
+     * edits and then updates the display with the messages read in from the file.
+     *
+     * @return the length of the chat to be accessed by ActionPerformed after clicking the report button
+     */
+    public int readFromTextFile() {
         displayed.setText("");
         ArrayList<String> list_of_messages = new ArrayList<>();
-        String s = "src/" + username1 + username2 + ".txt";
-        String s1 = "src/" + username2 + username1 + ".txt";
+        String s = "src/" + mainUser.getUsername() + matchedUser.getUsername() + ".txt";
+        String s1 = "src/" + matchedUser.getUsername() + mainUser.getUsername() + ".txt";
         File f = new File(s);
         if (f.exists()) {
             try {
@@ -305,8 +327,12 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
         return list_of_messages.size();
     }
 
-    // Ends the chat after the limit has been reached
-    public void endChat() throws InterruptedException {
+    /**
+     * Executes code to end and reset the chat and save necessary information.
+     * Stops the timer to keep refreshing the display, saves the chat point information to a new Event, prompts the
+     * user that the chat has now ended, deletes the chat file if the path can be found, and closes the GUI window.
+     */
+    public void endChat() {
         // Stops timer which keeps reading from the file
         timer.stop();
 
@@ -341,35 +367,45 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
     }
 
+    /**
+     * Executes desired code if a specific key has been typed
+     * @param e the event to be processed
+     */
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
 
+    /**
+     * Updates the text file and then updates the display if the enter key has been detected to have been pressed.
+     * @param e the event to be processed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         // Checks for the enter key being pressed so that the user doesn't have to click the send button every time
         if (e.getKeyCode() == 10){
             // Adds the text to the text file, displays the updated text file, and sets the text box to empty
-            addToTextFile(sendMessage.getText(), mainUser.getUsername(), matchedUser.getUsername());
-            try {
-                readFromTextFile(mainUser.getUsername(), matchedUser.getUsername());
-            } catch (InterruptedException ex) {
-                throw new RuntimeException(ex);
-            }
+            addToTextFile(sendMessage.getText());
+            readFromTextFile();
             sendMessage.setText("");
         }
     }
 
+    /**
+     * Executes desired code if a specific key has been typed
+     * @param e the event to be processed
+     */
     @Override
     public void keyReleased(KeyEvent e) {
 
     }
 }
 
-// Two user tests that can be run concurrently to test the GUI from each users perspective
+/**
+ * Class to test creating a conversation between two users with user "Manit" as the main user.
+ */
 class testUser1{
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException {
         User user1 = new User("Manit", "Casual");
         User user2 = new User("Arian", "Casual");
 
@@ -390,8 +426,11 @@ class testUser1{
     }
 }
 
+/**
+ * Class to test creating a conversation between two users with user "Arian" as the main user.
+ */
 class testUser2 {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException {
         User user1 = new User("Arian", "Casual");
         User user2 = new User("Manit", "Casual");
 
