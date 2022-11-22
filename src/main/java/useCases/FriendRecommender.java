@@ -40,17 +40,21 @@ public class FriendRecommender {
 
     public String getRecommend(User user, Graph allUsers) {
         Map<String, Integer> friends = new HashMap<>();
+        System.out.println(user.getUsername());
         for (User i : user.getFriends()) {
             int counter = 0;
-            for (User j : allUsers.accounts.get(i.getUsername()).getFriends()) {
-                System.out.println(j.getUsername());
-                if (!friends.containsKey(j.getUsername())) {
-                    friends.putIfAbsent(j.getUsername(), 0);
-                } else {
-                    friends.put(j.getUsername(), friends.get(j.getUsername()) + 1);
+                for (User j : i.getFriends()) {
+                    System.out.println(j.getUsername());
+                    if (!j.getUsername().equals(user.getUsername())) {
+                        System.out.println(j.getUsername());
+                        if (friends.containsKey(j.getUsername()) == false) {
+                            friends.putIfAbsent(j.getUsername(), 0);
+                        } else {
+                            friends.put(j.getUsername(), friends.get(j.getUsername()) + 1);
+                        }
+                        counter++;
+                    }
                 }
-                counter++;
-            }
         }
         int currMax = 0;
         for (String a : friends.keySet()) {

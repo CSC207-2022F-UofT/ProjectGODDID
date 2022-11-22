@@ -1,6 +1,5 @@
 package useCases;
 
-import Databases.ReadGraph;
 import entities.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +20,7 @@ class FriendRecommenderTest {
     AccountManager accountManager = new AccountManager();
     User curUser, user2, user3, user4, user5;
 
-    ArrayList<User> alphaFriends, deltaFriends;
+    ArrayList<User> alphaFriends;
 
     /**
      * To test use case:
@@ -43,6 +42,7 @@ class FriendRecommenderTest {
     void setUp() throws IOException, ClassNotFoundException {
         curUser = new User("Alpha", "");
         accountManager.addUser(curUser);
+        System.out.println(curUser + curUser.getUsername());
 
         user2 = new User("Beta", "");
         accountManager.addUser(user2);
@@ -57,53 +57,42 @@ class FriendRecommenderTest {
         accountManager.addUser(user5);
 
         alphaFriends = new ArrayList<>();
-        alphaFriends.add(user2);
+        alphaFriends.add(user4);
         alphaFriends.add(user3);
-        curUser.setFriends(alphaFriends);
 
-        accountManager.addFriend(curUser, user2);
         accountManager.addFriend(curUser, user3);
         accountManager.addFriend(curUser, user4);
-
-        deltaFriends = new ArrayList<>();
-        deltaFriends.add(user3);
-        deltaFriends.add(user5);
-        user5.setFriends(deltaFriends);
 
         accountManager.addFriend(user4, user5);
         accountManager.addFriend(user4, user3);
         accountManager.addFriend(user3, user5);
-        System.out.println(accountManager.getGraph().accounts);
     }
 
     @AfterEach
     void tearDown() {
     }
 
-
-// This is still in the works, we need to make chnages here
-
     @Test
-    void getRecommendRandom() throws IOException, ClassNotFoundException {
+    void getRecommendRandom() {
         FriendRecommender fRec = new FriendRecommender();
         ArrayList<String> recs = new ArrayList<>();
-        recs = fRec.getRecommendRandom(user5);
+        recs = fRec.getRecommendRandom(user4);
         ArrayList<User> friends = new ArrayList<>();
         friends = curUser.getFriends();
-        for (String rec : recs) {
-            ReadGraph rg = new ReadGraph();
-            friends.add(rg.readobject().getUser(rec));
+        for (int i = 0; i < recs.size(); i++) {
+            System.out.println(recs.get(i));
+            friends.add(accountManager.getGraph().getUser(recs.get(i)));
         }
         curUser.setFriends(friends);
-        assertEquals(5, curUser.getFriends().size()); //adds repeat friends????
+        assertEquals(5, curUser.getFriends().size());
     }
 
     @Test
-    void getRecommend() throws IOException, ClassNotFoundException {
+    void getRecommend() {
         FriendRecommender fRec = new FriendRecommender();
-        ReadGraph rg = new ReadGraph();
-        String rec = fRec.getRecommend(curUser, rg.readobject());
-        System.out.println(rec);
+        String rec = fRec.getRecommend(curUser, accountManager.getGraph());
         assertEquals(user5.getUsername(), rec); //Get the most common friend between your friends
     }
+
 }
+
