@@ -1,0 +1,47 @@
+- name: JUnit Report Action
+  # You may pin to the exact commit or the version.
+  # uses: mikepenz/action-junit-report@6e9933f4a97f4d2b99acef4d7b97924466037882
+  uses: mikepenz/action-junit-report@v3.6.1
+  with:
+    # Specify the token to use to publish the check.
+    token: # optional, default is ${{ github.token }}
+    # Deprecated syntax to specify github token.
+    github_token: 
+    # Xml report paths in glob format
+    report_paths: # optional, default is **/junit-reports/TEST-*.xml
+    # Prefix to add to test file paths from report files when annotating
+    test_files_prefix: # optional, default is 
+    # Comma seperated list of source folders to ignore for lookup
+    exclude_sources: # optional, default is /build/,/__pycache__/
+    # Regular expression for the named test suites
+    suite_regex: # optional, default is 
+    # Enable to only annotate the results on the files, will not create a check run.
+    annotate_only: # optional, default is false
+    # Defines if the active check should be updated instead
+    update_check: # optional, default is false
+    # Check name for test reports.
+    check_name: # optional, default is JUnit Test Report
+    # Commit SHA to update the check status.
+    commit: # optional
+    # Fail the build in case a test failure occurred.
+    fail_on_failure: # optional, default is false
+    # Fail if no test are found.
+    require_tests: # optional, default is false
+    # Include passed tests in the report
+    include_passed: # optional, default is false
+    # Template to configure the title format. Placeholders: {{FILE_NAME}}, {{SUITE_NAME}}, {{TEST_NAME}}.
+    check_title_template: # optional
+    # Additional text to summary output
+    summary: # optional, default is 
+    # If a testcase is retried, ignore the original failure.
+    check_retries: # optional, default is false
+    # Provide a regex pattern and target pattern
+    transformers: # optional, default is []
+    # Enables the publishing of a JOB_SUMMARY with the report.
+    job_summary: # optional, default is true
+    # Include table with all test results in summary
+    detailed_summary: # optional
+    # Annotate passed tests along with warning and failed ones
+    annotate_notice: # optional
+    # Enables the file globber to follow symlinks. Default: false
+    follow_symlink: # optional
