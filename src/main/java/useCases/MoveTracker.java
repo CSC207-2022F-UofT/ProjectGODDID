@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 public class MoveTracker {
 
-    public ArrayList<String> moves(ArrayList<String> board, int i, String piece) {
+    public ArrayList<ArrayList<String>> moves(ArrayList<ArrayList<String>> board, int i, int j, String piece) {
 
-        board.set(i, piece);
+        ArrayList<String> row = board.get(i);
+        row.set(j, piece);
+        board.set(i, row);
         return board;
 
     }
