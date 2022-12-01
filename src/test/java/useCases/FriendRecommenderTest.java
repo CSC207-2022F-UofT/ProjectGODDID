@@ -95,7 +95,7 @@ class FriendRecommenderTest {
     @Test
     void getRecommend() {
         FriendRecommender fRec = new FriendRecommender();
-        String rec = fRec.getRecommend(curUser, accountManager.getGraph());
+        String rec = fRec.getRecommend(curUser);
         System.out.println(rec);
         assertEquals(user5.getUsername(), rec); //Get the most common friend between your friends
     }

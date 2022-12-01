@@ -38,18 +38,22 @@ public class FriendRecommender {
     users and finds highest count of mutual friends among the users neighbours.
     */
 
-    public String getRecommend(User user, Graph allUsers) {
+    public String getRecommend(User user) {
         Map<String, Integer> friends = new HashMap<>();
+        System.out.println(user.getUsername());
         for (User i : user.getFriends()) {
             int counter = 0;
-            for (User j : allUsers.accounts.get(i.getUsername()).getFriends()) {
+            for (User j : i.getFriends()) {
                 System.out.println(j.getUsername());
-                if (friends.containsKey(j.getUsername()) == false) {
-                    friends.putIfAbsent(j.getUsername(), 0);
-                } else {
-                    friends.put(j.getUsername(), friends.get(j.getUsername()) + 1);
+                if (!j.getUsername().equals(user.getUsername())) {
+                    System.out.println(j.getUsername());
+                    if (friends.containsKey(j.getUsername()) == false) {
+                        friends.putIfAbsent(j.getUsername(), 0);
+                    } else {
+                        friends.put(j.getUsername(), friends.get(j.getUsername()) + 1);
+                    }
+                    counter++;
                 }
-                counter++;
             }
         }
         int currMax = 0;
