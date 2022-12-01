@@ -17,7 +17,7 @@ public class GameMain {
         GameUI game = new GameUI(user1, user2);
 
 
-        LoginPage loginPage = new LoginPage();
+        
 
 
     }

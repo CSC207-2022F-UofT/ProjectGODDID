@@ -74,7 +74,7 @@ class PointSystemTest {
 
 
     @Test
-    void RenewTest(){
+    void RenewTest() throws IOException {
         ArrayList<User> userlist = new ArrayList<>();
         userlist.add(user2);
         userlist.add(user3);
@@ -88,7 +88,7 @@ class PointSystemTest {
     }
 
     @Test
-    void SpendTest(){  // also tests that non-involved user vertices are not touched
+    void SpendTest() throws IOException {  // also tests that non-involved user vertices are not touched
         ArrayList<User> userlist = new ArrayList<>();
         userlist.add(user2);
         userlist.add(user3);
