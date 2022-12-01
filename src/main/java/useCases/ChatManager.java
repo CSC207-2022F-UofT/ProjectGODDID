@@ -64,4 +64,6 @@ public class ChatManager {
         ChatScreen testChat = new ChatScreen(this.mainUser, this.matchedUser);
         testChat.setVisible(true);
     }
+
+
 }

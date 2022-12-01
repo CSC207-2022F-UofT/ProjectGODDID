@@ -30,7 +30,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
     Timer timer = new Timer(500, this);
 
     // Constructor for when a chat screen is opened
-    public ChatScreen(User user1, User user2) throws InterruptedException {
+    public ChatScreen(User user1, User user2) throws InterruptedException, IOException {
         // Setting instance attributes to users passed into the ChatScreen constructor
         this.mainUser = user1;
         this.matchedUser = user2;
@@ -166,7 +166,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
             addToTextFile(sendMessage.getText(), mainUser.getUsername(), matchedUser.getUsername());
             try {
                 readFromTextFile(mainUser.getUsername(), matchedUser.getUsername());
-            } catch (InterruptedException ex) {
+            } catch (InterruptedException | IOException ex) {
                 throw new RuntimeException(ex);
             }
             sendMessage.setText("");
@@ -190,7 +190,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
                 while (true){
                     try {
                         if (!(readFromTextFile(mainUser.getUsername(), matchedUser.getUsername()) < 20)) break;
-                    } catch (InterruptedException ex) {
+                    } catch (InterruptedException | IOException ex) {
                         throw new RuntimeException(ex);
                     }
                     addToTextFile("REPORTED_DELETE", mainUser.getUsername(), matchedUser.getUsername());
@@ -212,7 +212,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
         else {
             try {
                 readFromTextFile(mainUser.getUsername(), matchedUser.getUsername());
-            } catch (InterruptedException ex) {
+            } catch (InterruptedException | IOException ex) {
                 throw new RuntimeException(ex);
             }
         }
@@ -252,7 +252,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
     }
 
     // Reads from the chat text file to display it to the users
-    public int readFromTextFile(String username1, String username2) throws InterruptedException {
+    public int readFromTextFile(String username1, String username2) throws InterruptedException, IOException {
         displayed.setText("");
         ArrayList<String> list_of_messages = new ArrayList<>();
         String s = "src/" + username1 + username2 + ".txt";
@@ -306,7 +306,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
     }
 
     // Ends the chat after the limit has been reached
-    public void endChat() throws InterruptedException {
+    public void endChat() throws InterruptedException, IOException {
         // Stops timer which keeps reading from the file
         timer.stop();
 
@@ -355,6 +355,8 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
             try {
                 readFromTextFile(mainUser.getUsername(), matchedUser.getUsername());
             } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
             sendMessage.setText("");

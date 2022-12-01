@@ -110,11 +110,7 @@ public class WelcomePage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == friends){
-            try {
-                FriendsPage friends = new FriendsPage(user1);
-            } catch (IOException | ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
+            FriendsPage friends = new FriendsPage(user1);
         }
 
         if(e.getSource() == addfriend){
@@ -122,11 +118,7 @@ public class WelcomePage extends JFrame implements ActionListener {
             System.out.println(friendToAdd);
             //FriendAdder fd = new FriendAdder();
             AccountManager am= new AccountManager();
-            try {
-                System.out.println(rg.readobject().getUsers());
-            } catch (IOException | ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
+            System.out.println(rg.readobject().getUsers());
             try {
                 //System.out.println("hi");
                 System.out.println("before:"+user1.getFriends());
@@ -171,6 +163,9 @@ public class WelcomePage extends JFrame implements ActionListener {
             }
         }
 
+        if (e.getSource() == activeButton) {
+            ActiveChatsPage activechats = new ActiveChatsPage(user1);
+        }
 
 
 

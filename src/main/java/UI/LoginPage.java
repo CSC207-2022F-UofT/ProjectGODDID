@@ -104,33 +104,29 @@ public class LoginPage implements ActionListener{
             String userID = userIDField.getText();
             String password = String.valueOf(userPasswordField.getPassword());
 
-            try {
-                if (rg.readobject().accounts.get(userID).getUsername().equals(userID))
+            if (rg.readobject().accounts.get(userID).getUsername().equals(userID))
+            {
+                if (rg.readobject().accounts.get(userID).getPassword().equals(password))
                 {
-                    if (rg.readobject().accounts.get(userID).getPassword().equals(password))
-                    {
-                        messageLabel.setForeground(Color.green);
-                        messageLabel.setText("Login successful");
-                        frame.dispose();
-                        try {
-                            WelcomePage welcomePage = new WelcomePage(rg.readobject().accounts.get(userID));
-                        } catch (IOException | ClassNotFoundException ex) {
-                            throw new RuntimeException(ex);
-                        }
+                    messageLabel.setForeground(Color.green);
+                    messageLabel.setText("Login successful");
+                    frame.dispose();
+                    try {
+                        WelcomePage welcomePage = new WelcomePage(rg.readobject().accounts.get(userID));
+                    } catch (IOException | ClassNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
 
-                    }
-                    else
-                    {
-                        messageLabel.setForeground(Color.red);
-                        messageLabel.setText("Wrong password");
-                    }
                 }
-                else{
+                else
+                {
                     messageLabel.setForeground(Color.red);
-                    messageLabel.setText(userID+" does not exist");
+                    messageLabel.setText("Wrong password");
                 }
-            } catch (IOException | ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
+            }
+            else{
+                messageLabel.setForeground(Color.red);
+                messageLabel.setText(userID+" does not exist");
             }
 
 
