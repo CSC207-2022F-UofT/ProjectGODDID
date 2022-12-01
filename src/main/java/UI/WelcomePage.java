@@ -31,6 +31,8 @@ public class WelcomePage extends JFrame implements ActionListener {
 
     JLabel friendsLabel = new JLabel();
 
+    JLabel matchLabel = new JLabel();
+
     JButton recommendButton, activeButton;
     User user1;
 
@@ -57,9 +59,13 @@ public class WelcomePage extends JFrame implements ActionListener {
         Integer points = (Integer) user1.getPoints();
         welcomeLabel.setText("Hello "+ user.getUsername() + ", you have " + points.toString() + " points");
 
-        friendsLabel.setBounds(500,0,400,35);
+        matchLabel.setBounds(200,450,400,35);
+        matchLabel.setFont(new Font(null,Font.PLAIN,20));
+
+
+        friendsLabel.setBounds(100,500,400,35);
         friendsLabel.setFont(new Font(null,Font.PLAIN,20));
-        friendsLabel.setText("x");
+
 
         frame.add(welcomeLabel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,6 +114,8 @@ public class WelcomePage extends JFrame implements ActionListener {
         frame.add(removefriend);
         frame.add(skipchat);
         frame.add(match);
+        frame.add(matchLabel);
+        frame.add(friendsLabel);
 
         messageLabel.setBounds(250,360,250,45);
         messageLabel.setFont(new Font(null,Font.ITALIC,25));
@@ -154,12 +162,13 @@ public class WelcomePage extends JFrame implements ActionListener {
 
         if (e.getSource() == match){
             chat.randomMatch();
-            System.out.println(chat.getMatchedUser().getUsername());
+            matchLabel.setText("Matched with: " + chat.getMatchedUser().getUsername());
+            match.setEnabled(false);
         }
 
         if (e.getSource() == skipchat){
             chat.skipMatch(chat.getMatchedUser());
-            System.out.println(chat.getMatchedUser().getUsername());
+            matchLabel.setText("Matched with: " + chat.getMatchedUser().getUsername());
         }
 
         if (e.getSource() == startchat){
@@ -185,7 +194,7 @@ public class WelcomePage extends JFrame implements ActionListener {
                 throw new RuntimeException(ex);
             }
 
-            friendsLabel.setText(recommended_friend);
+            friendsLabel.setText("Recommended Friends: " + recommended_friend);
 
         }
 
