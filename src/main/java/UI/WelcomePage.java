@@ -1,6 +1,7 @@
 package UI;
 
 
+import controllers.FriendRecommenderController;
 import entities.User;
 import useCases.*;
 import useCases.FriendAdder;
@@ -28,6 +29,8 @@ public class WelcomePage extends JFrame implements ActionListener {
 
     JLabel messageLabel = new JLabel();
 
+    JLabel friendsLabel = new JLabel();
+
     JButton recommendButton, activeButton;
     User user1;
 
@@ -53,6 +56,10 @@ public class WelcomePage extends JFrame implements ActionListener {
         welcomeLabel.setFont(new Font(null,Font.PLAIN,20));
         Integer points = (Integer) user1.getPoints();
         welcomeLabel.setText("Hello "+ user.getUsername() + ", you have " + points.toString() + " points");
+
+        friendsLabel.setBounds(500,0,400,35);
+        friendsLabel.setFont(new Font(null,Font.PLAIN,20));
+        friendsLabel.setText("x");
 
         frame.add(welcomeLabel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -165,6 +172,21 @@ public class WelcomePage extends JFrame implements ActionListener {
 
         if (e.getSource() == activeButton) {
             ActiveChatsPage activechats = new ActiveChatsPage(user1);
+        }
+
+        if (e.getSource() == recommendButton) {
+            FriendRecommenderController rec_friend = new FriendRecommenderController();
+            String recommended_friend;
+            try {
+                recommended_friend = rec_friend.getRec(user1);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            friendsLabel.setText(recommended_friend);
+
         }
 
 
