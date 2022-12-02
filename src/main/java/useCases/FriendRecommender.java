@@ -19,12 +19,16 @@ public class FriendRecommender {
     Given a user, randomly select three of their friends to recommend back to the current user.
     */
 
-    public ArrayList<String> getRecommendRandom(User user) {
+    public ArrayList<String> getRecommendRandom(User user, User curr) {
         if (user.getFriends().size() >= 1) {
             ArrayList<String> recs = new ArrayList<>();
             for (int i = 0; i < 3; i++) {
                 int randomNum = (int) (Math.random() * user.getFriends().size());
-                recs.add(user.getFriends().get(randomNum).getUsername());
+                if (user.getFriends().get(randomNum).getUsername().equals(curr.getUsername()) || recs.contains(user.getFriends().get(randomNum).getUsername())){
+
+                }else{
+                    recs.add(user.getFriends().get(randomNum).getUsername());
+                }
             }
 
             return recs;

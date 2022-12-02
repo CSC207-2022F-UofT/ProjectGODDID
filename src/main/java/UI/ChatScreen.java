@@ -130,7 +130,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
         // Frame containing all the added components and added panels which have their own components
         frame = new JFrame();
         frame.setTitle(mainUser.getUsername() + "'s chat with " + matchedUser.getUsername());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
         frame.setSize(500,500);
         ImageIcon image = new ImageIcon("Messaging logo.png");

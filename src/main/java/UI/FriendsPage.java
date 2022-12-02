@@ -28,7 +28,7 @@ public class FriendsPage extends JFrame implements ActionListener {
         buttons = new JButton[user.getFriends().size()];
 
         JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(500, 500);
         frame.setLayout(new GridLayout(user1.getFriends().size(), 1));
 
