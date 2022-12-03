@@ -9,7 +9,9 @@ import useCases.AccountManager;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.HashMap;
+import javax.sound.midi.Soundbank;
 import javax.swing.*;
 
 
@@ -31,7 +33,7 @@ public class LoginPage implements ActionListener{
     AccountManager adder = new AccountManager();
 
 
-    public LoginPage() throws IOException, ClassNotFoundException {
+    public LoginPage(){
 
 //        logininfo = loginInfoOriginal;
 
@@ -72,7 +74,12 @@ public class LoginPage implements ActionListener{
         if(e.getSource()== signUp) {
 
             try {
+                System.out.println(rg.readobject().accounts.keySet());
                 adder.addUser(userIDField.getText(),String.valueOf(userPasswordField.getPassword()), "casual");
+                System.out.println(adder.getGraph().accounts.keySet());
+                System.out.println(rg.readobject().accounts.keySet());
+                System.out.println(" ");
+                //System.out.println(rg.readobject().accounts.keySet());
             } catch (IOException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
@@ -93,31 +100,39 @@ public class LoginPage implements ActionListener{
 
 
         if(e.getSource()==loginButton) {
-            try {
-                logininfos = rg.readobject();
-            } catch (IOException | ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
-
+            //logininfos = rg.readobject();
             String userID = userIDField.getText();
             String password = String.valueOf(userPasswordField.getPassword());
 
-            if (logininfos.accounts.get(userID).getUsername().equals(userID)) {
-                if (logininfos.accounts.get(userID).getPassword().equals(password)) {
+            if (rg.readobject().accounts.get(userID).getUsername().equals(userID))
+            {
+                if (rg.readobject().accounts.get(userID).getPassword().equals(password))
+                {
                     messageLabel.setForeground(Color.green);
                     messageLabel.setText("Login successful");
                     frame.dispose();
-
-                    WelcomePage welcomePage = new WelcomePage(logininfos.accounts.get(userID));
+                    try {
+                        WelcomePage welcomePage = new WelcomePage(rg.readobject().accounts.get(userID));
+                    } catch (IOException | ClassNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
 
                 }
-            } else {
-                messageLabel.setForeground(Color.red);
-                messageLabel.setText("Wrong password");
+                else
+                {
+                    messageLabel.setForeground(Color.red);
+                    messageLabel.setText("Wrong password");
+                }
             }
+            else{
+                messageLabel.setForeground(Color.red);
+                messageLabel.setText(userID+" does not exist");
+            }
+
 
         }
 
-
     }
+
+
 }
