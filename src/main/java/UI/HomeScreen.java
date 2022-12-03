@@ -9,6 +9,7 @@ import useCases.FriendAdder;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class HomeScreen extends JFrame implements ActionListener
@@ -162,8 +163,7 @@ public class HomeScreen extends JFrame implements ActionListener
 
 
     // main method
-    public static void main(String argvs[])
-    {
+    public static void main(String argvs[]) throws IOException, ClassNotFoundException {
 // creating an object of the class CardLayoutExample1
         //HomeScreen crdl = new HomeScreen();
         User bob = new User("Bob","");

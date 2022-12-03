@@ -57,29 +57,6 @@ class LoginScreen extends JFrame implements ActionListener
     //define abstract method actionPerformed() which will be called on button click
     public void actionPerformed(ActionEvent ae)     //pass action listener as a parameter
     {
-        String userValue = textField1.getText();        //get user entered username from the textField1
-        String passValue = textField2.getText();        //get user entered pasword from the textField2
-
-        //check whether the credentials are authentic or not
-        if (userValue.equals("test@mail.com") && passValue.equals("test")) {  //if authentic, navigate user to a new page
-
-            //create instance of the NewPage
-            NewPage page = new NewPage();
-            HomeScreen home = new HomeScreen();
-
-            //make page visible to the user
-            page.setVisible(true);
-            home.setVisible(true);
-
-            //create a welcome label and set it to the new page
-            JLabel wel_label = new JLabel("Welcome: "+userValue);
-            page.getContentPane().add(wel_label);
-            page.userLabel = new JLabel("Welcome: "+userValue);
-        }
-        else{
-            //show error message
-            System.out.println("Please enter valid username and password");
-        }
     }
 }
 

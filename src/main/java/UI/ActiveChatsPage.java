@@ -63,8 +63,6 @@ public class ActiveChatsPage extends JFrame implements ActionListener {
                             chat.openChat();
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
                         }
                     }
 

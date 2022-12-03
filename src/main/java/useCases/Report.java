@@ -54,7 +54,7 @@ public class Report {
     some generic hatewords into a List<String> so it can itterated through in the report checkreport function. */
     public ArrayList<String> hateWords() throws FileNotFoundException {
         ArrayList<String> hate_words = new ArrayList<String>();
-        File f = new File("keywords.txt");
+        File f = new File("src/keywords.txt");
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()){
             String data = sc.nextLine();

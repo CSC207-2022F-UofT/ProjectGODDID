@@ -49,7 +49,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
      * @param user1 the main user who is accessing the GUI.
      * @param user2 the user the main user is matched with and will be messaging.
      */
-    public ChatScreen(User user1, User user2) {
+    public ChatScreen(User user1, User user2) throws IOException {
         // Setting instance attributes to users passed into the ChatScreen constructor
         this.mainUser = user1;
         this.matchedUser = user2;
@@ -149,7 +149,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
         // Frame containing all the added components and added panels which have their own components
         frame = new JFrame();
         frame.setTitle(mainUser.getUsername() + "'s chat with " + matchedUser.getUsername());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
         frame.setSize(500,500);
         ImageIcon image = new ImageIcon("Messaging logo.png");
@@ -196,7 +196,11 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
         // Will send the typed message in the text field if the user clicks send or presses enter
         else if (e.getSource()==send) {
             addToTextFile(sendMessage.getText());
-            readFromTextFile();
+            try {
+                readFromTextFile();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             sendMessage.setText("");
         }
 
@@ -215,7 +219,12 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
                     throw new RuntimeException(ex);
                 }
 
-                while (readFromTextFile() < 20){
+                while (true){
+                    try {
+                        if (!(readFromTextFile() < 20)) break;
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     addToTextFile("REPORTED_DELETE");
                 }
             }
@@ -224,12 +233,20 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
 
         // Will return to the home screen
         else if (e.getSource()==back) {
-            new WelcomePage(mainUser);
+            try {
+                new WelcomePage(mainUser);
+            } catch (IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
         // Used by the timer to keep reading from the text file
         else {
-            readFromTextFile();
+            try {
+                readFromTextFile();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -277,7 +294,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
      *
      * @return the length of the chat to be accessed by ActionPerformed after clicking the report button
      */
-    public int readFromTextFile() {
+    public int readFromTextFile() throws IOException {
         displayed.setText("");
         ArrayList<String> list_of_messages = new ArrayList<>();
         String s = "src/" + mainUser.getUsername() + matchedUser.getUsername() + ".txt";
@@ -335,7 +352,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
      * Stops the timer to keep refreshing the display, saves the chat point information to a new Event, prompts the
      * user that the chat has now ended, deletes the chat file if the path can be found, and closes the GUI window.
      */
-    public void endChat() {
+    public void endChat() throws IOException {
         // Stops timer which keeps reading from the file
         timer.stop();
 
@@ -353,7 +370,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
         String s2 = "src/" + matchedUser.getUsername() + mainUser.getUsername() + ".txt";
 
         // Displays a message to the user that the chat has now ended
-        JOptionPane.showMessageDialog(null, "Text limit reached. Chat will now end.");
+        JOptionPane.showMessageDialog(null, "Chat limit reached. Chat will now end.");
 
         try {
             Files.deleteIfExists(Paths.get(s1));
@@ -389,7 +406,11 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
         if (e.getKeyCode() == 10){
             // Adds the text to the text file, displays the updated text file, and sets the text box to empty
             addToTextFile(sendMessage.getText());
-            readFromTextFile();
+            try {
+                readFromTextFile();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             sendMessage.setText("");
         }
     }
