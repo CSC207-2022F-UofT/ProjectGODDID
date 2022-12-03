@@ -1,6 +1,7 @@
 package UI;
 
 import EventPackage.Event;
+import Interfaces.ChatScreenInt;
 import entities.User;
 import useCases.Report;
 import PointSystem.*;
@@ -17,7 +18,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ChatScreen extends JFrame implements ActionListener, KeyListener {
+public class ChatScreen extends JFrame implements ActionListener, KeyListener, ChatScreenInt {
     // Declaring instance attributes
     public User mainUser;
     public User matchedUser;
@@ -153,6 +154,12 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
         readFromTextFile(mainUser.getUsername(), matchedUser.getUsername());
     }
 
+    // TODO: javadoc
+    @Override
+    public void setVisible(boolean setting){
+        frame.setVisible(setting);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e){
         // Will start a new tictactoe game with the matched user if the game button is clicked
@@ -199,13 +206,9 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
 
         }
 
-        // Will return to the home secreen
+        // Will return to the home screen
         else if (e.getSource()==back) {
-            try {
-                new WelcomePage(mainUser);
-            } catch (IOException | ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
+            new WelcomePage(mainUser);
         }
 
         // Used by the timer to keep reading from the text file
