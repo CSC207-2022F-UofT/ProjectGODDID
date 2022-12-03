@@ -1,29 +1,61 @@
 package useCases;
 
+import Databases.CreateChatText;
+import Interfaces.ChatManagerInt;
+import Interfaces.ChatScreenInt;
+import Interfaces.CreateChatInt;
 import UI.ChatScreen;
 import entities.User;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
-public class ChatManager {
-    // Declaring instance attributes
+/**
+ * This class contains methods for the WelcomePage and FriendsPage pages in the GUI to interact with so that they can
+ * select the user that the main user (mainUser) is matched with (matchedUser), as well as get the information of whom
+ * the user has been matched with if matchedUser has been randomized, and finally open the actual chat with the user.
+ *
+ * @author Arian Khademi
+ * @version 1.0
+ * @since November 20th, 2022
+ */
+public class ChatManager implements ChatManagerInt {
     User mainUser;
     User matchedUser;
 
-    // Constructor w/ 1 parameter
+    /**
+     * Constructor for ChatManager.
+     * This is the constructor for the ChatManager class, which sets the instance attribute mainUser to the user
+     * passed into the constructor, and calls randomMatch to also set the instance attribute matchedUser.
+     *
+     * @param mainUser the user which is accessing the GUI and looking for a user to match with.
+     */
     public ChatManager(User mainUser){
-        // Sets the mainUser instance attribute to the one passed and the matchedUser to a random user
         this.mainUser = mainUser;
         randomMatch();
     }
 
-    // Method randomly finds a matched user
+    /**
+     * Method to randomly select matchedUser.
+     * This method selects a random user from the mainUser's friend list and sets matchedUser to the result.
+     */
+    @Override
     public void randomMatch(){
-        int index = (int)(Math.random() * this.mainUser.getFriends().size());
-        this.matchedUser = mainUser.getFriends().get(index);
+        if (mainUser.getFriends().size()>= 1) {
+            Random rg = new Random();
+            int index = rg.nextInt(this.mainUser.getFriends().size());
+            this.matchedUser = mainUser.getFriends().get(index);
+        }
     }
 
-    // Method randomly finds a matched user which is not the skipped user
+    /**
+     * Method to skip previous matchedUser.
+     * This method calls randomMatch to select a random user from the user's friend list and set it as the matchedUser,
+     * however, it also keeps finding a randomMatch until the matchedUser is not the same as the user passed in.
+     *
+     * @param otherUser the user that the mainUser does not want to be matched with.
+     */
+    @Override
     public void skipMatch(User otherUser){
         User tempUser = otherUser;
 
@@ -33,30 +65,41 @@ public class ChatManager {
         }
     }
 
-    // Method returns the user chosen / extended with (redundant for now but will not be when cases are edited)
+    /**
+     * Method to set matchedUser to chosen user.
+     * This method sets the matchedUser instance attribute to the user passed to the method, for when the mainUser has
+     * specifically chosen to speak with the user that is passed in.
+     *
+     * @param otherUser the user that the mainUser has chosen to be matched with.
+     */
+    @Override
     public void choseMatch(User otherUser){
         this.matchedUser = otherUser;
     }
 
+    /**
+     * Getter for matchedUser instance attribute.
+     * @return the matched user (matchedUser).
+     */
+    @Override
     public User getMatchedUser(){
         return this.matchedUser;
     }
 
-    // Starts a new chat between the mainUser and matchedUser
-    public void openChat() throws IOException, InterruptedException {
+
+    /**
+     * Creates a new ChatScreen, and text file to store messages, so the users can chat with each other.
+     * @throws IOException if createNewFile fails
+     */
+    @Override
+    public void openChat() throws IOException {
         String s1 = "src/" + this.mainUser.getUsername() + this.matchedUser.getUsername() + ".txt";
         String s2 = "src/" + this.matchedUser.getUsername() + this.mainUser.getUsername() + ".txt";
 
-        if (!new File(s2).exists() && !new File(s1).exists()){
-            File f = new File(s1);
-            if (f.createNewFile()) {
-                System.out.println("File created: " + f.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-        }
+        CreateChatInt createText = new CreateChatText();
+        createText.newChat(s1, s2);
 
-        ChatScreen testChat = new ChatScreen(this.mainUser, this.matchedUser);
-        testChat.setVisible(true);
+        ChatScreenInt startNew = new ChatScreen(this.mainUser, this.matchedUser);
+        startNew.setVisible(true);
     }
 }

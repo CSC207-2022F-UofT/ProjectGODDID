@@ -31,7 +31,7 @@ public class LoginPage implements ActionListener{
     AccountManager adder = new AccountManager();
 
 
-    public LoginPage(){
+    public LoginPage() throws IOException, ClassNotFoundException {
 
 //        logininfo = loginInfoOriginal;
 
@@ -108,14 +108,6 @@ public class LoginPage implements ActionListener{
                     messageLabel.setText("Login successful");
                     frame.dispose();
 
-                    try {
-                        WelcomePage welcomePage = new WelcomePage(logininfos.accounts.get(userID));
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (ClassNotFoundException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    
                     WelcomePage welcomePage = new WelcomePage(logininfos.accounts.get(userID));
 
                 }
