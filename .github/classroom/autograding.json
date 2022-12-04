@@ -3,17 +3,7 @@
     {
       "name": "Task 1",
       "setup": "",
-      "run": "gradle test --tests useCases/FriendAdderTest.addFriend",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 1
-    },
-    {
-      "name": "Task 2",
-      "setup": "",
-      "run": "gradle test --tests useCases/FriendRecommenderTest.getRecommendRandom",
+      "run": "gradle test --tests friendaddertest.addFriend",
       "input": "",
       "output": "",
       "comparison": "included",
