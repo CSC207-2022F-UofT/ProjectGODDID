@@ -7,6 +7,7 @@ import useCases.GameManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import static org.junit.Assert.assertArrayEquals;
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 public class GameControllerTests {
 
     @Test(timeout = 500)
-    public void testXWinsTextfield() {
+    public void testXWinsTextfield() throws IOException {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
 
         ArrayList<String> row = new ArrayList<String>();
@@ -60,7 +61,7 @@ public class GameControllerTests {
     }
 
     @Test
-    public void testOWinsTextfield() {
+    public void testOWinsTextfield() throws IOException {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
 
         ArrayList<String> row = new ArrayList<String>();

@@ -1,10 +1,11 @@
 package useCases;
 import Databases.ReadGraph;
 import Databases.WriteGraph;
+import Interfaces.ReadGraphInt;
+import Interfaces.WriteGraphInt;
 import entities.*;
 
 import java.io.IOException;
-import java.util.*;
 
 //public class AccountManager extends User {
 public class AccountManager{

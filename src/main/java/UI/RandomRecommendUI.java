@@ -2,6 +2,7 @@ package UI;
 
 import EventPackage.Event;
 import PointSystem.PointSystemS;
+import controllers.FriendRecommenderController;
 import entities.User;
 import useCases.ChatManager;
 
@@ -14,23 +15,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class FriendsPage extends JFrame implements ActionListener {
+public class RandomRecommendUI extends JFrame implements ActionListener {
 
     JButton[] buttons;
+
+    JPanel friend_panel = new JPanel();
+
+    JPanel button_panel = new JPanel();
+
+    JLabel textfield = new JLabel();
     User user;
-
-    ChatManager chat;
-
-    PointSystemS ps = new PointSystemS();
 
     JFrame frame = new JFrame();
 
 
-    public FriendsPage(User user1) {
+    public RandomRecommendUI(User user1) {
 
         user = user1;
-
-        chat = new ChatManager(user);
 
         buttons = new JButton[user.getFriends().size()];
 
@@ -39,21 +40,34 @@ public class FriendsPage extends JFrame implements ActionListener {
         frame.setSize(500, 500);
         frame.setLayout(new GridLayout(user1.getFriends().size(), 1));
 
+        textfield.setBackground(Color.black);
+        textfield.setForeground(Color.white);
+        textfield.setHorizontalAlignment(JLabel.CENTER);
+        textfield.setText("Choose a friend");
+        textfield.setOpaque(true);
+
+        friend_panel.setLayout(new BorderLayout());
+        friend_panel.setBounds(0, 0, 800, 100);
+
+        button_panel.setLayout(new GridLayout(user1.getFriends().size(), 1));
+        button_panel.setBackground(Color.GRAY);
+
+        friend_panel.add(textfield);
+
 
         for (int i = 0; i < user1.getFriends().size(); i++){
             JButton button = new JButton(user.getFriends().get(i).getUsername());
             button.addActionListener(this);
             button.setFocusable(false);
             button.setText(user.getFriends().get(i).getUsername());
-            String s1 = "src/" + user.getUsername() + user.getFriends().get(i).getUsername() + ".txt";
-            String s2 = "src/" + user.getFriends().get(i).getUsername() + user.getUsername() + ".txt";
-            if (!new File(s2).exists() && !new File(s1).exists()){
-                frame.add(button);
-                buttons[i] = button;
-            }
+
+            button_panel.add(button);
+            buttons[i] = button;
 
         }
 
+        frame.add(friend_panel, BorderLayout.NORTH);
+        frame.add(button_panel);
         frame.setVisible(true);
 
     }
@@ -65,22 +79,13 @@ public class FriendsPage extends JFrame implements ActionListener {
                 String friend_name = buttons[i].getText();
                 for (User friend : user.getFriends()){
                     if (friend_name.equals(friend.getUsername())){
-                        ArrayList<User> users_involved = new ArrayList<>();
-                        users_involved.add(user);
-                        Event choose_friend = new Event("SpendChoose", users_involved);
+                        FriendRecommenderController rec_con = new FriendRecommenderController();
                         try {
-                            choose_friend.execute(ps);
+                            String rand_friend = rec_con.getRandomRec(friend, user);
+                            textfield.setText("Recommended friend: " + rand_friend);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
-                        }
-                        frame.dispose();
-                        chat = new ChatManager(user);
-                        chat.choseMatch(friend);
-                        try {
-                            chat.openChat();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (InterruptedException ex) {
+                        } catch (ClassNotFoundException ex) {
                             throw new RuntimeException(ex);
                         }
                     }
@@ -91,9 +96,3 @@ public class FriendsPage extends JFrame implements ActionListener {
     }
 
 }
-
-
-
-
-
-

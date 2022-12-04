@@ -8,6 +8,7 @@ import useCases.MoveTracker;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
 
@@ -117,7 +118,11 @@ public class GameUI extends JFrame implements ActionListener {
                              * Calls the controller to check the winner and the controller calls the usecase which
                              * follows the Clean Architecture and Dependency inversion principle
                              */
-                            winner.Wins(board, player1, player2);
+                            try {
+                                winner.Wins(board, player1, player2);
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
                     } else {
                         if (buttons[i][j].getText().equals("")) {
@@ -130,7 +135,11 @@ public class GameUI extends JFrame implements ActionListener {
                             board = move_cont.moves(board, i, j, "O");
                             player1_turn = true;
                             textfield.setText("X(" + player1.getUsername() + ") turn");
-                            winner.Wins(board, player1, player2);
+                            try {
+                                winner.Wins(board, player1, player2);
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
                     }
                 }

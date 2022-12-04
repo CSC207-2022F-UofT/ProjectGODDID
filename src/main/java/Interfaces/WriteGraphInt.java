@@ -1,4 +1,4 @@
-package useCases;
+package Interfaces;
 
 import entities.Graph;
 

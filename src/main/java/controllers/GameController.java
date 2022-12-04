@@ -1,10 +1,14 @@
 package controllers;
 
+
+import EventPackage.Event;
+import PointSystem.PointSystemR;
 import entities.User;
 
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import useCases.GameManager;
@@ -15,6 +19,8 @@ public class GameController {
 
     JLabel textfield;
     JButton[][] buttons;
+
+    PointSystemR ps = new PointSystemR();
 
     /**
      * @param textfield
@@ -35,7 +41,7 @@ public class GameController {
      * @param user1
      * @param user2
      */
-    public void Wins(ArrayList<ArrayList<String>> board, User user1, User user2) {
+    public void Wins(ArrayList<ArrayList<String>> board, User user1, User user2) throws IOException {
         int[] wins;
 
         /**
@@ -66,11 +72,17 @@ public class GameController {
              */
             if (wins[8] == 1) {
                 textfield.setText(user1.getUsername() + " wins");
-//                gameEarn.adjustPoints(user1, "GameChatEnd");
+                ArrayList<User> users_involved = new ArrayList<>();
+                users_involved.add(user1);
+                Event game_win = new Event("GameChatEnd", users_involved);
+                game_win.execute(ps);
 
             } else if (wins[8] == 0) {
                 textfield.setText(user2.getUsername() + " wins");
-//                gameEarn.adjustPoints(user2, "GameChatEnd");
+                ArrayList<User> users_involved = new ArrayList<>();
+                users_involved.add(user2);
+                Event game_win = new Event("GameChatEnd", users_involved);
+                game_win.execute(ps);
             }
         }
     }

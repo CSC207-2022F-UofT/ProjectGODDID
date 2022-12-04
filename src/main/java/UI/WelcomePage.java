@@ -1,6 +1,9 @@
 package UI;
 
 
+
+import EventPackage.Event;
+import PointSystem.PointSystemS;
 import controllers.FriendRecommenderController;
 import entities.User;
 import useCases.*;
@@ -11,6 +14,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import Databases.*;
 
 import useCases.FriendRemover;
@@ -33,7 +38,11 @@ public class WelcomePage extends JFrame implements ActionListener {
 
     JLabel matchLabel = new JLabel();
 
-    JButton recommendButton, activeButton;
+    PointSystemS ps = new PointSystemS();
+
+    FriendFacade friend_facade = new FriendFacade();
+
+    JButton recommendButton, activeButton, recommendRandButton;
     User user1;
 
     ReadGraph rg = new ReadGraph();
@@ -43,10 +52,16 @@ public class WelcomePage extends JFrame implements ActionListener {
         user1 = user;
         chat = new ChatManager(user1);
         recommendButton = new JButton();
-        recommendButton.setBounds(200, 35, 200, 50);
+        recommendButton.setBounds(150, 35, 200, 50);
         recommendButton.addActionListener(this);
-        recommendButton.setText("Recommend Friends");
+        recommendButton.setText("Recommend Friend");
         recommendButton.setFocusable(false);
+
+        recommendRandButton = new JButton();
+        recommendRandButton.setBounds(350, 35, 200, 50);
+        recommendRandButton.addActionListener(this);
+        recommendRandButton.setText("Recommend Random");
+        recommendRandButton.setFocusable(false);
 
         activeButton = new JButton();
         activeButton.setBounds(250, 175, 100, 50);
@@ -116,6 +131,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         frame.add(match);
         frame.add(matchLabel);
         frame.add(friendsLabel);
+        frame.add(recommendRandButton);
 
         messageLabel.setBounds(250,360,250,45);
         messageLabel.setFont(new Font(null,Font.ITALIC,25));
@@ -132,12 +148,11 @@ public class WelcomePage extends JFrame implements ActionListener {
             String friendToAdd = text.getText();
             System.out.println(friendToAdd);
             //FriendAdder fd = new FriendAdder();
-            AccountManager am= new AccountManager();
             System.out.println(rg.readobject().getUsers());
             try {
                 //System.out.println("hi");
                 System.out.println("before:"+user1.getFriends());
-                am.addFriend(user1, rg.readobject().getUser(friendToAdd));
+                friend_facade.addFriend(user1, rg.readobject().getUser(friendToAdd));
                 System.out.println("after:"+user1.getFriends());
                 messageLabel.setForeground(Color.green);
                 System.out.println("hi");
@@ -150,9 +165,8 @@ public class WelcomePage extends JFrame implements ActionListener {
         if(e.getSource() == removefriend){
             String friendToAdd = text.getText();
             //FriendRemover fd = new FriendRemover();
-            AccountManager am = new AccountManager();
             try {
-                am.removeFriend(user1, rg.readobject().getUser(friendToAdd));
+                friend_facade.removeFriend(user1, rg.readobject().getUser(friendToAdd));
                 messageLabel.setForeground(Color.green);
                 messageLabel.setText(friendToAdd+" is successfuly removed from your friend's list");
             } catch (IOException | ClassNotFoundException ex) {
@@ -167,6 +181,16 @@ public class WelcomePage extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == skipchat){
+            ArrayList<User> users_involved = new ArrayList<>();
+            users_involved.add(user1);
+            Event skip_friend = new Event("SpendSkip", users_involved);
+            try {
+                skip_friend.execute(ps);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            Integer points = (Integer) user1.getPoints();
+            welcomeLabel.setText("Hello "+ user1.getUsername() + ", you have " + points.toString() + " points");
             chat.skipMatch(chat.getMatchedUser());
             matchLabel.setText("Matched with: " + chat.getMatchedUser().getUsername());
         }
@@ -194,8 +218,12 @@ public class WelcomePage extends JFrame implements ActionListener {
                 throw new RuntimeException(ex);
             }
 
-            friendsLabel.setText("Recommended Friends: " + recommended_friend);
+            friendsLabel.setText("Recommended Friend: " + recommended_friend);
 
+        }
+
+        if (e.getSource() == recommendRandButton) {
+            new RandomRecommendUI(user1);
         }
 
 

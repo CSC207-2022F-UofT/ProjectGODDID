@@ -12,30 +12,16 @@ public class FriendRecommenderController {
 
     Random random = new Random();
 
-    public String getRandomRec(User curr) throws IOException, ClassNotFoundException {
+    public String getRandomRec(User target, User curr) throws IOException, ClassNotFoundException {
+        String friend = friendRecommender.getRecommendRandom(target, curr);
 
-        int index = 0;
-        if (curr.getFriends().size() > 0) {
-            index = random.nextInt(curr.getFriends().size() - 1);
-            ArrayList<String> friends = friendRecommender.getRecommendRandom(curr.getFriends().get(index), curr);
-            String recommended_friends = friends.get(0) + ", " + friends.get(1) + ", " + friends.get(2);
-
-            return recommended_friends;
-        }
-        return "Add a friend to get recommendation";
+        return friend;
     }
 
-//    public void getRandomRec(User target, User curr) throws IOException, ClassNotFoundException {
-//        friendRecommender.getRecommendRandom(target, curr);
-//    }
     public String getRec(User target) throws IOException, ClassNotFoundException {
-        int index = 0;
-        if (target.getFriends().size() > 0) {
-            index = random.nextInt(target.getFriends().size() - 1);
-            return friendRecommender.getRecommend(target.getFriends().get(index));
-        }
 
-        return "Add a friend to get recommendation";
+        return friendRecommender.getRecommend(target);
+
     }
 
 }
