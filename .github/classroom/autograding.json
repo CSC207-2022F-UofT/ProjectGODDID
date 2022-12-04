@@ -1,14 +1,24 @@
 {
   "tests": [
     {
-      "name": "Default Test Runner",
+      "name": "Task 1",
       "setup": "",
-      "run": "gradle test --tests \"*.*\"",
+      "run": "gradle test --tests FriendAdderTest.addFriend",
       "input": "",
       "output": "",
       "comparison": "included",
       "timeout": 10,
       "points": 1
-    }
+    },
+    {
+      "name": "Task 2",
+      "setup": "",
+      "run": "gradle test --tests FriendRecommenderTest.getRecommendRandom",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
   ]
 }
