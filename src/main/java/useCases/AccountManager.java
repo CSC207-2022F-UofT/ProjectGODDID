@@ -4,17 +4,27 @@ import Databases.WriteGraph;
 import entities.*;
 
 import java.io.IOException;
-import java.util.*;
 
-//public class AccountManager extends User {
+/**
+ * Public class that is responsible for the addition and removal of users and user's friends.
+ * Contains a static Graph object which is initialized so in order to ensure that the same graph is
+ * refered to each time an accountmanager object is made.
+ */
 public class AccountManager{
-    public static Graph user_graph = new Graph();//so that every time a new user is registered (while doing this
-    //an object of account manager is created), each object of account manager refers to the same graph.
-//    WriteGraph wg = new WriteGraph();
-//    ReadGraph rg = new ReadGraph();
+    public static Graph user_graph = new Graph();
+
     ReadGraphInt rg = new ReadGraph();
     WriteGraphInt wg = new WriteGraph();
 
+
+    /**
+     * Adds a user, only if they do not already exist
+     * @param name name of the user
+     * @param pWord password of the user
+     * @param acc_type account type of the user
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
 
     public void addUser(String name, String pWord, String acc_type) throws IOException, ClassNotFoundException {
         User new_user = new User(name, acc_type);
@@ -32,12 +42,25 @@ public class AccountManager{
         }
     }
 
+    /**
+     * Adds a user, only if they do not already exist
+     * @param user the user object
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void addUser(User user) throws IOException, ClassNotFoundException {
         Graph user_graph = rg.readobject();
         user_graph.accounts.putIfAbsent(user.getUsername() ,user);
         wg.writeGraph(user_graph);
     }
 
+    /**
+     * Adds a friend to a user, if the friend is a current user and not already a friend of the user
+     * @param currUser the user who wants to add a friend
+     * @param friendToAdd the friend that currUser wants to add
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void addFriend(User currUser, User friendToAdd) throws IOException, ClassNotFoundException {
         Graph temp = rg.readobject();
         if(temp.accounts.containsKey(currUser.getUsername()) && temp.accounts.containsKey(friendToAdd.getUsername()))
@@ -51,6 +74,13 @@ public class AccountManager{
         }
     }
 
+    /**
+     * Removes a friend from a user's set of friends, if the friend exists.
+     * @param currUser the user who wants to remove a friend
+     * @param friendToRemove the friend that currUser wants to remove
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void removeFriend(User currUser, User friendToRemove) throws IOException, ClassNotFoundException {
         Graph user_graph = rg.readobject();
         if(user_graph.accounts.containsKey(currUser.getUsername()))
@@ -61,13 +91,31 @@ public class AccountManager{
         }
     }
 
+    /**
+     * Remove a user from the system completely, also ensures the removal of the user from the friends of
+     * other users.
+     * @param userToBeRemoved the user that needs to be removed from the system
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void removeUser(User userToBeRemoved) throws IOException, ClassNotFoundException {
         Graph user_graph = rg.readobject();
         user_graph.accounts.remove(userToBeRemoved.getUsername());
+        for(User i:user_graph.accounts.values()){
+            if(i.getFriends().contains(userToBeRemoved))
+                i.friends.remove(userToBeRemoved);
+        }
         userToBeRemoved.friends.clear();
         wg.writeGraph(user_graph);
     }
 
+    /**
+     * Allows a user to block another user
+     * @param user1 the user that wants to block the other user
+     * @param user2 the user to be blocked
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void blockUser(User user1, User user2) throws IOException, ClassNotFoundException {
         Graph user_graph = rg.readobject();
         user_graph.getUsers();
@@ -76,6 +124,9 @@ public class AccountManager{
         wg.writeGraph(user_graph);
     }
 
+    /**
+     * @return the graph that contains all the users and friends.
+     */
     public Graph getGraph() {
         return user_graph;
     }

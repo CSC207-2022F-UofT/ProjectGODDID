@@ -12,9 +12,12 @@ public class FriendAdder {
     public FriendAdder(){
     }
 
-    /*
-    Add friend to current users friends list and create new edge between the two in the graph of users
-    */
+    /**
+     * @param currUser the user that wants to add a friend
+     * @param friend the friend that needs to be added
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void addFriend(User currUser, User friend) throws IOException, ClassNotFoundException {
         AccountManager temp = new AccountManager();
         temp.addFriend(currUser, friend);
