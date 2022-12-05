@@ -39,29 +39,6 @@ public class AccountManager{
         wg.writeGraph(user_graph);
     }
 
-    public void addFriend(User currUser, User friendToAdd) throws IOException, ClassNotFoundException {
-        Graph temp = rg.readobject();
-        if(temp.accounts.containsKey(currUser.getUsername()) && temp.accounts.containsKey(friendToAdd.getUsername()))
-        {
-            currUser.friends.add(friendToAdd);
-            friendToAdd.friends.add(currUser);
-            temp.accounts.put(currUser.getUsername(), currUser);
-            temp.accounts.put(friendToAdd.getUsername(), friendToAdd);
-            user_graph = temp;
-            wg.writeGraph(user_graph);
-        }
-    }
-
-    public void removeFriend(User currUser, User friendToRemove) throws IOException, ClassNotFoundException {
-        Graph user_graph = rg.readobject();
-        if(user_graph.accounts.containsKey(currUser.getUsername()))
-        {
-            currUser.friends.remove(friendToRemove);
-            user_graph.accounts.put(currUser.getUsername(), currUser);
-            wg.writeGraph(user_graph);
-        }
-    }
-
     public void removeUser(User userToBeRemoved) throws IOException, ClassNotFoundException {
         Graph user_graph = rg.readobject();
         user_graph.accounts.remove(userToBeRemoved.getUsername());
@@ -69,13 +46,13 @@ public class AccountManager{
         wg.writeGraph(user_graph);
     }
 
-    public void blockUser(User user1, User user2) throws IOException, ClassNotFoundException {
-        Graph user_graph = rg.readobject();
-        user_graph.getUsers();
-        this.removeFriend(user1, user2);
-        user1.addblocked(user2);
-        wg.writeGraph(user_graph);
-    }
+//    public void blockUser(User user1, User user2) throws IOException, ClassNotFoundException {
+//        Graph user_graph = rg.readobject();
+//        user_graph.getUsers();
+//        this.removeFriend(user1, user2);
+//        user1.addblocked(user2);
+//        wg.writeGraph(user_graph);
+//    }
 
     public Graph getGraph() {
         return user_graph;

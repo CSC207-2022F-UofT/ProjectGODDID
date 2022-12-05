@@ -7,6 +7,13 @@ import java.io.*;
 
 public class ReadGraph implements Serializable, ReadGraphInt {
 
+    /**
+     * @return Graph
+     */
+
+    /**
+     * returns the saved graph containing the users by reading from the ser file
+     */
     @Override
     public Graph readobject() {
         Graph users = new Graph();

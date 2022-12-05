@@ -48,14 +48,28 @@ public class WelcomePage extends JFrame implements ActionListener {
     ReadGraph rg = new ReadGraph();
 
 
+    /**
+     * @param user
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public WelcomePage(User user) throws IOException, ClassNotFoundException {
         user1 = user;
         chat = new ChatManager(user1);
+
+        /**
+         * Adding a button for friend recommendation based on highest mutual friends
+         */
+
         recommendButton = new JButton();
         recommendButton.setBounds(150, 35, 200, 50);
         recommendButton.addActionListener(this);
         recommendButton.setText("Recommend Friend");
         recommendButton.setFocusable(false);
+
+        /**
+         * Adding a button for random friend recommendation
+         */
 
         recommendRandButton = new JButton();
         recommendRandButton.setBounds(350, 35, 200, 50);
@@ -63,21 +77,32 @@ public class WelcomePage extends JFrame implements ActionListener {
         recommendRandButton.setText("Recommend Random");
         recommendRandButton.setFocusable(false);
 
+        /**
+         * Adding a button to see active chats between the user and his/ her friends
+         */
         activeButton = new JButton();
         activeButton.setBounds(250, 175, 100, 50);
         activeButton.addActionListener(this);
         activeButton.setText("Active Chat");
         activeButton.setFocusable(false);
 
+        /**
+         * Welcome label for greeting the user and displaying the user's points
+         */
         welcomeLabel.setBounds(0,0,400,35);
         welcomeLabel.setFont(new Font(null,Font.PLAIN,20));
         Integer points = (Integer) user1.getPoints();
         welcomeLabel.setText("Hello "+ user.getUsername() + ", you have " + points.toString() + " points");
 
+        /**
+         * Match label for displaying who the user is matched with
+         */
         matchLabel.setBounds(200,450,400,35);
         matchLabel.setFont(new Font(null,Font.PLAIN,20));
 
-
+        /**
+         * Friends label for displaying the recommended friend
+         */
         friendsLabel.setBounds(100,500,400,35);
         friendsLabel.setFont(new Font(null,Font.PLAIN,20));
 
@@ -88,31 +113,49 @@ public class WelcomePage extends JFrame implements ActionListener {
         frame.setLayout(null);
         frame.setVisible(true);
 
+        /**
+         * Match button to get matched with a friend for chat
+         */
         match.setBounds(150, 100, 100, 50);
         match.addActionListener(this);
         match.setText("Match");
         match.setFocusable(false);
 
+        /**
+         * Start chat button for starting the chat between the user and matched friend
+         */
         startchat.setBounds(250, 100, 100, 50);
         startchat.addActionListener(this);
         startchat.setText("Start Chat");
         startchat.setFocusable(false);
 
+        /**
+         * Skip chat button to get matched with an another friend
+         */
         skipchat.setBounds(350, 100, 100, 50);
         skipchat.addActionListener(this);
         skipchat.setText("Skip");
         skipchat.setFocusable(false);
 
+        /**
+         * Friends button to see the list of friends (if there isn't ongoing chat between them)
+         */
         friends.setBounds(250, 250, 100, 50);
         friends.addActionListener(this);
         friends.setText("Friends");
         friends.setFocusable(false);
 
+        /**
+         * Add friend button to add a friend based on username
+         */
         addfriend.setBounds(210, 400,100,25);
         addfriend.setFocusable(false);
         addfriend.addActionListener(this);
         addfriend.setText("Add");
 
+        /**
+         * Remove friend button to remove a friend based on username
+         */
         removefriend.setBounds(310,400,100,25);
         removefriend.setFocusable(false);
         removefriend.addActionListener(this);
@@ -138,6 +181,9 @@ public class WelcomePage extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == friends){
@@ -180,6 +226,9 @@ public class WelcomePage extends JFrame implements ActionListener {
             match.setEnabled(false);
         }
 
+        /**
+         * Skip chat button calls the points system for deducting points
+         */
         if (e.getSource() == skipchat){
             ArrayList<User> users_involved = new ArrayList<>();
             users_involved.add(user1);
@@ -207,6 +256,9 @@ public class WelcomePage extends JFrame implements ActionListener {
             ActiveChatsPage activechats = new ActiveChatsPage(user1);
         }
 
+        /**
+         * Calls the friend recommender controller for friend recommendation
+         */
         if (e.getSource() == recommendButton) {
             FriendRecommenderController rec_friend = new FriendRecommenderController();
             String recommended_friend;
@@ -222,6 +274,9 @@ public class WelcomePage extends JFrame implements ActionListener {
 
         }
 
+        /**
+         * Calls the Random recommend Uı and Displays a new page
+         */
         if (e.getSource() == recommendRandButton) {
             new RandomRecommendUI(user1);
         }

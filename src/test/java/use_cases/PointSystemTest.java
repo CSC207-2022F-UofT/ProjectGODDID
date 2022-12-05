@@ -1,4 +1,4 @@
-package useCases;
+package use_cases;
 
 import EventPackage.Event;
 import PointSystem.PointSystemR;
@@ -8,6 +8,7 @@ import entities.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import useCases.AccountManager;
 
 import java.io.IOException;
 import java.util.ArrayList;

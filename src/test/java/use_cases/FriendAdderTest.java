@@ -1,10 +1,12 @@
-package useCases;
+package use_cases;
 
 import entities.Graph;
 import entities.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import useCases.AccountManager;
+import useCases.FriendAdder;
 
 import java.io.IOException;
 
