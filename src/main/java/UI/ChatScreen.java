@@ -372,8 +372,8 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
 // Two user tests that can be run concurrently to test the GUI from each users perspective
 class testUser1{
     public static void main(String[] args) throws IOException, InterruptedException {
-        User user1 = new User("Manit", "Casual");
-        User user2 = new User("Arian", "Casual");
+        User user1 = new User("Manit");
+        User user2 = new User("Arian");
 
         String s1 = "src/" + user1.getUsername() + user2.getUsername() + ".txt";
         String s2 = "src/" + user2.getUsername() + user1.getUsername() + ".txt";
@@ -394,8 +394,8 @@ class testUser1{
 
 class testUser2 {
     public static void main(String[] args) throws IOException, InterruptedException {
-        User user1 = new User("Arian", "Casual");
-        User user2 = new User("Manit", "Casual");
+        User user1 = new User("Arian");
+        User user2 = new User("Manit");
 
         String s1 = "src/" + user1.getUsername() + user2.getUsername() + ".txt";
         String s2 = "src/" + user2.getUsername() + user1.getUsername() + ".txt";

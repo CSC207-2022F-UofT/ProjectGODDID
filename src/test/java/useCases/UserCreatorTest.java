@@ -30,13 +30,11 @@ public class UserCreatorTest {
 
     @Test
     void addUser() throws IOException, ClassNotFoundException {
-        User user1 = new User("alpha","casual");
-        User user2 = new User("beta", "premium");
         AccountManager am = new AccountManager();
         AccountManager.user_graph.accounts.clear();
         am.addUser(user1);
         am.addUser(user2);
-        am.addUser("delta", "asd123","casual");
+        am.addUser("delta", "asd123");
         assert(am.getGraph().getUsers().size() == 3);
     }
 

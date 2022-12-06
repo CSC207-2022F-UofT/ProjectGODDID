@@ -54,7 +54,7 @@ public class Report {
     some generic hatewords into a List<String> so it can itterated through in the report checkreport function. */
     public ArrayList<String> hateWords() throws FileNotFoundException {
         ArrayList<String> hate_words = new ArrayList<String>();
-        File f = new File("keywords.txt");
+        File f = new File("src/keywords.txt");
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()){
             String data = sc.nextLine();
@@ -136,9 +136,8 @@ public class Report {
                 boolean bool = checkOffensive(s);
                 if (bool) {
                     AccountManager manager = new AccountManager();
-                    FriendRemover remover = new FriendRemover();
-                    remover.remove(this.user1, this.user2);
-                    manager.blockUser(this.user1, this.user2);
+                    FriendFacade remover = new FriendFacade();
+                    remover.removeFriend(this.user1, this.user2);
                     this.user2.addStrike();  //strike added to user 2 for vulgar language
                     boolean is_ban = checkBan(this.user2);
                     if (is_ban){

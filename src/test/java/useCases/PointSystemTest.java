@@ -1,4 +1,4 @@
-package use_cases;
+package useCases;
 
 import EventPackage.Event;
 import PointSystem.PointSystemR;
@@ -8,7 +8,6 @@ import entities.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import useCases.AccountManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,31 +28,31 @@ class PointSystemTest {
     void setUp() throws IOException, ClassNotFoundException {
         graph = new Graph();
 
-        curUser = new User("", "");
+        curUser = new User("");
         curUser.setUsername("Alpha");
         curUser.setAccountType("casual");
         accountManager.addUser(curUser);
         //accountManager.addUser("Alpha", "123","mail","Casual");
 
-        user2 = new User("", "");
+        user2 = new User("");
         user2.setUsername("Beta");
         user2.setAccountType("casual");
         accountManager.addUser(user2);
         //accountManager.addUser("Beta", "123","mail","Casual");
 
-        user3 = new User("", "");
+        user3 = new User("");
         user3.setUsername("Charlie");
         user3.setAccountType("casual");
         accountManager.addUser(user3);
         //accountManager.addUser("Charlie", "123","mail","Casual");
 
-        user4 = new User("", "");
+        user4 = new User("");
         user4.setUsername("Delta");
         user4.setAccountType("casual");
         accountManager.addUser(user4);
         //accountManager.addUser("Delta", "123","mail","Casual");
 
-        user5 = new User("", "");
+        user5 = new User("");
         user5.setUsername("Echo");
         user5.setAccountType("casual");
         accountManager.addUser(user5);

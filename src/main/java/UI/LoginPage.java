@@ -75,7 +75,7 @@ public class LoginPage implements ActionListener{
 
             try {
                 System.out.println(rg.readobject().accounts.keySet());
-                adder.addUser(userIDField.getText(),String.valueOf(userPasswordField.getPassword()), "casual");
+                adder.addUser(userIDField.getText(),String.valueOf(userPasswordField.getPassword()));
                 System.out.println(adder.getGraph().accounts.keySet());
                 System.out.println(rg.readobject().accounts.keySet());
                 System.out.println(" ");
