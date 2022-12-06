@@ -97,11 +97,11 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
 
         // TODO: Maybe add back button later? (Check back w/ mert when he finishes home screen)
         // Button to return to HomeScreen window
-//        back = new JButton();
-//        back.addActionListener(this);
-//        back.setText("Exit"); // maybe add return icon instead
-//        back.setFont(buttonFont);
-//        back.setBounds(0, 0, 20, 20);
+        back = new JButton();
+        back.addActionListener(this);
+        back.setText("Exit"); // maybe add return icon instead
+        back.setFont(buttonFont);
+        back.setBounds(0, 0, 20, 20);
 
         // Panels below to separate the code into 3 sections:
         // 1: Panel to contain the buttons and the label in the menu bar
@@ -155,7 +155,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e){
-        // Will start a new tictactoe game with the matched user if the game button is clicked
+        // Will start a new connect 4 game with the matched user if the game button is clicked
         if (e.getSource()==newGame){
             new GameUI(mainUser, matchedUser);
 

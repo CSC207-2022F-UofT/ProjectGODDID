@@ -5,6 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
+import Databases.ReadGraph;
+import Databases.WriteGraph;
+import Interfaces.ReadGraphInt;
+import Interfaces.WriteGraphInt;
+import entities.Graph;
 import entities.User;
 
 
@@ -116,8 +121,8 @@ public class Report {
     /* Helper method to check is the user who is reported has less than 3 strikes. If the user has 3 strikes then
     user is banned */
     public boolean checkBan(User user1){
-        int number_stikes = user1.getNum_strikes();
-        return number_stikes == 3;
+        int number_strikes = user1.getNum_strikes();
+        return number_strikes == 3;
 
     }
 
@@ -126,6 +131,9 @@ public class Report {
      offensive or not. If any message is ofensive then strike is added to the matched user, he/she is blocked and
      removed as friend and if there are more than 3 strikes then matched user is removed from graph (banned).*/
     public void checkReport() throws IOException, ClassNotFoundException {
+        ReadGraphInt read_graph = new ReadGraph();
+        WriteGraphInt write_graph = new WriteGraph();
+
         ArrayList<String> all_messages = readFiles();
         int index = all_messages.size() - 1;
         while (index >= 0) {
@@ -139,6 +147,11 @@ public class Report {
                     FriendFacade remover = new FriendFacade();
                     remover.removeFriend(this.user1, this.user2);
                     this.user2.addStrike();  //strike added to user 2 for vulgar language
+
+                    Graph user_graph = read_graph.readobject();
+                    user_graph.accounts.put(this.user2.getUsername(), this.user2);
+                    write_graph.writeGraph(user_graph);
+
                     boolean is_ban = checkBan(this.user2);
                     if (is_ban){
                         // user2 is banned//

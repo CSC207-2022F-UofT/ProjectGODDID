@@ -84,7 +84,7 @@ public class FriendsPage extends JFrame implements ActionListener {
             if (e.getSource() == buttons[i]){
                 String friend_name = buttons[i].getText();
                 for (User friend : user.getFriends()){
-                    if (friend_name.equals(friend.getUsername())){
+                    if (friend_name.equals(friend.getUsername()) && friend.getPoints() >= 20){
 
                         /**
                          * If a friend is chosen point system is called to deduct points for choosing a match

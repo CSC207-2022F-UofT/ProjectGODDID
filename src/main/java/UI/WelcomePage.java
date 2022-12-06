@@ -229,7 +229,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         /**
          * Skip chat button calls the points system for deducting points
          */
-        if (e.getSource() == skipchat){
+        if (e.getSource() == skipchat && user1.getPoints() >= 10){
             ArrayList<User> users_involved = new ArrayList<>();
             users_involved.add(user1);
             Event skip_friend = new Event("SpendSkip", users_involved);
@@ -253,7 +253,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == activeButton) {
-            ActiveChatsPage activechats = new ActiveChatsPage(user1);
+            new ActiveChatsPage(user1);
         }
 
         /**

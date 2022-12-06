@@ -40,8 +40,7 @@ public class FriendRemover {
                 friends2.remove(i);
             }
         }
-//        friends1.remove(friend);
-//        friends2.remove(currUser);
+
         currUser.setFriends(friends1);
         friend.setFriends(friends2);
         users.accounts.put(currUser.getUsername(), currUser);
