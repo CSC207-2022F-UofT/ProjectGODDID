@@ -168,8 +168,10 @@ public class Report {
                     AccountManager manager = new AccountManager();
                     Graph user_graph = read_graph.readobject();
                     FriendFacade remover = new FriendFacade();
-                    this.user2 = user_graph.accounts.get(this.user2.getUsername());
-                    remover.removeFriend(this.user1, this.user2);
+                    ReadGraph rg = new ReadGraph();
+                    Graph user_graph1 = rg.readobject();
+                    remover.removeFriend(this.user1, user_graph.accounts.get(this.user2.getUsername()));
+                    remover.removeFriend(this.user2, this.user1);
                     this.user2.addStrike();  //strike added to user 2 for vulgar language
 
 

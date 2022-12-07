@@ -52,7 +52,7 @@ public class ChatManagerController {
      *
      * @return
      */
-    public User getUser(){
+    public User getMatch(){
         return manager.getMatchedUser();
     }
 

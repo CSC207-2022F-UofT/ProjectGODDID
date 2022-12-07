@@ -35,6 +35,7 @@ public class FriendsPage extends JFrame implements ActionListener {
 
         chat = new ChatManager(user);
 
+
         buttons = new JButton[user.getFriends().size()];
 
 

@@ -1,4 +1,4 @@
-package game_tests;
+package controllers;
 
 import controllers.GameController;
 import entities.User;

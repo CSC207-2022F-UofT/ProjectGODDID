@@ -223,7 +223,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 
         if (e.getSource() == match){
             chat_con.randomize();
-            matchLabel.setText("Matched with: " + chat_con.getUser().getUsername());
+            matchLabel.setText("Matched with: " + chat_con.getMatch().getUsername());
             match.setEnabled(false);
         }
 
@@ -241,8 +241,8 @@ public class WelcomePage extends JFrame implements ActionListener {
             }
             Integer points = (Integer) user1.getPoints();
             welcomeLabel.setText("Hello "+ user1.getUsername() + ", you have " + points.toString() + " points");
-            chat_con.makeMatch("Skip", chat_con.getUser());
-            matchLabel.setText("Matched with: " + chat_con.getUser().getUsername());
+            chat_con.makeMatch("Skip", chat_con.getMatch());
+            matchLabel.setText("Matched with: " + chat_con.getMatch().getUsername());
         }
 
         if (e.getSource() == startchat){

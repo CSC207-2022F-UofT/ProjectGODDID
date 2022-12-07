@@ -39,6 +39,7 @@ public class ReportTest {
         assert(report.hateWords().size() == 60);
         assert(report.convertToListOfStrings("Bob: ").contains(":"));
         assert(report.checkOffensive("$hithead"));
+        assert(!user2.getFriends().contains(user1));
         assert(!user1.getFriends().contains(user2));
         assert(user2.getNum_strikes() == 1);
     }

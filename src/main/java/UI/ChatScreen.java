@@ -1,8 +1,10 @@
 package UI;
 
+import Databases.ReadGraph;
 import EventPackage.Event;
 import Interfaces.ChatScreenInt;
 import controllers.ReportController;
+import entities.Graph;
 import entities.User;
 import useCases.Report;
 import PointSystem.*;
@@ -201,7 +203,9 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
             if (answer == 0) {
                 ReportController report = new ReportController();
                 try {
-                    report.reportController(mainUser, matchedUser);
+                    ReadGraph rg = new ReadGraph();
+                    Graph user_graph = rg.readobject();
+                    report.reportController(mainUser, user_graph.accounts.get(matchedUser.getUsername()));
                 } catch (IOException | ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
