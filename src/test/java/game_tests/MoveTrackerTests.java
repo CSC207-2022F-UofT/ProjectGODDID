@@ -13,19 +13,19 @@ import java.util.Arrays;
 import static org.junit.Assert.assertArrayEquals;
 
 public class MoveTrackerTests {
-    @Before
-    public void setUp() {
-    }
 
-    @After
-    public void tearDown() {
-    }
 
+    /**
+     * Test whether the board is updated after O makes a move
+     */
     @Test
     public void testOMove() {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
         ArrayList<String> row = new ArrayList<String>();
 
+        /**
+         * Board before the move
+         */
         for (int i = 0; i < 5; i++){
             row = new ArrayList<String>(Arrays.asList("", "", "", "", "", "", ""));
             board.add(row);
@@ -38,6 +38,9 @@ public class MoveTrackerTests {
 
         ArrayList<ArrayList<String>> expected = new ArrayList<>();
 
+        /**
+         * Board after the move
+         */
         for (int i = 0; i < 5; i++){
             row = new ArrayList<String>(Arrays.asList("", "", "", "", "", "", ""));
             expected.add(row);
@@ -52,11 +55,17 @@ public class MoveTrackerTests {
 
     }
 
+    /**
+     * Test whether the board is updated after X makes a move
+     */
     @Test
     public void testXMove() {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
         ArrayList<String> row = new ArrayList<String>();
 
+        /**
+         * Board before the move
+         */
         for (int i = 0; i < 4; i++){
             row = new ArrayList<String>(Arrays.asList("", "", "", "", "", "", ""));
             board.add(row);
@@ -72,6 +81,9 @@ public class MoveTrackerTests {
 
         ArrayList<ArrayList<String>> expected = new ArrayList<>();
 
+        /**
+         * Board after the move
+         */
         for (int i = 0; i < 4; i++){
             row = new ArrayList<String>(Arrays.asList("", "", "", "", "", "", ""));
             expected.add(row);
