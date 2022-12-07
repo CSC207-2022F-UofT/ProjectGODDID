@@ -60,7 +60,7 @@ The chat system allows two users to interact with one another and uses a timer t
 
 
 
-### Malhar - Point System
+### Malhar - Point System and Event Class
 Worked on the Point System for the user’s. Points can be used to skip chat. We are yet implement extend chat, a feature that users can use to extend the chat after the 20 line limit is reached. Also created an event log that helps keep track of what events have occurred.
 
 #### Clean architecture and use of design patterns
