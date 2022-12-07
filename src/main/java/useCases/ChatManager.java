@@ -74,6 +74,7 @@ public class ChatManager {
 
     /**
      * Getter for matchedUser instance attribute.
+     *
      * @return the matched user (matchedUser).
      */
     public User getMatchedUser(){
@@ -82,8 +83,10 @@ public class ChatManager {
 
 
     /**
+     * Method to open the chat's GUI.
      * Creates a new ChatScreen, and text file to store messages, so the users can chat with each other.
-     * @throws IOException if createNewFile fails
+     *
+     * @throws IOException if createNewFile fails.
      */
     public void openChat() throws IOException {
         String s1 = "src/" + this.mainUser.getUsername() + this.matchedUser.getUsername() + ".txt";

@@ -6,14 +6,14 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- *
+ * Class to create a new text file which contains the chat between the main user and the matched user.
  */
 public class CreateChatText implements CreateChatInt {
     /**
      *
-     * @param name1
-     * @param name2
-     * @throws IOException
+     * @param name1 the username of the main user (who is accessing the UI)
+     * @param name2 the username of the user they have been matched with
+     * @throws IOException if creating the new file fails
      */
     @Override
     public void newChat(String name1, String name2) throws IOException {

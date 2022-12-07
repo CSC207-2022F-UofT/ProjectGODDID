@@ -159,7 +159,11 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
         readFromTextFile();
     }
 
-    // TODO: documentation
+    /**
+     * Method to set whether the GUI is visible or not visible
+     *
+     * @param setting the desired visibility setting of the GUI window.
+     */
     @Override
     public void setVisible(boolean setting){
         frame.setVisible(setting);
