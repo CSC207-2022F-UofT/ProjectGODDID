@@ -9,12 +9,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,7 +31,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
 
     // Declaring all buttons and text fields and the timer to be accessed both by actionPerformed and constructor
     JFrame frame;
-    JButton newGame; JButton send; JButton report; JButton back;
+    JButton newGame; JButton send; JButton report;
     JTextField sendMessage; JTextArea displayed;
     Timer timer = new Timer(500, this);
 
@@ -114,14 +110,6 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
         report.setFocusable(false);
         report.setFont(buttonFont);
 
-        // TODO: Maybe add back button later? (Check back w/ mert when he finishes home screen)
-        // Button to return to HomeScreen window
-//        back = new JButton();
-//        back.addActionListener(this);
-//        back.setText("Exit"); // maybe add return icon instead
-//        back.setFont(buttonFont);
-//        back.setBounds(0, 0, 20, 20);
-
         // Panels below to separate the code into 3 sections:
         // 1: Panel to contain the buttons and the label in the menu bar
         JPanel topPanel = new JPanel();
@@ -160,7 +148,6 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
         topPanel.add(label);
         topPanel.add(newGame);
         topPanel.add(report);
-//        topPanel.add(back);
         frame.add(topPanel);
         textPanel.add(scrollPane, BorderLayout.CENTER);
         frame.add(textPanel);
@@ -190,7 +177,6 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
         // Will start a new ticktacktoe game with the matched user if the game button is clicked
         if (e.getSource()==newGame){
             new GameUI(mainUser, matchedUser);
-
         }
 
         // Will send the typed message in the text field if the user clicks send or presses enter
@@ -229,15 +215,6 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
                 }
             }
 
-        }
-
-        // Will return to the home screen
-        else if (e.getSource()==back) {
-            try {
-                new WelcomePage(mainUser);
-            } catch (IOException | ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
         }
 
         // Used by the timer to keep reading from the text file
@@ -327,21 +304,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
             }
         }
 
-        // Supposed to prompt the users to choose if they want to extend the chat or not
-        // TODO: Add later?
         if ((list_of_messages.size() - (numExtended * 20)) >= 20){
-//            ArrayList<User> main = new ArrayList<>();
-//            int answer = JOptionPane.showConfirmDialog(null, "Do you want to extend this chat" +
-//                            " (use 20 points)? You have " + mainUser.getPoints() + " points.", "",
-//                    JOptionPane.YES_NO_OPTION);
-//            if (answer == 0){
-//                Event e = new Event("SpendExtend", main);
-//                PointSystemS ps = new PointSystemS();
-//                e.execute(ps);
-//                numExtended += 1;
-//            } else {
-//                endChat();
-//            }
             endChat();
         }
         return list_of_messages.size();

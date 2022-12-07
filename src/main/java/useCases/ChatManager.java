@@ -1,12 +1,10 @@
 package useCases;
 
 import Databases.CreateChatText;
-import Interfaces.ChatManagerInt;
 import Interfaces.ChatScreenInt;
 import Interfaces.CreateChatInt;
 import UI.ChatScreen;
 import entities.User;
-import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
@@ -19,7 +17,7 @@ import java.util.Random;
  * @version 1.0
  * @since November 20th, 2022
  */
-public class ChatManager implements ChatManagerInt {
+public class ChatManager {
     User mainUser;
     User matchedUser;
 
@@ -39,7 +37,6 @@ public class ChatManager implements ChatManagerInt {
      * Method to randomly select matchedUser.
      * This method selects a random user from the mainUser's friend list and sets matchedUser to the result.
      */
-    @Override
     public void randomMatch(){
         if (mainUser.getFriends().size()>= 1) {
             Random rg = new Random();
@@ -55,7 +52,6 @@ public class ChatManager implements ChatManagerInt {
      *
      * @param otherUser the user that the mainUser does not want to be matched with.
      */
-    @Override
     public void skipMatch(User otherUser){
         User tempUser = otherUser;
 
@@ -72,7 +68,6 @@ public class ChatManager implements ChatManagerInt {
      *
      * @param otherUser the user that the mainUser has chosen to be matched with.
      */
-    @Override
     public void choseMatch(User otherUser){
         this.matchedUser = otherUser;
     }
@@ -81,7 +76,6 @@ public class ChatManager implements ChatManagerInt {
      * Getter for matchedUser instance attribute.
      * @return the matched user (matchedUser).
      */
-    @Override
     public User getMatchedUser(){
         return this.matchedUser;
     }
@@ -91,7 +85,6 @@ public class ChatManager implements ChatManagerInt {
      * Creates a new ChatScreen, and text file to store messages, so the users can chat with each other.
      * @throws IOException if createNewFile fails
      */
-    @Override
     public void openChat() throws IOException {
         String s1 = "src/" + this.mainUser.getUsername() + this.matchedUser.getUsername() + ".txt";
         String s2 = "src/" + this.matchedUser.getUsername() + this.mainUser.getUsername() + ".txt";

@@ -5,7 +5,16 @@ import Interfaces.CreateChatInt;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ *
+ */
 public class CreateChatText implements CreateChatInt {
+    /**
+     *
+     * @param name1
+     * @param name2
+     * @throws IOException
+     */
     @Override
     public void newChat(String name1, String name2) throws IOException {
         if (!new File(name1).exists() && !new File(name2).exists()){
