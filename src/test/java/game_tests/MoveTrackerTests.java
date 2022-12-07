@@ -3,8 +3,10 @@ package game_tests;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import useCases.MoveTracker;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +21,7 @@ public class MoveTrackerTests {
     public void tearDown() {
     }
 
-    @Test(timeout = 500)
+    @Test
     public void testOMove() {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
         ArrayList<String> row = new ArrayList<String>();
@@ -50,7 +52,7 @@ public class MoveTrackerTests {
 
     }
 
-    @Test(timeout = 500)
+    @Test
     public void testXMove() {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
         ArrayList<String> row = new ArrayList<String>();

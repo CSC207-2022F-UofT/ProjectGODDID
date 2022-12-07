@@ -1,6 +1,5 @@
 package useCases;
 
-import entities.Graph;
 import entities.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -33,19 +31,19 @@ public class FriendAdderTest {
      */
     @BeforeEach
     void setUp() throws IOException, ClassNotFoundException {
-        user1 = new User("Alpha", "");
+        user1 = new User("Alpha");
         accountManager.addUser(user1);
 
-        user2 = new User("Beta", "");
+        user2 = new User("Beta");
         accountManager.addUser(user2);
 
-        user3 = new User("Charlie", "");
+        user3 = new User("Charlie");
         accountManager.addUser(user3);
 
-        user4 = new User("Delta", "");
+        user4 = new User("Delta");
         accountManager.addUser(user4);
 
-        user5 = new User("Echo", "");
+        user5 = new User("Echo");
         accountManager.addUser(user5);
 
     }

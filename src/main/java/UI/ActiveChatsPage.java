@@ -1,7 +1,5 @@
 package UI;
 
-import EventPackage.Event;
-import PointSystem.PointSystemS;
 import entities.User;
 import useCases.ChatManager;
 
@@ -12,35 +10,29 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 
-public class FriendsPage extends JFrame implements ActionListener {
-
-    JButton[] buttons;
+public class ActiveChatsPage extends JFrame implements ActionListener {
+    ArrayList<JButton> buttons;
     User user;
 
-    ChatManager chat;
-
-    PointSystemS ps = new PointSystemS();
-
     JFrame frame = new JFrame();
+
+    ChatManager chat;
 
 
     /**
      * @param user1
      */
-    public FriendsPage(User user1) {
+    public ActiveChatsPage(User user1) {
 
         user = user1;
 
-        chat = new ChatManager(user);
-
-        buttons = new JButton[user.getFriends().size()];
-
+        buttons = new ArrayList<>();
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(500, 500);
         frame.setLayout(new GridLayout(user1.getFriends().size(), 1));
+
 
         /**
          * Adding a button in the gridlayout for each of the friends
@@ -55,13 +47,13 @@ public class FriendsPage extends JFrame implements ActionListener {
             String s2 = "src/" + user.getFriends().get(i).getUsername() + user.getUsername() + ".txt";
 
             /**
-             * Adding the button only if there isn't an ongoing chat between the users
-             * (file not existing between the two users means there isn't an ongoing chat)
+             * Adding the button only if there is an ongoing chat (existing file between the two users means the chat is
+             * ongoing
              */
 
-            if (!new File(s2).exists() && !new File(s1).exists()){
+            if (new File(s2).exists() || new File(s1).exists()){
                 frame.add(button);
-                buttons[i] = button;
+                buttons.add(button);
             }
 
         }
@@ -75,33 +67,18 @@ public class FriendsPage extends JFrame implements ActionListener {
      */
 
     /**
-     *
+     * If one of the buttons are pressed the chat screen between the user and the chosen friends
+     * is displayed and the active chats page
+     * is disposed
      */
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (int i = 0; i < buttons.length; i++){
-            if (e.getSource() == buttons[i]){
-                String friend_name = buttons[i].getText();
+        for (int i = 0; i < buttons.size(); i++){
+            if (e.getSource() == buttons.get(i)){
+                String friend_name = buttons.get(i).getText();
                 for (User friend : user.getFriends()){
-                    if (friend_name.equals(friend.getUsername()) && friend.getPoints() >= 20){
-
-                        /**
-                         * If a friend is chosen point system is called to deduct points for choosing a match
-                         */
-                        ArrayList<User> users_involved = new ArrayList<>();
-                        users_involved.add(user);
-                        Event choose_friend = new Event("SpendChoose", users_involved);
-                        try {
-                            choose_friend.execute(ps);
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        /**
-                         * After a friend is chosen chat starts between the user and the chosen friend and chat screen
-                         * is displayed
-                         * the friends page is disposed
-                         */
+                    if (friend_name.equals(friend.getUsername())){
                         frame.dispose();
                         chat = new ChatManager(user);
                         chat.choseMatch(friend);
@@ -120,9 +97,3 @@ public class FriendsPage extends JFrame implements ActionListener {
     }
 
 }
-
-
-
-
-
-

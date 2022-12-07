@@ -5,8 +5,13 @@ import entities.User;
 import org.junit.*;
 import useCases.GameManager;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import static org.junit.Assert.assertArrayEquals;
@@ -14,8 +19,8 @@ import static org.junit.Assert.assertEquals;
 
 public class GameControllerTests {
 
-    @Test(timeout = 500)
-    public void testXWinsTextfield() {
+    @Test
+    public void testXWinsTextfield() throws IOException {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
 
         ArrayList<String> row = new ArrayList<String>();
@@ -24,8 +29,8 @@ public class GameControllerTests {
 
         JButton[][] buttons = new JButton[6][7];
 
-        User user1 = new User("Mert", "casual");
-        User user2 = new User("Manit", "casual");
+        User user1 = new User("Mert");
+        User user2 = new User("Manit");
 
         for (int i = 0; i < 4; i++){
             row = new ArrayList<>(Arrays.asList("", "", "", "", "", "", ""));
@@ -60,7 +65,7 @@ public class GameControllerTests {
     }
 
     @Test
-    public void testOWinsTextfield() {
+    public void testOWinsTextfield() throws IOException {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
 
         ArrayList<String> row = new ArrayList<String>();
@@ -69,8 +74,8 @@ public class GameControllerTests {
 
         JButton[][] buttons = new JButton[6][7];
 
-        User user1 = new User("Mert", "casual");
-        User user2 = new User("Manit", "casual");
+        User user1 = new User("Mert");
+        User user2 = new User("Manit");
 
         for (int i = 0; i < 4; i++){
             row = new ArrayList<>(Arrays.asList("", "", "", "", "", "", ""));

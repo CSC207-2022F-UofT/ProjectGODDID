@@ -1,35 +1,19 @@
 package Databases;
 
 import entities.Graph;
-import useCases.ReadGraphInt;
+import Interfaces.ReadGraphInt;
 
 import java.io.*;
 
 public class ReadGraph implements Serializable, ReadGraphInt {
 
-//    public Graph readobject() throws IOException, ClassNotFoundException {
-//        Graph users = new Graph();
-//        try {
-//            FileInputStream fis = new FileInputStream("Users.ser");
-//            ObjectInputStream ois = new ObjectInputStream(fis);
-//
-//            users = (Graph) ois.readObject();
-//
-//            ois.close();
-//            fis.close();
-//            return users;
-//        } catch (EOFException e){
-//            //users = new Graph();
-//            return users;
-//        }
-//
-//
-//        //return users;
-//
-//
-//
-//    }
+    /**
+     * @return Graph
+     */
 
+    /**
+     * returns the saved graph containing the users by reading from the ser file
+     */
     @Override
     public Graph readobject() {
         Graph users = new Graph();

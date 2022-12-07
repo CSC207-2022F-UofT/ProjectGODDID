@@ -19,17 +19,25 @@ public class FriendRecommender {
     Given a user, randomly select three of their friends to recommend back to the current user.
     */
 
-    public ArrayList<String> getRecommendRandom(User user) {
-        if (user.getFriends().size() >= 1) {
-            ArrayList<String> recs = new ArrayList<>();
-            for (int i = 0; i < 3; i++) {
-                int randomNum = (int) (Math.random() * user.getFriends().size());
-                recs.add(user.getFriends().get(randomNum).getUsername());
+    public String getRecommendRandom(User user, User curr) {
+        if (user.getFriends().size() >= 2) {
+            String rec;
+
+            int randomNum = (int) (Math.random() * user.getFriends().size());
+            String random_friend = user.getFriends().get(randomNum).getUsername();
+
+            if (random_friend.equals(curr.getUsername())){
+                return "Try again";
             }
 
-            return recs;
+            random_friend = user.getFriends().get(randomNum).getUsername();
+
+            rec = random_friend;
+
+
+            return rec;
         }
-        return new ArrayList<>();
+        return "Not enough friends";
     }
 
 
@@ -56,6 +64,15 @@ public class FriendRecommender {
                 }
             }
         }
+
+        for (String friend : friends.keySet()){
+            for (User user_friend : user.getFriends()){
+                if (friend.equals(user_friend.getUsername())){
+                    friends.put(friend, 0);
+                }
+            }
+        }
+
         int currMax = 0;
         for (String a : friends.keySet()) {
             if (friends.get(a) >= currMax) {

@@ -4,8 +4,8 @@ import Databases.ReadGraph;
 import Databases.WriteGraph;
 import entities.Graph;
 import entities.User;
-import useCases.ReadGraphInt;
-import useCases.WriteGraphInt;
+import Interfaces.ReadGraphInt;
+import Interfaces.WriteGraphInt;
 
 import java.io.IOException;
 import java.util.Hashtable;

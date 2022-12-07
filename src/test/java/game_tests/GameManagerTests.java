@@ -3,6 +3,10 @@ package game_tests;
 import org.junit.*;
 import useCases.GameManager;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import static org.junit.Assert.assertArrayEquals;
@@ -10,7 +14,7 @@ import static org.junit.Assert.assertArrayEquals;
 public class GameManagerTests {
 
 
-    @Test(timeout = 500)
+    @Test
     public void testHorizontalWinX() {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
         ArrayList<String> row = new ArrayList<String>();
@@ -36,7 +40,7 @@ public class GameManagerTests {
 
     }
 
-    @Test(timeout = 500)
+    @Test
     public void testVerticalWinO() {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
         ArrayList<String> row = new ArrayList<String>();
@@ -62,7 +66,7 @@ public class GameManagerTests {
 
     }
 
-    @Test(timeout = 500)
+    @Test
     public void testLeftDiagonalWinX() {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
         ArrayList<String> row = new ArrayList<String>();
@@ -94,7 +98,7 @@ public class GameManagerTests {
 
     }
 
-    @Test(timeout = 500)
+    @Test
     public void testRightDiagonalWinO() {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
         ArrayList<String> row = new ArrayList<String>();
