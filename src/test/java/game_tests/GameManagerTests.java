@@ -4,12 +4,11 @@ import org.junit.*;
 import useCases.GameManager;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import static org.junit.Assert.assertArrayEquals;
+
 
 public class GameManagerTests {
 

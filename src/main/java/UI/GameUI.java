@@ -15,8 +15,8 @@ import javax.swing.*;
 public class GameUI extends JFrame implements ActionListener {
 
     JFrame frame = new JFrame();
-    JPanel title_panel = new JPanel();
-    JPanel button_panel = new JPanel();
+    JPanel titlePanel = new JPanel();
+    JPanel buttonPanel = new JPanel();
     JLabel textfield = new JLabel();
     JButton[][] buttons = new JButton[6][7];
     User player1;
@@ -42,7 +42,7 @@ public class GameUI extends JFrame implements ActionListener {
         player2 = user2;
 
         /**
-         * A frame is created for the Tic-Tac-Toe board
+         * A frame is created for the Connect 4 board
          * The frame is closed when the user closes the window
          */
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -61,14 +61,14 @@ public class GameUI extends JFrame implements ActionListener {
         textfield.setText("Connect 4");
         textfield.setOpaque(true);
 
-        title_panel.setLayout(new BorderLayout());
-        title_panel.setBounds(0, 0, 800, 100);
+        titlePanel.setLayout(new BorderLayout());
+        titlePanel.setBounds(0, 0, 800, 100);
 
         /**
-         * 9 buttons are created and placed on the frame in 3x3 size to make a Tic-Tac-Toe board
+         * 42 buttons are created and placed on the frame in 6 x 7 size to make a Connect 4 board
          */
-        button_panel.setLayout(new GridLayout(6, 7));
-        button_panel.setBackground(Color.GRAY);
+        buttonPanel.setLayout(new GridLayout(6, 7));
+        buttonPanel.setBackground(Color.GRAY);
 
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
@@ -76,15 +76,15 @@ public class GameUI extends JFrame implements ActionListener {
                 if (i != 5){
                     buttons[i][j].setEnabled(false);
                 }
-                button_panel.add(buttons[i][j]);
+                buttonPanel.add(buttons[i][j]);
                 buttons[i][j].setFocusable(false);
                 buttons[i][j].setFont(new Font(null, Font.PLAIN, 100));
                 buttons[i][j].addActionListener(this);
             }
 
-            title_panel.add(textfield);
-            frame.add(title_panel, BorderLayout.NORTH);
-            frame.add(button_panel);
+            titlePanel.add(textfield);
+            frame.add(titlePanel, BorderLayout.NORTH);
+            frame.add(buttonPanel);
 
         }
 
@@ -98,7 +98,7 @@ public class GameUI extends JFrame implements ActionListener {
                 if (e.getSource() == buttons[i][j]) {
                     /**
                      * If player1_turn is true the first if body is executed
-                     * In the body only a move can be made if the grid is empty
+                     * In the body only a move can be made if the grid is empty and there is a piece below it
                      * The player one (x) is red and (o) is blue
                      * Move tracker converts the moves in the buttons to an arraylist to check the board to see if
                      * there is a winner

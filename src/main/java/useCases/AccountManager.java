@@ -55,7 +55,8 @@ public class AccountManager{
 
     /**
      * Remove a user from the system completely, also ensures the removal of the user from the friends of
-     * other users.
+     * other users. Calls the UserRemover class which follows the Facade design principle since the changes between them
+     * do not have a hard dependence
      * @param userToBeRemoved the user that needs to be removed from the system
      * @throws IOException
      * @throws ClassNotFoundException
@@ -107,8 +108,15 @@ public class AccountManager{
         Graph user_graph = rg.readobject();
         if(user_graph.accounts.containsKey(currUser.getUsername()))
         {
-            currUser.friends.remove(friendToRemove);
-            user_graph.accounts.put(currUser.getUsername(), currUser);
+            for (int i = 0; i < currUser.getFriends().size(); i++){
+                if (currUser.getFriends().get(i).getUsername().equals(friendToRemove.getUsername())) {
+                    currUser.friends.remove(i);
+                    user_graph.accounts.put(currUser.getUsername(), currUser);
+                    break;
+                }
+            }
+//            currUser.friends.remove(friendToRemove);
+//            user_graph.accounts.put(currUser.getUsername(), currUser);
             wg.writeGraph(user_graph);
         }
     }

@@ -2,15 +2,16 @@ package entities;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- * public class that represents the graph entity which is responsible for storing the users and their friends
- */
 public class Graph  implements Serializable {
+    /**
+     * Creates a hashmap that includes the all of the users accounts refer to the vertices
+     */
     public Map<String, User> accounts = new HashMap<>();
 
 
     /**
-     * @return an arraylist of user from the graph
+     *
+     * @return all the users in the accounts hashmap
      */
     public ArrayList<User> getUsers()
     {
@@ -18,8 +19,9 @@ public class Graph  implements Serializable {
     }
 
     /**
-     * @param username the username of the user that needs to be returned
-     * @return the user from the graph who's user name corresponds to the parameter username
+     *
+     * @param username
+     * @return the specific chosen user from the graph
      */
     public User getUser(String username) {
         ArrayList<User> allusers = this.getUsers();

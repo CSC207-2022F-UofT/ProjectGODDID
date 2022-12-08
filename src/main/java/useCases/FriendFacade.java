@@ -1,11 +1,14 @@
 package useCases;
 
-import entities.Graph;
+
 import entities.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+
+/**
+ * Facade design pattern to call add friend and remove friend
+ */
 public class FriendFacade {
 
     /**

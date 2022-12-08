@@ -1,7 +1,7 @@
 package UI;
 
+import controllers.ChatManagerController;
 import entities.User;
-import useCases.ChatManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ public class ActiveChatsPage extends JFrame implements ActionListener {
 
     JFrame frame = new JFrame();
 
-    ChatManager chat;
+    ChatManagerController chat;
 
 
     /**
@@ -80,10 +80,10 @@ public class ActiveChatsPage extends JFrame implements ActionListener {
                 for (User friend : user.getFriends()){
                     if (friend_name.equals(friend.getUsername())){
                         frame.dispose();
-                        chat = new ChatManager(user);
-                        chat.choseMatch(friend);
+                        chat = new ChatManagerController(user);
+                        chat.makeMatch("Choose", friend);
                         try {
-                            chat.openChat();
+                            chat.createChat();
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         } catch (InterruptedException ex) {

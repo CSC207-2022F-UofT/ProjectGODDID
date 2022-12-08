@@ -29,10 +29,18 @@ public class UserRemover {
             int j = 0;
             for (User removal : i.getFriends()){
                 if (removal.getUsername().equals(userToBeRemoved.getUsername())){
-                    ArrayList<User> friends = user_graph.accounts.get(i).getFriends();
-                    friends.remove(j);
-                    i.setFriends(friends);
-                    user_graph.accounts.put(i.getUsername(), i);
+                    try{
+                        ArrayList<User> friends = user_graph.accounts.get(i).getFriends();
+                        friends.remove(j);
+                        i.setFriends(friends);
+                        user_graph.accounts.put(i.getUsername(), i);
+                    } catch (NullPointerException ignored){
+
+                    }
+//                    ArrayList<User> friends = user_graph.accounts.get(i).getFriends();
+//                    friends.remove(j);
+//                    i.setFriends(friends);
+//                    user_graph.accounts.put(i.getUsername(), i);
                 }
                 j += 1;
             }

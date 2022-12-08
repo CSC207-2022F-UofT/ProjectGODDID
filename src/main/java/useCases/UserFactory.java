@@ -7,10 +7,12 @@ import entities.Graph;
 import entities.User;
 
 public class UserFactory {
+
+
     /**
-     * @param username the username of the user who is to be added
-     * @param password the password of that user
-     * @return
+     * @param username
+     * @param password
+     * @return creates a user object and returns it following the factory design pattern
      */
     public User CreateUser(String username, String password) {
         User user = new User(username);
@@ -22,7 +24,7 @@ public class UserFactory {
         {
             user.setUsername(username);
             user.setPassword(password);
-            user.setNum_strikes();
+            user.setNum_strikes(0);
         }
         return user;
     }
