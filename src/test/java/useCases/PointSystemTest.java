@@ -1,6 +1,6 @@
 package useCases;
 
-import EventPackage.Event;
+import useCases.EventPackage.Event;
 import PointSystem.PointSystemR;
 import PointSystem.PointSystemS;
 import entities.Graph;

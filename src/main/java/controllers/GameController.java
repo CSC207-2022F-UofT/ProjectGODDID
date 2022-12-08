@@ -1,7 +1,7 @@
 package controllers;
 
 
-import EventPackage.Event;
+import useCases.EventPackage.Event;
 import PointSystem.PointSystemR;
 import entities.User;
 

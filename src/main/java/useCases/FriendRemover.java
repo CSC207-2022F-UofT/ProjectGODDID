@@ -27,6 +27,7 @@ public class FriendRemover {
     public void remove(User currUser, User friend) throws IOException, ClassNotFoundException {
         Graph users = rg.readobject();
         friends1 = currUser.getFriends();
+        friend = users.accounts.get(friend.getUsername());
         friends2 = friend.getFriends();
 
         for (int i = 0; i < friends1.size(); i++){

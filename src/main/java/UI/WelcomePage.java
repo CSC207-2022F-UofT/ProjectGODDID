@@ -2,12 +2,12 @@ package UI;
 
 
 
-import EventPackage.Event;
+import useCases.EventPackage.Event;
 import PointSystem.PointSystemS;
+import controllers.ChatManagerController;
 import controllers.FriendRecommenderController;
 import entities.User;
 import useCases.*;
-import useCases.FriendAdder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,10 +18,8 @@ import java.util.ArrayList;
 
 import Databases.*;
 
-import useCases.FriendRemover;
-
 public class WelcomePage extends JFrame implements ActionListener {
-    ChatManager chat;
+    ChatManagerController chat_con;
     JFrame frame = new JFrame();
     JLabel welcomeLabel = new JLabel("Hello!");
     JButton startchat = new JButton();
@@ -55,7 +53,7 @@ public class WelcomePage extends JFrame implements ActionListener {
      */
     public WelcomePage(User user) throws IOException, ClassNotFoundException {
         user1 = user;
-        chat = new ChatManager(user1);
+        chat_con = new ChatManagerController(user1);
 
         /**
          * Adding a button for friend recommendation based on highest mutual friends
@@ -221,8 +219,8 @@ public class WelcomePage extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == match){
-            chat.randomMatch();
-            matchLabel.setText("Matched with: " + chat.getMatchedUser().getUsername());
+            chat_con.randomize();
+            matchLabel.setText("Matched with: " + chat_con.getMatch().getUsername());
             match.setEnabled(false);
         }
 
@@ -240,13 +238,13 @@ public class WelcomePage extends JFrame implements ActionListener {
             }
             Integer points = (Integer) user1.getPoints();
             welcomeLabel.setText("Hello "+ user1.getUsername() + ", you have " + points.toString() + " points");
-            chat.skipMatch(chat.getMatchedUser());
-            matchLabel.setText("Matched with: " + chat.getMatchedUser().getUsername());
+            chat_con.makeMatch("Skip", chat_con.getMatch());
+            matchLabel.setText("Matched with: " + chat_con.getMatch().getUsername());
         }
 
         if (e.getSource() == startchat){
             try {
-                chat.openChat();
+                chat_con.createChat();
             } catch (IOException | InterruptedException ex) {
                 throw new RuntimeException(ex);
             }

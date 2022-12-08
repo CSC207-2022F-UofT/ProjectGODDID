@@ -14,6 +14,9 @@ import static org.junit.Assert.assertArrayEquals;
 public class GameManagerTests {
 
 
+    /**
+     * Test when X wins horizontally
+     */
     @Test
     public void testHorizontalWinX() {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
@@ -40,6 +43,9 @@ public class GameManagerTests {
 
     }
 
+    /**
+     * Test when O wins vertically
+     */
     @Test
     public void testVerticalWinO() {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
@@ -66,6 +72,9 @@ public class GameManagerTests {
 
     }
 
+    /**
+     * Test when X wins from the left diagonal
+     */
     @Test
     public void testLeftDiagonalWinX() {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
@@ -98,6 +107,9 @@ public class GameManagerTests {
 
     }
 
+    /**
+     * Test when O wins from the right diagonal
+     */
     @Test
     public void testRightDiagonalWinO() {
         ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();

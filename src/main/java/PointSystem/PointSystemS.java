@@ -21,11 +21,22 @@ public class PointSystemS extends PointSystem{
     WriteGraphInt wg = new WriteGraph();
     Graph users;
 
+    /**
+     * Constructor loads types of spend cases every tıme a PointSystemR object ıs ınıtlıazed.
+     * Newer methods of spendıng can be easıly ıncorporated here.
+     */
     public PointSystemS(){ // leaves scope for future developers to incorporate newer methods to spend points
         spendCases.put("SpendSkip", 10);
         spendCases.put("SpendChoose", 20);
         spendCases.put("SpendExtend", 20);
     }
+
+    /**
+     * adjustPoınts deducts poınts for a gıven user X dependıng on the type of earn case
+     * @param X
+     * @param spendCase
+     * @throws IOException
+     */
 
     @Override
     public void adjustPoints(User X, String spendCase) throws IOException {
