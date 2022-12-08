@@ -55,7 +55,8 @@ public class AccountManager{
 
     /**
      * Remove a user from the system completely, also ensures the removal of the user from the friends of
-     * other users.
+     * other users. Calls the UserRemover class which follows the Facade design principle since the changes between them
+     * do not have a hard dependence
      * @param userToBeRemoved the user that needs to be removed from the system
      * @throws IOException
      * @throws ClassNotFoundException

@@ -32,39 +32,34 @@ class PointSystemTest {
         curUser.setUsername("Alpha");
         curUser.setAccountType("casual");
         accountManager.addUser(curUser);
-        //accountManager.addUser("Alpha", "123","mail","Casual");
+
 
         user2 = new User("");
         user2.setUsername("Beta");
         user2.setAccountType("casual");
         accountManager.addUser(user2);
-        //accountManager.addUser("Beta", "123","mail","Casual");
 
         user3 = new User("");
         user3.setUsername("Charlie");
         user3.setAccountType("casual");
         accountManager.addUser(user3);
-        //accountManager.addUser("Charlie", "123","mail","Casual");
 
         user4 = new User("");
         user4.setUsername("Delta");
         user4.setAccountType("casual");
         accountManager.addUser(user4);
-        //accountManager.addUser("Delta", "123","mail","Casual");
+
 
         user5 = new User("");
         user5.setUsername("Echo");
         user5.setAccountType("casual");
         accountManager.addUser(user5);
-        //accountManager.addUser("Echo", "123","mail","Casual");
 
 
         accountManager.addFriend(user2, user3);
         accountManager.addFriend(user2, user4);
         accountManager.addFriend(user2, user5);
-        //System.out.println(graph.getVertices());
-        //graph.addEdge("Alpha", "Casual", curUser, "Beta","Casual",user2);
-        //graph.addEdge("Alpha", "Casual", curUser, "Charlie","Casual",user3);
+
 
     }
 

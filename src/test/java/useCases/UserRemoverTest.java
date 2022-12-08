@@ -15,13 +15,7 @@ import java.io.IOException;
 public class UserRemoverTest {
     UserFactory user_f = new UserFactory();
     UserRemover user_r = new UserRemover();
-    @BeforeEach
-    void setUp(){
-    }
 
-    @AfterEach
-    void tearDown() {
-    }
 
     @Test
     void addUser() throws IOException, ClassNotFoundException {

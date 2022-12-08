@@ -2,10 +2,10 @@ package useCases;
 
 import Databases.ReadGraph;
 import Interfaces.ReadGraphInt;
-import entities.Graph;
+
 import entities.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+
+
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -18,15 +18,6 @@ public class UserFactoryTest {
 
 
 
-    @BeforeEach
-    void setUp(){
-
-
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
 
     @Test
     void addUser() throws IOException, ClassNotFoundException {

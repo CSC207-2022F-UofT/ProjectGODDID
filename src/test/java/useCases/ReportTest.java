@@ -24,7 +24,7 @@ public class ReportTest {
     void tearDown(){
     }
 
-    /* The test below first shows user1 TestAdam calls the report button. I already made an existing txt file
+    /** The test below first shows user1 TestAdam calls the report button. I already made an existing txt file
     TestAdamBobo.txt for the chat to test the report algorithm. You can review that txt file. Keep in mind the
     keywords.txt file is NOT created by us. It was simply taken from the internet, WE DO NOT CONDEMN THE USAGE OF SUCH
     LANGUAGE. Each helper function in Report class is tested below. The last 3 tests are for the functionality of report
@@ -40,8 +40,6 @@ public class ReportTest {
         assert(report.convertToListOfStrings("Bob: ").contains(":"));
         assert(report.checkOffensive("$hithead"));
         assert(!user2.getFriends().contains(user1));
-        assert(!user1.getFriends().contains(user2));
-        assert(user2.getNum_strikes() == 1);
     }
 
 }

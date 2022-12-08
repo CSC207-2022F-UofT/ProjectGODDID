@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 /**
  * Test the FriendRemover use case and see if it succesfully removes a user to current users friends list

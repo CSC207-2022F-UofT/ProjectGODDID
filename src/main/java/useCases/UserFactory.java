@@ -7,6 +7,13 @@ import entities.Graph;
 import entities.User;
 
 public class UserFactory {
+
+
+    /**
+     * @param username
+     * @param password
+     * @return creates a user object and returns it following the factory design pattern
+     */
     public User CreateUser(String username, String password) {
         User user = new User(username);
         ReadGraphInt rg = new ReadGraph();
