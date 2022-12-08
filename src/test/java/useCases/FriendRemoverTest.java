@@ -6,8 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test the FriendRemover use case and see if it succesfully removes a user to current users friends list
@@ -20,19 +21,30 @@ public class FriendRemoverTest {
 
     @BeforeEach
     void setUp() throws IOException, ClassNotFoundException {
-        user1 = new User("Alpha");
+
+        user1 = new User("", "");
+        user1.setUsername("Alpha");
+        user1.setAccountType("casual");
         accountManager.addUser(user1);
 
-        user2 = new User("Beta");
+        user2 = new User("", "");
+        user2.setUsername("Beta");
+        user2.setAccountType("casual");
         accountManager.addUser(user2);
 
-        user3 = new User("Charlie");
+        user3 = new User("", "");
+        user3.setUsername("Charlie");
+        user3.setAccountType("casual");
         accountManager.addUser(user3);
 
-        user4 = new User("Delta");
+        user4 = new User("", "");
+        user4.setUsername("Delta");
+        user4.setAccountType("casual");
         accountManager.addUser(user4);
 
-        user5 = new User("Echo");
+        user5 = new User("", "");
+        user5.setUsername("Echo");
+        user5.setAccountType("casual");
         accountManager.addUser(user5);
 
     }
@@ -59,8 +71,8 @@ public class FriendRemoverTest {
         fd.addFriend(user1, user3);
         fd.addFriend(user1, user4);
 
-        fr.remove(user1, user2);
-        fr.remove(user1, user3);
+        fr.remove(user1, user2, accountManager);
+        fr.remove(user1, user3, accountManager);
 
         assert(!user1.getFriends().contains(user2));
         assert(!user1.getFriends().contains(user3));

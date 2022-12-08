@@ -1,7 +1,5 @@
 package useCases;
 
-
-
 import Databases.CreateChatText;
 import Interfaces.ChatScreenInt;
 import Interfaces.CreateChatInt;
@@ -16,8 +14,8 @@ import java.util.Random;
  * the user has been matched with if matchedUser has been randomized, and finally open the actual chat with the user.
  *
  * @author Arian Khademi
- * @version 1.0
- * @since November 20th, 2022
+ * @version 2.0
+ * @since December 8th, 2022
  */
 public class ChatManager {
     User mainUser;
@@ -76,6 +74,7 @@ public class ChatManager {
 
     /**
      * Getter for matchedUser instance attribute.
+     *
      * @return the matched user (matchedUser).
      */
     public User getMatchedUser(){
@@ -84,10 +83,12 @@ public class ChatManager {
 
 
     /**
+     * Method to open the chat's GUI.
      * Creates a new ChatScreen, and text file to store messages, so the users can chat with each other.
-     * @throws IOException if createNewFile fails
+     *
+     * @throws IOException if createNewFile fails.
      */
-    public void openChat() throws IOException, InterruptedException {
+    public void openChat() throws IOException {
         String s1 = "src/" + this.mainUser.getUsername() + this.matchedUser.getUsername() + ".txt";
         String s2 = "src/" + this.matchedUser.getUsername() + this.mainUser.getUsername() + ".txt";
 

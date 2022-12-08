@@ -1,9 +1,8 @@
 package UI;
 
 import Databases.ReadGraph;
-import useCases.EventPackage.Event;
+import EventPackage.Event;
 import Interfaces.ChatScreenInt;
-import controllers.ReportController;
 import entities.Graph;
 import entities.User;
 import PointSystem.*;
@@ -22,8 +21,8 @@ import java.util.Scanner;
  * after the message limit has been reached.
  *
  * @author Arian Khademi
- * @version 1.0
- * @since November 20th, 2022
+ * @version 2.0
+ * @since December 8th, 2022
  */
 public class ChatScreen extends JFrame implements ActionListener, KeyListener, ChatScreenInt {
     // Declaring instance attributes
@@ -161,7 +160,11 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
         readFromTextFile();
     }
 
-    // TODO: documentation
+    /**
+     * Method to set whether the GUI is visible or not visible
+     *
+     * @param setting the desired visibility setting of the GUI window.
+     */
     @Override
     public void setVisible(boolean setting){
         frame.setVisible(setting);
