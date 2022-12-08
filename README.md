@@ -65,14 +65,11 @@ The PointSystem is responsible for the gamification of networking behaviour, rel
 
 <u> Event Class/EventLog: </u> <br/> 
 Each time a behavior occurs that involves any manipulation of points (spending/renewing), an Event object is created with the specifics of the occurrence, such as the User(s) involved and what kind of occurrence it is. A PointSystem object is passed in to the .execute() method of the Event; execution hands the baton to PointSystem's adjustPoints method, which effects the necessary changes to a User's points. 
-
 The EventLog was conceptualized as an afterthought to the Event class for debugging and testing purposes. If the code jammed somewhere, the Event Log would stop at the last executed Event object, making it easier to identify the Event that caused the disruption. As such, it isn't actively utilized elsewhere in the app framework, and exists only for development purposes.
 
 <u> PointSystem: </u> <br/> 
 PointSystem is an abstract class that consists of two concrete subclasses: PointSystemR (for renewing/earning points) and PointSystemS (for spending points). It contains an abstract adjustPoints method. Both of the subclasses implement this method in different ways to facilitate addition/deduction of points. 
-
 Each time a PointSystemR object is created, its constructor loads in the different possible cases for renewal, and the points associated with each of them (in a dictionary called earnCases). The same goes for PointSystemS as well (with spendCases).
-
 Creating an inheritance hierarchy for PointSystem allowed Event.execute() to be modelled as polymorphic method, thereby eliminating bloated code for the different point manipulation cases.
 
 
