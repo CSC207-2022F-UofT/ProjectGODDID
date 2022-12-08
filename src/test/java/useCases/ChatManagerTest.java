@@ -7,15 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
-/**
- * Test the FriendAdder use case and see if it succesfully adds a user to current users friends list
- * and adds edge between the two user vertices in the graph
- */
-public class FriendAdderTest {
-
+public class ChatManagerTest {
     AccountManager accountManager = new AccountManager();
     User user1, user2, user3, user4, user5;
 
@@ -53,20 +45,26 @@ public class FriendAdderTest {
     }
 
     @Test
-    void addFriend() throws IOException, ClassNotFoundException {
+    void randomMatch() throws IOException, ClassNotFoundException {
         FriendAdder fd = new FriendAdder();
         fd.addFriend(user1, user2);
-        fd.addFriend(user2, user1);
-        fd.addFriend(user5, user1);
-        fd.addFriend(user3, user4);
-        fd.addFriend(user3, user5);
-        assert(user1.getFriends().contains(user2));
-        assert(user2.getFriends().contains(user1));
-        assert(user5.getFriends().contains(user1));
-        assert(user3.getFriends().contains(user4));
-        assert(user3.getFriends().contains(user5));
-        assertEquals(2, user3.getFriends().size());
+        fd.addFriend(user1, user3);
+        ChatManager chatManager = new ChatManager(user1);
+        User matched;
+        chatManager.randomMatch();
+        matched = chatManager.getMatchedUser();
+        assert(matched.equals(user2) || matched.equals(user3));
     }
 
+    @Test
+    void skipMatch() throws IOException, ClassNotFoundException {
+        FriendAdder fd = new FriendAdder();
+        fd.addFriend(user1, user2);
+        fd.addFriend(user1, user3);
+        ChatManager chatManager = new ChatManager(user1);
+        User matched;
+        chatManager.skipMatch(user2);
+        matched = chatManager.getMatchedUser();
+        assert(matched.equals(user3));
+    }
 }
-

@@ -1,12 +1,21 @@
 package Databases;
 
 import entities.Graph;
+import Interfaces.ReadGraphInt;
 
 import java.io.*;
 
-public class ReadGraph implements Serializable{
+public class ReadGraph implements Serializable, ReadGraphInt {
 
-    public Graph readobject() throws IOException, ClassNotFoundException {
+    /**
+     * @return Graph
+     */
+
+    /**
+     * returns the saved graph containing the users by reading from the ser file
+     */
+    @Override
+    public Graph readobject() {
         Graph users = new Graph();
         try {
             FileInputStream fis = new FileInputStream("Users.ser");
@@ -17,15 +26,11 @@ public class ReadGraph implements Serializable{
             ois.close();
             fis.close();
             return users;
-        } catch (EOFException e){
+        } catch (IOException | ClassNotFoundException e){
             //users = new Graph();
             return users;
         }
-
-
-        //return users;
-
-
-
     }
+
+
 }

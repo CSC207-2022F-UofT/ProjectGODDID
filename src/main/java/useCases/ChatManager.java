@@ -1,8 +1,12 @@
 package useCases;
 
+
+
+import Databases.CreateChatText;
+import Interfaces.ChatScreenInt;
+import Interfaces.CreateChatInt;
 import UI.ChatScreen;
 import entities.User;
-import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
@@ -83,20 +87,14 @@ public class ChatManager {
      * Creates a new ChatScreen, and text file to store messages, so the users can chat with each other.
      * @throws IOException if createNewFile fails
      */
-    public void openChat() throws IOException {
+    public void openChat() throws IOException, InterruptedException {
         String s1 = "src/" + this.mainUser.getUsername() + this.matchedUser.getUsername() + ".txt";
         String s2 = "src/" + this.matchedUser.getUsername() + this.mainUser.getUsername() + ".txt";
 
-        if (!new File(s2).exists() && !new File(s1).exists()){
-            File f = new File(s1);
-            if (f.createNewFile()) {
-                System.out.println("File created: " + f.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-        }
+        CreateChatInt createText = new CreateChatText();
+        createText.newChat(s1, s2);
 
-        ChatScreen testChat = new ChatScreen(this.mainUser, this.matchedUser);
-        testChat.setVisible(true);
+        ChatScreenInt startNew = new ChatScreen(this.mainUser, this.matchedUser);
+        startNew.setVisible(true);
     }
 }

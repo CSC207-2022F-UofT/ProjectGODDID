@@ -1,8 +1,9 @@
-package EventPackage;
+package useCases.EventPackage;
 
 import PointSystem.PointSystem;
 import entities.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Event {
@@ -24,7 +25,7 @@ public class Event {
         this.usersInvolved = usersInvolved;
     }
 
-    public void execute(PointSystem ps){
+    public void execute(PointSystem ps) throws IOException {
         /*
         Polymorphic function, handles execution of both Spend-type and Renew-type events
         Argument is strictly an instance of either: PointSystemS or PointSystemR.

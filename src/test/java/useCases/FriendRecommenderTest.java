@@ -29,10 +29,10 @@ class FriendRecommenderTest {
      * but here we can bypass the controller and just directly call the FriendAdder
      * use case for testing purposes
      * 3) Add the friends to various users
-     * 4) Call FriendRecommender.getRecommendRandom for user 5 to get 3 randomly
-     * selected users from user5's friend list
-     * 5) Check to see if 3 users are succesfully added to curUsers friend list which
-     * already includes 2 users
+     * 4) Call FriendRecommender.getRecommendRandom for user4 to get randomly
+     * selected users from user4's friend list
+     * 5) Check to see if returned String is one of user4's friends or if it is the current
+     * user in which case the String "Try again" is returned
      * 6) Call FriendRecommender.getRecommend for curUser to get most common friend among
      * their neighbours / friends
      * 7) Check to see if recommended friend is user5 who is the most common shared friend
@@ -40,20 +40,20 @@ class FriendRecommenderTest {
      */
     @BeforeEach
     void setUp() throws IOException, ClassNotFoundException {
-        curUser = new User("Alpha", "");
+        curUser = new User("Alpha");
         accountManager.addUser(curUser);
         System.out.println(curUser + curUser.getUsername());
 
-        user2 = new User("Beta", "");
+        user2 = new User("Beta");
         accountManager.addUser(user2);
 
-        user3 = new User("Charlie", "");
+        user3 = new User("Charlie");
         accountManager.addUser(user3);
 
-        user4 = new User("Delta", "");
+        user4 = new User("Delta");
         accountManager.addUser(user4);
 
-        user5 = new User("Echo", "");
+        user5 = new User("Echo");
         accountManager.addUser(user5);
 
         alphaFriends = new ArrayList<>();
@@ -75,24 +75,16 @@ class FriendRecommenderTest {
     @Test
     void getRecommendRandom() {
         FriendRecommender fRec = new FriendRecommender();
-        ArrayList<String> recs = new ArrayList<>();
-        recs = fRec.getRecommendRandom(user4);
-        ArrayList<User> friends = new ArrayList<>();
-        friends = curUser.getFriends();
-        for (int i = 0; i < recs.size(); i++) {
-            System.out.println(recs.get(i));
-            friends.add(accountManager.getGraph().getUser(recs.get(i)));
-        }
-        curUser.setFriends(friends);
-        assertEquals(5, curUser.getFriends().size());
+        String recs;
+        recs = fRec.getRecommendRandom(user4, curUser);
+        assertTrue(recs.equals("Try again")||recs.equals(user5.getUsername())||recs.equals(user3.getUsername()));
     }
 
     @Test
     void getRecommend() {
         FriendRecommender fRec = new FriendRecommender();
-        String rec = fRec.getRecommend(curUser, accountManager.getGraph());
+        String rec = fRec.getRecommend(curUser);
         assertEquals(user5.getUsername(), rec); //Get the most common friend between your friends
     }
 
 }
-

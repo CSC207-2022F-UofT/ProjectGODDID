@@ -2,10 +2,18 @@ package PointSystem;
 
 import entities.User;
 
+import java.io.IOException;
+
 public abstract class PointSystem {
     /**
      * Abstract parent class for the two different PointSystem classes .
      */
 
-    public abstract void adjustPoints(User X, String spendCase);
+    /**
+     * abstract method that must be implemented by the subclasses, allows polymorphism when an Event is executed
+     * @param X user
+     * @param spendCase spending option
+     * @throws IOException
+     */
+    public abstract void adjustPoints(User X, String spendCase) throws IOException;
 }
