@@ -108,8 +108,15 @@ public class AccountManager{
         Graph user_graph = rg.readobject();
         if(user_graph.accounts.containsKey(currUser.getUsername()))
         {
-            currUser.friends.remove(friendToRemove);
-            user_graph.accounts.put(currUser.getUsername(), currUser);
+            for (int i = 0; i < currUser.getFriends().size(); i++){
+                if (currUser.getFriends().get(i).getUsername().equals(friendToRemove.getUsername())) {
+                    currUser.friends.remove(i);
+                    user_graph.accounts.put(currUser.getUsername(), currUser);
+                    break;
+                }
+            }
+//            currUser.friends.remove(friendToRemove);
+//            user_graph.accounts.put(currUser.getUsername(), currUser);
             wg.writeGraph(user_graph);
         }
     }
