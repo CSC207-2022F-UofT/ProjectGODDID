@@ -166,10 +166,10 @@ public class HomeScreen extends JFrame implements ActionListener
     public static void main(String argvs[]) throws IOException, ClassNotFoundException {
 // creating an object of the class CardLayoutExample1
         //HomeScreen crdl = new HomeScreen();
-        User bob = new User("Bob","");
+        User bob = new User("Bob");
         ArrayList friends = new ArrayList();
-        User user1 = new User("Alpha", "");
-        User user2 = new User("Beta", "");
+        User user1 = new User("Alpha");
+        User user2 = new User("Beta");
         friends.add(user2);
         friends.add(user1);
         bob.setFriends(friends);

@@ -16,14 +16,14 @@ public class AccountManager{
     WriteGraphInt wg = new WriteGraph();
 
 
-    public void addUser(String name, String pWord, String acc_type) throws IOException, ClassNotFoundException {
-        User new_user = new User(name, acc_type);
+    public void addUser(String name, String pWord) throws IOException, ClassNotFoundException {
+        User new_user = new User(name);
         Graph temp = rg.readobject();
         if(!temp.accounts.containsKey(name))
         {
             new_user.setUsername(name);
             new_user.setPassword(pWord);
-            new_user.setAccountType(acc_type);
+            new_user.setAccountType("");
             new_user.setNum_strikes();
             new_user.setBlocked_friends();
             temp.accounts.putIfAbsent(name, new_user);

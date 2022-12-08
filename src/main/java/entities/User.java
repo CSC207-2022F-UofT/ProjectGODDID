@@ -14,9 +14,9 @@ public class User implements Serializable {
     public ArrayList<User> blocked_friends;
     public int num_strikes;
 
-    public User(String name, String acctype){
+    public User(String name){
         this.username = name;
-        this.acc_type = acctype;
+        this.acc_type = "basic";
         //points = 0;
         this.friends = new ArrayList<User>();
         this.blocked_friends = new ArrayList<User>();

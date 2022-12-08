@@ -73,16 +73,11 @@ public class LoginPage implements ActionListener{
 
         if(e.getSource()== signUp) {
 
-            try {
-                System.out.println(rg.readobject().accounts.keySet());
-                adder.addUser(userIDField.getText(),String.valueOf(userPasswordField.getPassword()), "casual");
-                System.out.println(adder.getGraph().accounts.keySet());
-                System.out.println(rg.readobject().accounts.keySet());
-                System.out.println(" ");
-                //System.out.println(rg.readobject().accounts.keySet());
-            } catch (IOException | ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
+            System.out.println(rg.readobject().accounts.keySet());
+            System.out.println(adder.getGraph().accounts.keySet());
+            System.out.println(rg.readobject().accounts.keySet());
+            System.out.println(" ");
+            //System.out.println(rg.readobject().accounts.keySet());
             messageLabel.setForeground(Color.green);
             messageLabel.setText("Sign Up Successful");
 
