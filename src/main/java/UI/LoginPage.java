@@ -20,30 +20,28 @@ public class LoginPage implements ActionListener{
     JFrame frame = new JFrame();
     JButton loginButton = new JButton("Login");
     JButton signUp = new JButton("Sign Up");
-    JTextField userIDField = new JTextField();
+    JTextField usernameField = new JTextField();
     JPasswordField userPasswordField = new JPasswordField();
-    JLabel userIDLabel = new JLabel("username:");
+    JLabel usernameLabel = new JLabel("username:");
     JLabel userPasswordLabel = new JLabel("password:");
     JLabel messageLabel = new JLabel();
 
 
     ReadGraph rg = new ReadGraph();
 
-    Graph logininfos = new Graph();
     AccountManager adder = new AccountManager();
 
 
     public LoginPage(){
 
-//        logininfo = loginInfoOriginal;
 
-        userIDLabel.setBounds(50,100,75,25);
+        usernameLabel.setBounds(50,100,75,25);
         userPasswordLabel.setBounds(50,150,75,25);
 
         messageLabel.setBounds(125,250,250,35);
-        messageLabel.setFont(new Font(null,Font.ITALIC,25));
+        messageLabel.setFont(new Font(null,Font.PLAIN,25));
 
-        userIDField.setBounds(125,100,200,25);
+        usernameField.setBounds(125,100,200,25);
         userPasswordField.setBounds(125,150,200,25);
 
         loginButton.setBounds(125,200,100,25);
@@ -54,10 +52,10 @@ public class LoginPage implements ActionListener{
         signUp.setFocusable(false);
         signUp.addActionListener(this);
 
-        frame.add(userIDLabel);
+        frame.add(usernameLabel);
         frame.add(userPasswordLabel);
         frame.add(messageLabel);
-        frame.add(userIDField);
+        frame.add(usernameField);
         frame.add(userPasswordField);
         frame.add(loginButton);
         frame.add(signUp);
@@ -71,64 +69,57 @@ public class LoginPage implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource()== signUp) {
+        if(e.getSource() == signUp) {
 
             try {
                 System.out.println(rg.readobject().accounts.keySet());
-                adder.addUser(userIDField.getText(),String.valueOf(userPasswordField.getPassword()));
-                System.out.println(adder.getGraph().accounts.keySet());
-                System.out.println(rg.readobject().accounts.keySet());
-                System.out.println(" ");
-                //System.out.println(rg.readobject().accounts.keySet());
+
+                if (!rg.readobject().accounts.containsKey(usernameField.getText())) {
+                    adder.addUser(usernameField.getText(), String.valueOf(userPasswordField.getPassword()));
+                    messageLabel.setForeground(Color.green);
+                    messageLabel.setText("Sign Up Successful");
+                    System.out.println(rg.readobject().accounts.keySet());
+                    System.out.println(" ");
+                } else{
+                    messageLabel.setForeground(Color.red);
+                    messageLabel.setText("Username exists");
+                }
+
             } catch (IOException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
-            messageLabel.setForeground(Color.green);
-            messageLabel.setText("Sign Up Successful");
-
-//            UserCreator use = new UserCreator();
-//            User user = use.CreateUser(userIDField.getText(), String.valueOf(userPasswordField.getPassword()));
-//            try {
-//                userwr.writefile(user);
-//            } catch (IOException ex) {
-//                throw new RuntimeException(ex);
-//            } catch (ClassNotFoundException ex) {
-//                throw new RuntimeException(ex);
-//            }
 
         }
 
 
         if(e.getSource()==loginButton) {
-            //logininfos = rg.readobject();
-            String userID = userIDField.getText();
+            String username = usernameField.getText();
             String password = String.valueOf(userPasswordField.getPassword());
 
-            if (rg.readobject().accounts.get(userID).getUsername().equals(userID))
-            {
-                if (rg.readobject().accounts.get(userID).getPassword().equals(password))
-                {
-                    messageLabel.setForeground(Color.green);
-                    messageLabel.setText("Login successful");
-                    frame.dispose();
-                    try {
-                        WelcomePage welcomePage = new WelcomePage(rg.readobject().accounts.get(userID));
-                    } catch (IOException | ClassNotFoundException ex) {
-                        throw new RuntimeException(ex);
+            try {
+                if (rg.readobject().accounts.get(username).getUsername().equals(username)) {
+                    if (rg.readobject().accounts.get(username).getPassword().equals(password)) {
+                        messageLabel.setForeground(Color.green);
+                        messageLabel.setText("Login successful");
+                        frame.dispose();
+                        try {
+                            WelcomePage welcomePage = new WelcomePage(rg.readobject().accounts.get(username));
+                        } catch (IOException | ClassNotFoundException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                    } else {
+                        messageLabel.setForeground(Color.red);
+                        messageLabel.setText("Wrong password");
                     }
-
-                }
-                else
-                {
+                } else {
                     messageLabel.setForeground(Color.red);
-                    messageLabel.setText("Wrong password");
+                    messageLabel.setText(username + " does not exist");
                 }
-            }
-            else{
+            } catch (NullPointerException exception) {
                 messageLabel.setForeground(Color.red);
-                messageLabel.setText(userID+" does not exist");
+                messageLabel.setText("Account does not exist");
             }
-
 
         }
 
