@@ -3,6 +3,8 @@ package controllers;
 import entities.User;
 import useCases.ChatManager;
 
+import java.io.IOException;
+
 /**
  * This is a controller to be used by WelcomePage and FriendsPage which can interact with ChatManager. This controller
  * is required for these pages because it will allow them to match the user with a new user and also get the match so
@@ -60,5 +62,13 @@ public class ChatManagerController {
      */
     public User getMatch(){
         return manager.getMatchedUser();
+    }
+
+    /**
+     * Method for creating the chat's UI once the main user is satisfied with their match and want to chat.
+     * @throws IOException if openChat fails.
+     */
+    public void createChat() throws IOException {
+        manager.openChat();
     }
 }
