@@ -24,7 +24,7 @@ public class UserFactory {
         {
             user.setUsername(username);
             user.setPassword(password);
-            user.setNum_strikes();
+            user.setNum_strikes(0);
         }
         return user;
     }

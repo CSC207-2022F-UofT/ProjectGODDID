@@ -177,8 +177,12 @@ public class Report {
 //                    this.user2.addStrike();  //strike added to user 2 for vulgar language
                     manager.removeFriend(this.user1, this.user2);
 
+                    User addst = user_graph.accounts.get(this.user2.getUsername());
 
-                    user_graph.accounts.put(this.user2.getUsername(), this.user2);
+                    addst.setNum_strikes(addst.getNum_strikes() + 1);
+
+
+                    user_graph.accounts.put(addst.getUsername(), addst);
                     write_graph.writeGraph(user_graph);
 
                     boolean is_ban = checkBan(this.user2);

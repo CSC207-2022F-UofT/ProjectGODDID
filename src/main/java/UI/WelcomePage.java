@@ -173,7 +173,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         frame.add(matchLabel);
         frame.add(friendsLabel);
         frame.add(recommendRandButton);
-        frame.add(messageLabel);
+
 
         messageLabel.setBounds(250,360,250,45);
         messageLabel.setFont(new Font(null,Font.PLAIN,25));
@@ -187,23 +187,25 @@ public class WelcomePage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == friends){
             AccountManager remover = new AccountManager();
-            for (User friend : user1.getFriends()) {
-                boolean exists = false;
-                for (User i : friend.getFriends()){
-                    if (i.getUsername().equals(user1.getUsername())){
-                        exists = true;
-                    }
-                }
-                if (!exists){
-                    try {
-                        remover.removeFriend(user1, friend);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (ClassNotFoundException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
-            }
+//            if (user1.friends.size() > 0) {
+//                for (User friend : user1.getFriends()) {
+//                    boolean exists = false;
+//                    for (User i : friend.getFriends()) {
+//                        if (i.getUsername().equals(user1.getUsername())) {
+//                            exists = true;
+//                        }
+//                    }
+//                    if (!exists) {
+//                        try {
+//                            remover.removeFriend(user1, friend);
+//                        } catch (IOException ex) {
+//                            throw new RuntimeException(ex);
+//                        } catch (ClassNotFoundException ex) {
+//                            throw new RuntimeException(ex);
+//                        }
+//                    }
+//                }
+//            }
 
             FriendsPage friends = new FriendsPage(user1);
         }

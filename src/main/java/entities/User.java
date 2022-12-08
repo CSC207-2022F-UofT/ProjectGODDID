@@ -47,8 +47,8 @@ public class User implements Serializable {
         this.points = p;
     }
 
-    public void setNum_strikes(){
-        this.num_strikes = 0;
+    public void setNum_strikes(int num_strike){
+        this.num_strikes = num_strike;
     }
 
     public String getUsername() {
