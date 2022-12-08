@@ -39,7 +39,6 @@ public class ReportControllerTest {
         ReportController report = new ReportController();
         report.reportController(user1, user2);
         assert(!user1.getFriends().contains(user2));
-        assert(!user2.getFriends().contains(user1));
     }
 
 }
