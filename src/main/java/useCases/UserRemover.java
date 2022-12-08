@@ -8,6 +8,7 @@ import entities.Graph;
 import entities.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UserRemover {
 
@@ -28,7 +29,9 @@ public class UserRemover {
             int j = 0;
             for (User removal : i.getFriends()){
                 if (removal.getUsername().equals(userToBeRemoved.getUsername())){
-                    user_graph.accounts.get(i).friends.remove(j);
+                    ArrayList<User> friends = user_graph.accounts.get(i).getFriends();
+                    friends.remove(j);
+                    i.setFriends(friends);
                     user_graph.accounts.put(i.getUsername(), i);
                 }
                 j += 1;

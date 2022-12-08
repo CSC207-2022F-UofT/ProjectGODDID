@@ -1,19 +1,13 @@
 package UI;
 
-import EventPackage.Event;
-import PointSystem.PointSystemS;
 import controllers.FriendRecommenderController;
 import entities.User;
-import useCases.ChatManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class RandomRecommendUI extends JFrame implements ActionListener {
 

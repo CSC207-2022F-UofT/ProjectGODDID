@@ -2,13 +2,12 @@ package UI;
 
 
 
-import EventPackage.Event;
+import useCases.EventPackage.Event;
 import PointSystem.PointSystemS;
 import controllers.ChatManagerController;
 import controllers.FriendRecommenderController;
 import entities.User;
 import useCases.*;
-import useCases.FriendAdder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,8 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Databases.*;
-
-import useCases.FriendRemover;
 
 public class WelcomePage extends JFrame implements ActionListener {
     ChatManagerController chat_con;

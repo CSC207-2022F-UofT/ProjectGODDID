@@ -1,6 +1,6 @@
 package UI;
 
-import EventPackage.Event;
+import useCases.EventPackage.Event;
 import PointSystem.PointSystemS;
 import entities.User;
 import useCases.ChatManager;
@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class FriendsPage extends JFrame implements ActionListener {
 
