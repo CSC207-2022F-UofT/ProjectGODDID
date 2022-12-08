@@ -73,6 +73,10 @@ class PointSystemTest {
     }
 
 
+    /**
+     * tests that a chat-end results ın both user's poınts beıng updated
+     * @throws IOException
+     */
     @Test
     void RenewTest(){
         ArrayList<User> userlist = new ArrayList<>();
@@ -87,6 +91,10 @@ class PointSystemTest {
         assertEquals(user3.points, 10);
     }
 
+    /**
+     * tests that a user's poınts are deducted successfully after spendıng behavıor
+     * @throws IOException
+     */
     @Test
     void SpendTest(){  // also tests that non-involved user vertices are not touched
         ArrayList<User> userlist = new ArrayList<>();

@@ -6,18 +6,15 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Class to create a new text file which contains the chat between the main user and the matched user.
  *
- * @author Arian Khademi
- * @version 1.0
- * @since December 5th, 2022
  */
 public class CreateChatText implements CreateChatInt {
     /**
      *
-     * @param name1 the username of the main user (who is accessing the UI)
-     * @param name2 the username of the user they have been matched with
-     * @throws IOException if creating the new file fails
+     * @param name1 first user
+     * @param name2 second user
+     * @throws IOException
+     * Starts a new chat between two users
      */
     @Override
     public void newChat(String name1, String name2) throws IOException {
