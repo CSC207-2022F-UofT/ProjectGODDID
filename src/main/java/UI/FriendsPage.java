@@ -1,7 +1,7 @@
 package UI;
 
 import controllers.ChatManagerController;
-import useCases.EventPackage.Event;
+import EventPackage.Event;
 import PointSystem.PointSystemS;
 import entities.User;
 

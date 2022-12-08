@@ -1,4 +1,4 @@
-package useCases.EventPackage;
+package EventPackage;
 
 import java.util.ArrayList;
 

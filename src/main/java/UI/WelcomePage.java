@@ -2,7 +2,7 @@ package UI;
 
 
 
-import useCases.EventPackage.Event;
+import EventPackage.Event;
 import PointSystem.PointSystemS;
 import controllers.ChatManagerController;
 import controllers.FriendRecommenderController;
@@ -263,7 +263,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         if (e.getSource() == startchat){
             try {
                 chat_con.createChat();
-            } catch (IOException | InterruptedException ex) {
+            } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         }

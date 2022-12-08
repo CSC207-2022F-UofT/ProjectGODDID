@@ -1,9 +1,11 @@
 package UI;
 
+import Databases.ReadGraph;
 import EventPackage.Event;
 import Interfaces.ChatScreenInt;
+import controllers.ReportController;
+import entities.Graph;
 import entities.User;
-import useCases.Report;
 import PointSystem.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
