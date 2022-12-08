@@ -24,11 +24,12 @@ public class UserRemover {
         WriteGraphInt wg = new WriteGraph();
         Graph user_graph = rg.readobject();
         user_graph.accounts.remove(userToBeRemoved.getUsername());
-        for(User i:user_graph.accounts.values()){
+        wg.writeGraph(user_graph);
+        for(User i: user_graph.accounts.values()){
             int j = 0;
-            for (User removal : i.getFriends()){
+            for (User removal : i.getFriends()){ // each user in i's friends
                 if (removal.getUsername().equals(userToBeRemoved.getUsername())){
-                    user_graph.accounts.get(i).friends.remove(j);
+                    user_graph.accounts.get(i.getUsername()).friends.remove(removal);
                     user_graph.accounts.put(i.getUsername(), i);
                 }
                 j += 1;
