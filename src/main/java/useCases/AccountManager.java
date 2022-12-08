@@ -115,8 +115,6 @@ public class AccountManager{
                     break;
                 }
             }
-//            currUser.friends.remove(friendToRemove);
-//            user_graph.accounts.put(currUser.getUsername(), currUser);
             wg.writeGraph(user_graph);
         }
     }
