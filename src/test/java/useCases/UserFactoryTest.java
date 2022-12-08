@@ -2,7 +2,6 @@ package useCases;
 
 import Databases.ReadGraph;
 import Interfaces.ReadGraphInt;
-import entities.Graph;
 import entities.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

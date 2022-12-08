@@ -23,6 +23,9 @@ public class RandomRecommendUI extends JFrame implements ActionListener {
     JFrame frame = new JFrame();
 
 
+    /**
+     * @param user1
+     */
     public RandomRecommendUI(User user1) {
 
         user = user1;
@@ -66,6 +69,9 @@ public class RandomRecommendUI extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < buttons.length; i++){

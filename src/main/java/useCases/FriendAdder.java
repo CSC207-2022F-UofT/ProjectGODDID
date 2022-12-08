@@ -15,10 +15,12 @@ public class FriendAdder {
     ReadGraphInt rg = new ReadGraph();
     WriteGraphInt wg = new WriteGraph();
 
-    public FriendAdder(){
-
-    }
-
+    /**
+     * @param currUser the user that wants to add a friend
+     * @param friendToAdd the friend to be added
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     /*
     Add friend to current users friends list and create new edge between the two in the graph of users
     */

@@ -7,6 +7,11 @@ import entities.Graph;
 import entities.User;
 
 public class UserFactory {
+    /**
+     * @param username the username of the user who is to be added
+     * @param password the password of that user
+     * @return
+     */
     public User CreateUser(String username, String password) {
         User user = new User(username);
         ReadGraphInt rg = new ReadGraph();

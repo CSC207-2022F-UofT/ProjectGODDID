@@ -64,6 +64,8 @@ public class FriendRemoverTest {
 
         assert(!user1.getFriends().contains(user2));
         assert(!user1.getFriends().contains(user3));
+        assert(!user3.getFriends().contains(user1));
+        assert(!user2.getFriends().contains(user1));
         assert(user1.getFriends().contains(user4));
 
     }

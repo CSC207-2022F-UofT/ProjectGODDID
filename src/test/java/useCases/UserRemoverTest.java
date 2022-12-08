@@ -30,6 +30,7 @@ public class UserRemoverTest {
         am.addUser(user_new);
         ReadGraphInt rg = new ReadGraph();
         user_r.removeUser(user_new);
+        System.out.println(rg.readobject().accounts.keySet());
         assert(!rg.readobject().accounts.containsKey(user_new.getUsername()));
     }
 }
