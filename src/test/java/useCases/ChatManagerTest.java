@@ -9,6 +9,10 @@ import java.io.IOException;
 
 /**
  * This file exists to test the ChatManager class to ensure that all the methods are working as they should be.
+ *
+ * @author Brandon
+ * @version 1.0
+ * @since December 7th, 2022
  */
 public class ChatManagerTest {
     AccountManager accountManager = new AccountManager();

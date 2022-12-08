@@ -14,8 +14,8 @@ import java.util.Random;
  * the user has been matched with if matchedUser has been randomized, and finally open the actual chat with the user.
  *
  * @author Arian Khademi
- * @version 1.0
- * @since November 20th, 2022
+ * @version 2.0
+ * @since December 8th, 2022
  */
 public class ChatManager {
     User mainUser;

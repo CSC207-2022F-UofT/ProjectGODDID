@@ -5,6 +5,10 @@ import java.io.IOException;
 /**
  * Interface for the CreateChatText class to implement that will be used in ChatManager to create a new text file
  * so that the code follows clean architecture.
+ *
+ * @author Arian Khademi
+ * @version 1.0
+ * @since December 5th, 2022
  */
 public interface CreateChatInt {
     /**

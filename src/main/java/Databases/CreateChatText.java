@@ -7,6 +7,10 @@ import java.io.IOException;
 
 /**
  * Class to create a new text file which contains the chat between the main user and the matched user.
+ *
+ * @author Arian Khademi
+ * @version 1.0
+ * @since December 5th, 2022
  */
 public class CreateChatText implements CreateChatInt {
     /**

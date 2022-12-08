@@ -20,8 +20,8 @@ import java.util.Scanner;
  * after the message limit has been reached.
  *
  * @author Arian Khademi
- * @version 1.0
- * @since November 20th, 2022
+ * @version 2.0
+ * @since December 8th, 2022
  */
 public class ChatScreen extends JFrame implements ActionListener, KeyListener, ChatScreenInt {
     // Declaring instance attributes
