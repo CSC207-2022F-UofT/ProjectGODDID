@@ -26,27 +26,26 @@ public class FriendRemover {
     */
     public void remove(User currUser, User friend) throws IOException, ClassNotFoundException {
         Graph users = rg.readobject();
-        currUser = rg.readobject().accounts.get(currUser.getUsername());
         friends1 = currUser.getFriends();
-        friend = rg.readobject().accounts.get(friend.getUsername());
+        friend = users.accounts.get(friend.getUsername());
         friends2 = friend.getFriends();
 
         for (int i = 0; i < friends1.size(); i++){
             if (friends1.get(i).getUsername().equals(friend.getUsername())){
-                friends1.remove(friends1.get(i));
+                friends1.remove(i);
             }
         }
 
         for (int i = 0; i < friends2.size(); i++){
             if (friends2.get(i).getUsername().equals(currUser.getUsername())){
-                friends2.remove(friends2.get(i));
+                friends2.remove(i);
             }
         }
 
         currUser.setFriends(friends1);
         friend.setFriends(friends2);
-        rg.readobject().accounts.put(currUser.getUsername(), currUser);
-        rg.readobject().accounts.put(friend.getUsername(), friend);
-        wg.writeGraph(rg.readobject());
+        users.accounts.put(currUser.getUsername(), currUser);
+        users.accounts.put(friend.getUsername(), friend);
+        wg.writeGraph(users);
     }
 }

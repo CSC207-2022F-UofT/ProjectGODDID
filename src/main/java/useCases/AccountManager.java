@@ -113,10 +113,6 @@ public class AccountManager{
         }
     }
 
-
-
-
-
     /**
      * @return the graph that contains all the users and friends.
      */
