@@ -40,7 +40,6 @@ public class ReportControllerTest {
         report.reportController(user1, user2);
         assert(!user1.getFriends().contains(user2));
         assert(!user2.getFriends().contains(user1));
-        assert(user2.getNum_strikes() == 1);
     }
 
 }
