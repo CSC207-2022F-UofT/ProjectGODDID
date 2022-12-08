@@ -173,9 +173,10 @@ public class WelcomePage extends JFrame implements ActionListener {
         frame.add(matchLabel);
         frame.add(friendsLabel);
         frame.add(recommendRandButton);
+        frame.add(messageLabel);
 
         messageLabel.setBounds(250,360,250,45);
-        messageLabel.setFont(new Font(null,Font.ITALIC,25));
+        messageLabel.setFont(new Font(null,Font.PLAIN,25));
 
     }
 
@@ -208,7 +209,6 @@ public class WelcomePage extends JFrame implements ActionListener {
 
         if(e.getSource() == removefriend){
             String friendToAdd = text.getText();
-            //FriendRemover fd = new FriendRemover();
             try {
                 friend_facade.removeFriend(user1, rg.readobject().getUser(friendToAdd));
                 messageLabel.setForeground(Color.green);
