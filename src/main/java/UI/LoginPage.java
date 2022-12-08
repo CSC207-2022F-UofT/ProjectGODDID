@@ -1,17 +1,9 @@
 package UI;
-
 import Databases.ReadGraph;
-import entities.Graph;
-import entities.User;
 import useCases.AccountManager;
-
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.sql.SQLOutput;
-import java.util.HashMap;
-import javax.sound.midi.Soundbank;
 import javax.swing.*;
 
 
@@ -32,6 +24,9 @@ public class LoginPage implements ActionListener{
     AccountManager adder = new AccountManager();
 
 
+    /**
+     * initializes the display of the login page
+     */
     public LoginPage(){
 
 
@@ -66,6 +61,14 @@ public class LoginPage implements ActionListener{
 
     }
 
+    /**
+     * responsible for the various actions in the login page, responds appropriate messages according to
+     * the situation, displays a 'sign up successful' message if so or a 'username exists' message if the
+     * username already exists. Displays 'login successful' if the user exists and the correct username
+     * and password is entered. 'wrong password' is displayed if user tries to login with an incorrect
+     * password. Displays if the account does not exist.
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 

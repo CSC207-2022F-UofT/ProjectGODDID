@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ * A UI class displaying the friends of the user so the user can pick one of his/ her friends to get a random
+ * recommendation
+ */
 public class RandomRecommendUI extends JFrame implements ActionListener {
 
     JButton[] buttons;
@@ -66,6 +70,10 @@ public class RandomRecommendUI extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * @param e the event to be processed
+     *  Adds a friend button displaying the every friend of the users
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < buttons.length; i++){

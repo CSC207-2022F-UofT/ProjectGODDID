@@ -11,6 +11,8 @@ public interface CreateChatInt {
      * @param name1
      * @param name2
      * @throws IOException
+     *
+     * An interface for creating a new chat
      */
     void newChat(String name1, String name2) throws IOException;
 }

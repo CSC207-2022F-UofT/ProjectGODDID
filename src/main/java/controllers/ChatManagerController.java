@@ -29,7 +29,7 @@ public class ChatManagerController {
     }
 
     /**
-     *
+     * Randomly chooses a match
      */
     public void randomize(){
         manager.randomMatch();
@@ -39,6 +39,8 @@ public class ChatManagerController {
      *
      * @param matchType
      * @param otherUser
+     *
+     * Skips the matched user and chooses another one or starts a chat with a chosen user
      */
     public void makeMatch(String matchType, User otherUser){
         if (matchType.equals("Skip")) {
@@ -50,12 +52,19 @@ public class ChatManagerController {
 
     /**
      *
-     * @return
+     * @return the friend which the user is matched with
+     *
      */
     public User getMatch(){
         return manager.getMatchedUser();
     }
 
+
+    /**
+     * @throws IOException
+     * @throws InterruptedException
+     * Creates a chat between the chosen users
+     */
     public void createChat() throws IOException, InterruptedException {
         manager.openChat();
     }

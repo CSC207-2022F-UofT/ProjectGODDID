@@ -172,6 +172,7 @@ public class Report {
                     remover.removeFriend(this.user1, this.user2);
                     remover.removeFriend(this.user2, this.user1);
 
+                    this.user2 = user_graph.accounts.get(this.user2.getUsername());
 
                     this.user2.addStrike();  //strike added to user 2 for vulgar language
 

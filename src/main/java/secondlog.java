@@ -11,7 +11,7 @@ public class secondlog {
 
         Graph user_graph = rg.readobject();
 
-        User b = user_graph.accounts.get("bb");
+        User b = user_graph.accounts.get("ee");
 
         int s = b.getNum_strikes();
         String r = String.valueOf(s);

@@ -192,27 +192,24 @@ public class WelcomePage extends JFrame implements ActionListener {
         if(e.getSource() == addfriend){
             String friendToAdd = text.getText();
             System.out.println(friendToAdd);
-            //FriendAdder fd = new FriendAdder();
             System.out.println(rg.readobject().getUsers());
             try {
-                //System.out.println("hi");
                 System.out.println("before:"+user1.getFriends());
                 friend_facade.addFriend(user1, rg.readobject().getUser(friendToAdd));
                 System.out.println("after:"+user1.getFriends());
                 messageLabel.setForeground(Color.green);
-                System.out.println("hi");
-                messageLabel.setText(friendToAdd+" is successfuly added to your friend's list");
+                messageLabel.setText(friendToAdd+" is successfuly added");
             } catch (IOException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
         }
 
         if(e.getSource() == removefriend){
-            String friendToAdd = text.getText();
+            String friendToRemove= text.getText();
             try {
-                friend_facade.removeFriend(user1, rg.readobject().getUser(friendToAdd));
+                friend_facade.removeFriend(user1, rg.readobject().getUser(friendToRemove));
                 messageLabel.setForeground(Color.green);
-                messageLabel.setText(friendToAdd+" is successfuly removed from your friend's list");
+                messageLabel.setText(friendToRemove+" is successfuly removed");
             } catch (IOException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }

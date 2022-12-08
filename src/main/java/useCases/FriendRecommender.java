@@ -1,11 +1,11 @@
 package useCases;
 
 import entities.*;
-import java.util.ArrayList;
+
 import java.util.*;
 
 
-/*
+/**
 Automated friend recommender system where a friend is recommended based on mutual friend count.
 This use case occurs when a user interacts with the friend adder UI / interfaces.
 */
@@ -15,7 +15,7 @@ public class FriendRecommender {
 
     public FriendRecommender() {
     }
-/*
+/**
     Given a user, randomly select three of their friends to recommend back to the current user.
     */
 
@@ -41,7 +41,7 @@ public class FriendRecommender {
     }
 
 
-/*
+/**
     Given a Vertex which represents a user and a Graph representing all the users in the app, search graph of
     users and finds highest count of mutual friends among the users neighbours.
     */

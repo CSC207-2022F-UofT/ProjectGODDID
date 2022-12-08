@@ -14,6 +14,7 @@ public class CreateChatText implements CreateChatInt {
      * @param name1
      * @param name2
      * @throws IOException
+     * Starts a new chat between two users
      */
     @Override
     public void newChat(String name1, String name2) throws IOException {

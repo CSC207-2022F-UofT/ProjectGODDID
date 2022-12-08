@@ -1,18 +1,22 @@
 package useCases;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class GameManager {
 
     /**
      * @param board
      * @return
+     *
+     *  Checks if there is a winning move aftr every move and returns the indexes of the rows and columns of the winning
+     *  with the winning player indicated
      */
+
     public int[] check(ArrayList<ArrayList<String>> board) {
 
+        /**
+         * Checks whether there is a winning move by X or O horizontally
+         */
         for (int row = 0; row < board.size(); row++) {
             for (int col = 0; col < board.get(0).size() - 3; col++) {
                 if (board.get(row).get(col).equals("X") &&
@@ -31,6 +35,9 @@ public class GameManager {
             }
         }
 
+        /**
+         * Checks whether there is a winning move by X or O vertically
+         */
         for (int row = 0; row < board.size() - 3; row++) {
             for (int col = 0; col < board.get(0).size(); col++) {
                 if (board.get(row).get(col).equals("X") &&
@@ -49,6 +56,9 @@ public class GameManager {
             }
         }
 
+        /**
+         * Checks whether there is a winning move by X or O from the left diagonal
+         */
         for (int row = 0; row < board.size() - 3; row++) {
             for (int col = 0; col < board.get(0).size() - 3; col++) {
                 if (board.get(row).get(col).equals("X") &&
@@ -67,6 +77,9 @@ public class GameManager {
             }
         }
 
+        /**
+         * Checks whether there is a winning move by X or O from the right diagonal
+         */
         for (int row = 0; row < board.size() - 3; row++) {
             for (int col = 0; col < board.get(0).size() - 3; col++) {
                 if (board.get(row).get(col + 3).equals("X") &&
