@@ -202,9 +202,11 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
 
             // If the user chooses to follow through with the report the code below is executed and chat ends
             if (answer == 0) {
-                Report report = new Report(mainUser, matchedUser);
+                ReportController report = new ReportController();
                 try {
-                    report.checkReport();
+                    ReadGraph rg = new ReadGraph();
+                    Graph user_graph = rg.readobject();
+                    report.reportController(mainUser, user_graph.accounts.get(matchedUser.getUsername()));
                 } catch (IOException | ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
