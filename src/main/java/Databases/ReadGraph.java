@@ -18,7 +18,7 @@ public class ReadGraph implements Serializable, ReadGraphInt {
     public Graph readobject() {
         Graph users = new Graph();
         try {
-            FileInputStream fis = new FileInputStream("Users.ser");
+            FileInputStream fis = new FileInputStream("src/Users.ser");
             ObjectInputStream ois = new ObjectInputStream(fis);
 
             users = (Graph) ois.readObject();

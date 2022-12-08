@@ -17,7 +17,7 @@ public class WriteGraph implements Serializable, WriteGraphInt {
      */
     @Override
     public void writeGraph(Graph users) throws IOException {
-        FileOutputStream fos = new FileOutputStream("Users.ser", false);
+        FileOutputStream fos = new FileOutputStream("src/Users.ser", false);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
 
         oos.writeObject(users);
