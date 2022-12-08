@@ -11,8 +11,8 @@ import java.io.IOException;
 public class CreateChatText implements CreateChatInt {
     /**
      *
-     * @param name1
-     * @param name2
+     * @param name1 first user
+     * @param name2 second user
      * @throws IOException
      * Starts a new chat between two users
      */

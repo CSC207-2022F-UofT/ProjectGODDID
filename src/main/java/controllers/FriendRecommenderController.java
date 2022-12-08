@@ -4,18 +4,17 @@ import entities.User;
 import useCases.FriendRecommender;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
+
+
 
 public class FriendRecommenderController {
     private FriendRecommender friendRecommender = new FriendRecommender();
 
-    Random random = new Random();
 
     /**
-     * @param target
-     * @param curr
-     * @return
+     * @param target chosen friend
+     * @param curr current user
+     * @return recommended friend
      * @throws IOException
      * @throws ClassNotFoundException
      *

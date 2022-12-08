@@ -33,8 +33,8 @@ public class PointSystemR extends PointSystem{
 
     /**
      * adjustPoınts renews poınts for a gıven user X dependıng on the type of earn case
-     * @param X
-     * @param earnCase
+     * @param X user
+     * @param earnCase earning option
      * @throws IOException
      */
     @Override

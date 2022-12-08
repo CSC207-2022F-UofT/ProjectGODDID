@@ -66,16 +66,7 @@ public class AccountManager{
         remover.removeUser(userToBeRemoved);
     }
 
-//    public void removeUser(User userToBeRemoved) throws IOException, ClassNotFoundException {
-//        Graph user_graph = rg.readobject();
-//        user_graph.accounts.remove(userToBeRemoved.getUsername());
-//        for(User i:user_graph.accounts.values()){
-//            if(i.getFriends().contains(userToBeRemoved))
-//                i.friends.remove(userToBeRemoved);
-//        }
-//        userToBeRemoved.friends.clear();
-//        wg.writeGraph(user_graph);
-//    }
+
 
     /**
      * Adds a friend to a user, if the friend is a current user and not already a friend of the user

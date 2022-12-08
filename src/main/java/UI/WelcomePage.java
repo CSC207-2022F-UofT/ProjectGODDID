@@ -187,25 +187,6 @@ public class WelcomePage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == friends){
             AccountManager remover = new AccountManager();
-//            if (user1.friends.size() > 0) {
-//                for (User friend : user1.getFriends()) {
-//                    boolean exists = false;
-//                    for (User i : friend.getFriends()) {
-//                        if (i.getUsername().equals(user1.getUsername())) {
-//                            exists = true;
-//                        }
-//                    }
-//                    if (!exists) {
-//                        try {
-//                            remover.removeFriend(user1, friend);
-//                        } catch (IOException ex) {
-//                            throw new RuntimeException(ex);
-//                        } catch (ClassNotFoundException ex) {
-//                            throw new RuntimeException(ex);
-//                        }
-//                    }
-//                }
-//            }
 
             FriendsPage friends = new FriendsPage(user1);
         }

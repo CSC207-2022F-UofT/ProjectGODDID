@@ -21,7 +21,7 @@ public class ActiveChatsPage extends JFrame implements ActionListener {
 
 
     /**
-     * @param user1
+     * @param user1 first user
      */
     public ActiveChatsPage(User user1) {
 

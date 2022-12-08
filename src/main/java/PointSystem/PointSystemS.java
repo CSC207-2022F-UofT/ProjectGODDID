@@ -33,8 +33,8 @@ public class PointSystemS extends PointSystem{
 
     /**
      * adjustPoınts deducts poınts for a gıven user X dependıng on the type of earn case
-     * @param X
-     * @param spendCase
+     * @param X user
+     * @param spendCase spending case
      * @throws IOException
      */
 

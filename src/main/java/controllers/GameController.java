@@ -23,23 +23,22 @@ public class GameController {
     PointSystemR ps = new PointSystemR();
 
     /**
-     * @param textfield
-     * @param buttons
+     * @param textfield for the player turn
+     * @param buttons for placing pieces
      */
     public GameController(JLabel textfield, JButton[][] buttons) {
         this.textfield = textfield;
         this.buttons = buttons;
     }
 
-//    PointSystemR gameEarn = new PointSystemR();
 
     GameManager checker = new GameManager();
 
 
     /**
-     * @param board
-     * @param user1
-     * @param user2
+     * @param board of the Connect 4 game
+     * @param user1 is player 1
+     * @param user2 is player 2
      */
     public void Wins(ArrayList<ArrayList<String>> board, User user1, User user2) throws IOException {
         int[] wins;

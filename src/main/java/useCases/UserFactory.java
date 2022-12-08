@@ -1,8 +1,7 @@
 package useCases;
 import Databases.ReadGraph;
-import Databases.WriteGraph;
 import Interfaces.ReadGraphInt;
-import Interfaces.WriteGraphInt;
+
 import entities.Graph;
 import entities.User;
 
@@ -10,8 +9,8 @@ public class UserFactory {
 
 
     /**
-     * @param username
-     * @param password
+     * @param username username of the user
+     * @param password of the user
      * @return creates a user object and returns it following the factory design pattern
      */
     public User CreateUser(String username, String password) {

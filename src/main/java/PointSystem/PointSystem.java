@@ -11,8 +11,8 @@ public abstract class PointSystem {
 
     /**
      * abstract method that must be implemented by the subclasses, allows polymorphism when an Event is executed
-     * @param X
-     * @param spendCase
+     * @param X user
+     * @param spendCase spending option
      * @throws IOException
      */
     public abstract void adjustPoints(User X, String spendCase) throws IOException;

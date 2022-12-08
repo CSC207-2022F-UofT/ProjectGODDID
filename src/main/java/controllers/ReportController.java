@@ -9,8 +9,8 @@ public class ReportController {
 
     /**
      *
-     * @param mainuser
-     * @param reporteduser
+     * @param mainuser of the account
+     * @param reporteduser which is the friend
      * @throws IOException
      * @throws ClassNotFoundException
      *

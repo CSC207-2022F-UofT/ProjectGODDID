@@ -21,8 +21,7 @@ public class ChatManagerController {
     /**
      * Constructor for ChatManagerController.
      *
-     *
-     * @param mainUser
+     * @param mainUser current user
      */
     public ChatManagerController(User mainUser){
         this.manager = new ChatManager(mainUser);

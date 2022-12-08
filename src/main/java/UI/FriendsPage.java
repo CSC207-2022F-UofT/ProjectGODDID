@@ -27,7 +27,7 @@ public class FriendsPage extends JFrame implements ActionListener {
 
 
     /**
-     * @param user1
+     * @param user1 first user
      */
     public FriendsPage(User user1) {
 
@@ -75,9 +75,7 @@ public class FriendsPage extends JFrame implements ActionListener {
      * @param e the event to be processed
      */
 
-    /**
-     *
-     */
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -107,9 +105,7 @@ public class FriendsPage extends JFrame implements ActionListener {
                         chat_con.makeMatch("Choose", friend);
                         try {
                             chat_con.createChat();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (InterruptedException ex) {
+                        } catch (IOException | InterruptedException ex) {
                             throw new RuntimeException(ex);
                         }
 

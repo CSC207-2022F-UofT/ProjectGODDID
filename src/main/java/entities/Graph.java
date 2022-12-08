@@ -20,7 +20,7 @@ public class Graph  implements Serializable {
 
     /**
      *
-     * @param username
+     * @param username of the user
      * @return the specific chosen user from the graph
      */
     public User getUser(String username) {

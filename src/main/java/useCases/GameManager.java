@@ -5,10 +5,8 @@ import java.util.ArrayList;
 public class GameManager {
 
     /**
-     * @param board
-     * @return
-     *
-     *  Checks if there is a winning move aftr every move and returns the indexes of the rows and columns of the winning
+     * @param board of the connect 4 game
+     * @return Checks if there is a winning move aftr every move and returns the indexes of the rows and columns of the winning
      *  with the winning player indicated
      */
 

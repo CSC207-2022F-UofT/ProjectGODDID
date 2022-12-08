@@ -29,8 +29,8 @@ public class GameUI extends JFrame implements ActionListener {
 
 
     /**
-     * @param user1
-     * @param user2
+     * @param user1 first user
+     * @param user2 second user
      */
     public GameUI(User user1, User user2) {
 

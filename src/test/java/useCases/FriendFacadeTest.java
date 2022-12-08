@@ -57,7 +57,7 @@ public class FriendFacadeTest {
 
     @Test
     void addFriend() throws IOException, ClassNotFoundException {
-        //FriendAdder fd = new FriendAdder();
+
         FriendFacade friendFacade = new FriendFacade();
         friendFacade.addFriend(user1, user2);
         friendFacade.addFriend(user2, user1);

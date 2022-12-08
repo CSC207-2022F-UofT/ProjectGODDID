@@ -37,10 +37,7 @@ public class UserRemover {
                     } catch (NullPointerException ignored){
 
                     }
-//                    ArrayList<User> friends = user_graph.accounts.get(i).getFriends();
-//                    friends.remove(j);
-//                    i.setFriends(friends);
-//                    user_graph.accounts.put(i.getUsername(), i);
+
                 }
                 j += 1;
             }
