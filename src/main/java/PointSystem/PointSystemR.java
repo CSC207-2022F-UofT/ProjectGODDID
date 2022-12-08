@@ -4,8 +4,8 @@ import Databases.ReadGraph;
 import Databases.WriteGraph;
 import entities.Graph;
 import entities.User;
-import useCases.ReadGraphInt;
-import useCases.WriteGraphInt;
+import Interfaces.ReadGraphInt;
+import Interfaces.WriteGraphInt;
 
 import java.io.IOException;
 import java.util.Hashtable;
@@ -21,11 +21,22 @@ public class PointSystemR extends PointSystem{
     WriteGraphInt wg = new WriteGraph();
     Graph users;
 
+    /**
+     * Constructor loads types of earn cases every tıme a PointSystemR object ıs ınıtlıazed.
+     * Newer methods of earnıng can be easıly ıncorporated here.
+     */
     public PointSystemR(){ // leaves scope to incorporate newer methods of earning points
         earnCases.put("ChatEnd", 10);
         earnCases.put("GameChatEnd", 15);
     }
 
+
+    /**
+     * adjustPoınts renews poınts for a gıven user X dependıng on the type of earn case
+     * @param X
+     * @param earnCase
+     * @throws IOException
+     */
     @Override
     public void adjustPoints(User X, String earnCase) throws IOException {
         if (earnCases.containsKey(earnCase)){

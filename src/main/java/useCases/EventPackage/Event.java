@@ -1,4 +1,4 @@
-package EventPackage;
+package useCases.EventPackage;
 
 import PointSystem.PointSystem;
 import entities.User;

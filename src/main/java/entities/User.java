@@ -14,12 +14,15 @@ public class User implements Serializable {
     public ArrayList<User> blocked_friends;
     public int num_strikes;
 
+    /**
+     * @param name
+     *
+     * User class which is the object (entity) where the users of the app is stored as
+     */
     public User(String name){
         this.username = name;
-        this.acc_type = "basic";
-        //points = 0;
+        this.points = 0;
         this.friends = new ArrayList<User>();
-        this.blocked_friends = new ArrayList<User>();
     }
 
     public void setUsername(String name){
@@ -35,10 +38,6 @@ public class User implements Serializable {
         this.acc_type = acc_type;
     }
 
-    public String getAccountType(){
-        return this.acc_type;
-    }
-
     public void setFriends(ArrayList<User> friends) {
         this.friends = friends;
     }
@@ -48,12 +47,8 @@ public class User implements Serializable {
         this.points = p;
     }
 
-    public void setBlocked_friends(){
-        this.blocked_friends = new ArrayList<User>();
-    }
-
-    public void setNum_strikes(){
-        this.num_strikes = 0;
+    public void setNum_strikes(int num_strike){
+        this.num_strikes = num_strike;
     }
 
     public String getUsername() {
@@ -65,9 +60,6 @@ public class User implements Serializable {
         return this.points;
     }
 
-    /*public Boolean getPremium() {
-        return premium;
-    }*/
 
     public String getPassword(  ){
         return password;
@@ -75,10 +67,6 @@ public class User implements Serializable {
 
     public ArrayList<User> getFriends() {
         return friends;
-    }
-
-    public ArrayList<User> getBlocked_friends() {
-        return blocked_friends;
     }
 
     public int getNum_strikes(){
@@ -89,7 +77,4 @@ public class User implements Serializable {
         this.num_strikes += 1;
     }
 
-    public void addblocked(User user){
-        this.blocked_friends.add(user);
-    }
 }

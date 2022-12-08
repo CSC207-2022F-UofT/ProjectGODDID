@@ -1,7 +1,7 @@
 package UI;
 
+import controllers.ChatManagerController;
 import entities.User;
-import useCases.ChatManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,9 +17,12 @@ public class ActiveChatsPage extends JFrame implements ActionListener {
 
     JFrame frame = new JFrame();
 
-    ChatManager chat;
+    ChatManagerController chat;
 
 
+    /**
+     * @param user1
+     */
     public ActiveChatsPage(User user1) {
 
         user = user1;
@@ -31,6 +34,10 @@ public class ActiveChatsPage extends JFrame implements ActionListener {
         frame.setLayout(new GridLayout(user1.getFriends().size(), 1));
 
 
+        /**
+         * Adding a button in the gridlayout for each of the friends
+         */
+
         for (int i = 0; i < user1.getFriends().size(); i++){
             JButton button = new JButton(user.getFriends().get(i).getUsername());
             button.addActionListener(this);
@@ -38,6 +45,12 @@ public class ActiveChatsPage extends JFrame implements ActionListener {
             button.setText(user.getFriends().get(i).getUsername());
             String s1 = "src/" + user.getUsername() + user.getFriends().get(i).getUsername() + ".txt";
             String s2 = "src/" + user.getFriends().get(i).getUsername() + user.getUsername() + ".txt";
+
+            /**
+             * Adding the button only if there is an ongoing chat (existing file between the two users means the chat is
+             * ongoing
+             */
+
             if (new File(s2).exists() || new File(s1).exists()){
                 frame.add(button);
                 buttons.add(button);
@@ -49,6 +62,16 @@ public class ActiveChatsPage extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * @param e the event to be processed
+     */
+
+    /**
+     * If one of the buttons are pressed the chat screen between the user and the chosen friends
+     * is displayed and the active chats page
+     * is disposed
+     */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < buttons.size(); i++){
@@ -57,10 +80,10 @@ public class ActiveChatsPage extends JFrame implements ActionListener {
                 for (User friend : user.getFriends()){
                     if (friend_name.equals(friend.getUsername())){
                         frame.dispose();
-                        chat = new ChatManager(user);
-                        chat.choseMatch(friend);
+                        chat = new ChatManagerController(user);
+                        chat.makeMatch("Choose", friend);
                         try {
-                            chat.openChat();
+                            chat.createChat();
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
