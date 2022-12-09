@@ -4,7 +4,7 @@
 Merging issues so we had to push again that's why commit message is just try again.
 
 ## Description of app and how to use
-Social media chatting app that allows users to randomly chat with someone in their contact list. Users can add and remove friends by username. They can chat with their friends to gain points based on the length of their conversation. They can also earn points by playing Connect 4. 
+Social media chatting app that allows users to randomly chat with someone in their contact list. Users can add and remove friends by username. They can chat with their friends to gain points based on the length of their conversation. They can also earn points by playing Connect 4.
 
 ### How to use the app <br/>
 Go to the LoginPageMain file under src/main. Run the class LoginPageMain with user1 and user2 to test having an synchronous chat. Once done you will be prompted with a sign in / sign up screen where you can create a user with any username and password. Click sign up and then once shown the message on the GUI click login. From here you will reach the welcome page. There is a textbox at the bottom with an add friend button. Remove button next to add can be used for removing friends. Friends button is viewing friends which you don’t have an existing chat with and active chats is for viewing the active chats. Recommend friend recommends the friend with the highest mutual and recommend random recommends a random friend among the friends of the chosen friend. Match button gets you match with a friend start chat button starts the chat and skip button skips the matched user and gives a new match. GameMain class can also be used to test the game manually.
@@ -19,7 +19,7 @@ There are 4 main classes for the game: GameManager (Use case), MoveTracker (Use 
 
 GameManager class contains the check method which checks whether there is a winning move in the board so far. It takes an arraylist as an input an checks both X and O to see if one of them has a winning move. If there is a winning move, then the location of the winning move is returned with the player that won (X or O).
 
-GameController calls the GameManager class’s check method and gets the returned value. Based on the returned value the the locations on the board that contains the winning move is changed to green to show the winning move and name of the winner player is displaced at the top of the screen. Moreover, GameController class calls the Points System Class (use case) to update the points of the winning user. 
+GameController calls the GameManager class’s check method and gets the returned value. Based on the returned value the the locations on the board that contains the winning move is changed to green to show the winning move and name of the winner player is displaced at the top of the screen. Moreover, GameController class calls the Points System Class (use case) to update the points of the winning user.
 
 GameUI calls the GameController which follows the clean architecture flow. The game UI is created with 42 buttons, one for each grid using GridLayout. Game UI also uses MoveTracker which converts the moves on the UI to an arraylist so the check method in GameManager can check the winning moves. Other UI that were accessed before the game are LoginPage, WelcomePage, and FriendsPage. I worked on the UI design of these classes and collaborated with Arian, Ashvat and Brandon for connecting the Chat, AccountManager and FriendAdder and Remover to these UIs.
 
@@ -29,7 +29,7 @@ The tests were written for all the win cases for X and O in the GameManagerTests
 
 
 ### Brandon - Friend System
-The friend system involves the friendAdder, friendRemover, and friendRecommender use cases as well as the respective tests, controllers and friendFacade. The system also included the respective controllers like the addFriendController that interact with the UI and call upon the correct use cases and other packages. The friendAdder class interacts with the acccountManager use case and the user and graph entities, allowing a user to add friends. There is a lot of emphasis on utilizing the graph which uses a dictionary that maps username strings to users. The friendAdder class adds a selected user to the friends ArrayList in the user entity as well as adds an edge between users in the graph entity. Likewise, the friendRemover class removes users from the friends ArrayList and removes edges from the graph. The friendRecommender class provides two ways for users to get new friends. This class can randomly select 1 friend from one of the current user's friends and return this list of users as a recommendation. The class can also recommend a user based on a graph-based algorithm such that the most common friend amongst your current friends is recommended to you. This is done by searching the user's neighbors or friends in other words in the graph and then looking through their friends and counting the most common or interconnected one and returning this recommendation. 
+The friend system involves the friendAdder, friendRemover, and friendRecommender use cases as well as the respective tests, controllers and friendFacade. The system also included the respective controllers like the addFriendController that interact with the UI and call upon the correct use cases and other packages. The friendAdder class interacts with the acccountManager use case and the user and graph entities, allowing a user to add friends. There is a lot of emphasis on utilizing the graph which uses a dictionary that maps username strings to users. The friendAdder class adds a selected user to the friends ArrayList in the user entity as well as adds an edge between users in the graph entity. Likewise, the friendRemover class removes users from the friends ArrayList and removes edges from the graph. The friendRecommender class provides two ways for users to get new friends. This class can randomly select 1 friend from one of the current user's friends and return this list of users as a recommendation. The class can also recommend a user based on a graph-based algorithm such that the most common friend amongst your current friends is recommended to you. This is done by searching the user's neighbors or friends in other words in the graph and then looking through their friends and counting the most common or interconnected one and returning this recommendation.
 The friendAdderTest, friendRecommenderTest, and friendRemoverTest creates a set of users and tests their respective functions through asserting the correct users have been added or recommended as well as checking if the correct amount of users have been added.
 
 
@@ -38,7 +38,7 @@ The friendAdderTest, friendRecommenderTest, and friendRemoverTest creates a set 
 The AccountManager contains the addUser, removeUser, addFriend, removeFriend methods that are used by the FriendAdder, FriendRemover, UserCreator, UserRemover use cases. The accountmanager uses a static graph which stores all the users in the form of a hashmap that maps the user’s username to the User object. This graph is kept static to ensure that all uses of the accountmanager in various other use cases, refer to the same graph. We update the graph in the Graph.ser file each time a change is made to it i.e. each time a user is added or removed, a friend is added or removed, we update the graph in the file. The methods in the accountmanager handle edge cases as well, such as logging into an account which does not exist.
 The FriendAdder and FriendRemover are 2 use cases that are responsible for adding and removing friends of the users respectively.
 The 2 entities are the Graph and the User. The User contains the respective attributes such as username, password and a list of friends. The graph contains a hashmap that maps the username to the User, as mentioned earlier.
-The database package contains the ReadGraph and WriteGraph classes that are responsible for reading the graph from the ser file and writing a graph into the ser file, respectively. 
+The database package contains the ReadGraph and WriteGraph classes that are responsible for reading the graph from the ser file and writing a graph into the ser file, respectively.
 
 The FriendFacade is created to implement the facade design pattern. The facade class contains the add friend and remove friend methods of the accountmanager and the facade is called whenever these methods need to be implemented
 
@@ -87,5 +87,56 @@ Creating an inheritance hierarchy for PointSystem allowed Event.execute() to be 
 
 
 #### Github Features
+<ul>
+<li>Github actions autotesting in used in the classroom workflow</li>
+
+<li>Pull requests and branching</li>
+<ul><li>Used for code organization, pull requests, merging into main, and etc
+</ul>
+<li>Issues</li> 
+<ul><li>Used to keep track of features, known bugs, and next steps</li></ul>
+</ul>
 
 
+#### Testing
+<ul>
+<li>At least 80% testing coverage for most layers unless further specified</li>
+<li>Testing UI not necessary</li>
+</ul>
+
+
+#### Clean architecture, SOLID, and use of design patterns
+<ul>
+<li>Properly using dependency layers of clean architecture</li>
+<li>Abstraction and inheritance</li>
+<ul>
+<li>PointSystem is an abstract class with two subclasses PointSystemR (for earning/renewing points) and PointSystemS (for spending points). Both of the subclasses manipulate points in different ways.</li>
+<li>Utilized inheritance to implement an adjustPoints interface</li>
+</ul>
+<li>Packaging</li>
+<ul>
+<li>Done by clean architecture layers</li>
+</ul>
+<li>Serialization</li>
+<ul>
+<li>Used to store user objects and graph in the .ser file</li>
+</ul>
+<li>SOLID</li>
+<ul>
+<li>Single responsibility - Implemented by every class</li>
+<li>Open and Closed - Seen when classes use abstraction or inheritance. For example, the PointsSystem.</li>
+<li>Liskov Substitution - Use of inheritance in PointSystem as well as general use of large potential parent class in the User allow for easy substitution if needed. We can easily pass in new types of users as parameters if needed.</li>
+<li>Dependency Inversion - Found in game features and Interfaces added between ChatScreen and ChatManager called ChatScreenInt and CreateChatInt to fix dependency issue</li>
+</ul>
+<li>Design Patterns</li>
+<ul>
+<li>Graph pattern - Implemented in the AccountManager use case. Stores all the users.</li>
+<li>Factory Pattern - Implemented in the UserFactory class that the AccountManager class calls. It is responsible for creating users.</li>
+<li>Facade Pattern - Implemented in FriendFacade. Since multiple actors can access the add or remove friend use cases (ReportManager and AccountManager), a facade is implemented to keep access to these functions private.</li>
+<li>Dependency Injection</li>
+<ul>
+<li>Used in PointSystem so that point storage and manipulation is  independent of persistence mechanisms and gateways </li>
+<li>Implemented in FriendRecommender, FriendAdder, FriendRemover so that the most general user class is used and can easily be modified for subclasses of users</li>
+</ul>
+</ul>
+</ul>
