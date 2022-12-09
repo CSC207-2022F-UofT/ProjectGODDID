@@ -14,12 +14,9 @@ public class ChatManagerTest {
     /**
      * To test use case:
      * 1) Create 5 users and add them to the graph
-     * 2) Typically we call a controller as this function is controlled by a UI
-     * but here we can bypass the controller and just directly call the FriendAdder
-     * use case for testing purposes
-     * 3) Add the friends to various users using FriendAdder
-     * 4) Check that right friends are added to corresponding users
-     * 5) Check right amount of friends are added to corresponding user
+     * 2) Add the friends to various users using FriendAdder
+     * 3) See if we are matched witha user when using randomMatch
+     * 5) Check if we can properly skip the current matched user
      */
     @BeforeEach
     void setUp() throws IOException, ClassNotFoundException {
