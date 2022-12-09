@@ -55,6 +55,8 @@ The report algorithm is broken down into parts which are defined by helper funct
 <u> Testing the Report Class (ReportTest): </u> <br/>
 The report tests include all the methods in Report Class while also some methods and features from other use cases. For example attributes from User Class, blockUser, removeFriend, removeUser from AccountManager, features of graph and the FriendRemover class. There are functions in accountManager and users which I worked on that which the Report Class was solely dependent on.
 
+We want to mention we condemn the use of any offensive language, hence believe ot was vital to include the report feature
+
 ### Arian - Chat System
 
 <u> ChatManager: </u> <br/>
