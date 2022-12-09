@@ -1,31 +1,35 @@
 # Project Description and Information
+
+#### Note
+Merging issues so we had to push again that's why commit message is just try again.
+
 ## Description of app and how to use
-Social media chatting app that allows users to randomly chat with someone in their contact list. Users can add and remove friends by username. They can chat with their friends to gain points based on the length of their conversation. They can also earn points by playing tic-tac-toe.
+Social media chatting app that allows users to randomly chat with someone in their contact list. Users can add and remove friends by username. They can chat with their friends to gain points based on the length of their conversation. They can also earn points by playing Connect 4. 
 
 ### How to use the app <br/>
-Go to the loginpagemain file under src/main. Run the class loginpagemain. Once done you will be prompted with a sign in / sign up screen where you can create a user with any username and password. Click sign up and then once shown the message on the GUI click login. From here you will reach the welcome page. There is a textbox at the bottom with an add friend button. Type in Bob (use Bob because it’s a hard coded test user which can be used) and then click the add friend button. Once done you can click on the friends tab where you will find Bob. Don't shut this window or the program will shut (still need to fix that issue). Then, click match where you will be matched with Bob since he is your only friend. Then you can click start chat which will bring up a new chat screen with Bob, where you can play a game, send messages, and report. Don’t click the x button on this screen as it will also end the program (need to correct the code).
+Go to the LoginPageMain file under src/main. Run the class LoginPageMain with user1 and user2 to test having an synchronous chat. Once done you will be prompted with a sign in / sign up screen where you can create a user with any username and password. Click sign up and then once shown the message on the GUI click login. From here you will reach the welcome page. There is a textbox at the bottom with an add friend button. Remove button next to add can be used for removing friends. Friends button is viewing friends which you don’t have an existing chat with and active chats is for viewing the active chats. Recommend friend recommends the friend with the highest mutual and recommend random recommends a random friend among the friends of the chosen friend. Match button gets you match with a friend start chat button starts the chat and skip button skips the matched user and gives a new match. GameMain class can also be used to test the game manually.
 
 ## List of features
 
 ### Mert - Game Feature
 
-The game that we implemented is a Tic - Tac - Toe (Planning to make it Connect 4 game for final submission) game. In order to play the game from the user interface, first create an account and login. You will be directed to the welcome page. In order to play the game, first you should have a friend that you added among the other existing users. After you have friends in your friends list, you should press match to get matched with one of your friends. Then, press Start Chat and the chat user interface will be displaced to you. At the top of the chat user interface, there is a button called Game. Press that button to start the game. The game will continue between the two users until it ends. When one of the users win, the points of that user will be incremented by 15.
+The game that we implemented is a Connect 4 game. In order to play the game from the user interface, first create an account and login. You will be directed to the welcome page. In order to play the game, first you should have a friend that you added among the other existing users. After you have friends in your friends list, you should press match to get matched with one of your friends. Then, press Start Chat and the chat user interface will be displaced to you. At the top of the chat user interface, there is a button called Game. Press that button to start the game. The game will continue between the two users until it ends. When one of the users win, the points of that user will be incremented by 15.
 
 There are 4 main classes for the game: GameManager (Use case), MoveTracker (Use case), GameController (Controller), GameUI (UI)
 
-GameManager class contains the check method which checks whether there is a winning move in the board so far. It takes an arraylis as an input an checks both X and O to see if one of them has a winning move. If there is a winning move, then the location of the winning move is returned with the player that won (X or O).
+GameManager class contains the check method which checks whether there is a winning move in the board so far. It takes an arraylist as an input an checks both X and O to see if one of them has a winning move. If there is a winning move, then the location of the winning move is returned with the player that won (X or O).
 
-GameController calls the GameManager class’s check method and gets the returned value. Based on the returned value the the locations on the board that contains the winning move is changed to green to show the winning move and name of the winner player is displaced at the top of the screen. Moreover, GameController class calls the Points System Class (use case) to update the points of the winning user.
+GameController calls the GameManager class’s check method and gets the returned value. Based on the returned value the the locations on the board that contains the winning move is changed to green to show the winning move and name of the winner player is displaced at the top of the screen. Moreover, GameController class calls the Points System Class (use case) to update the points of the winning user. 
 
-GameUI calls the GameController which follows the clean architecture flow. The game UI is created with 9 buttons, one for each grid using GridLayout. Game UI also uses MoveTracker which converts the moves on the UI to an arraylist so the check method in GameManager can check the winning moves.
+GameUI calls the GameController which follows the clean architecture flow. The game UI is created with 42 buttons, one for each grid using GridLayout. Game UI also uses MoveTracker which converts the moves on the UI to an arraylist so the check method in GameManager can check the winning moves. Other UI that were accessed before the game are LoginPage, WelcomePage, and FriendsPage. I worked on the UI design of these classes and collaborated with Arian, Ashvat and Brandon for connecting the Chat, AccountManager and FriendAdder and Remover to these UIs.
 
 For storing the users I worked on Serialization of the data by working on ReadGraph and WriteGraph classes by collaborating with Ashvat.
 
-The tests were written for all the win cases for X and O in the GameManagerTests. In the MoveTracker tests whether the arraylist representing the board was updated
+The tests were written for all the win cases for X and O in the GameManagerTests. MoveTrackerTests test whether the arraylist representing the board was updated after X or O makes a move. GameController test tests whether the textfield at the to of the frame is updated after each move and when a player wins.
 
 
 ### Brandon - Friend System
-The friend system involves the friendAdder, friendRemover, and friendRecommender use cases as well as the respective tests. The system also included the respective controllers like the addFriendController that interact with the UI and call upon the correct use cases and other packages. The friendAdder class interacts with the acccountManager use case and the user and graph entities, allowing a user to add friends. There is a lot of emphasis on utilizing the graph which uses a dictionary that maps username strings to users. The friendAdder class adds a selected user to the friends ArrayList in the user entity as well as adds an edge between users in the graph entity. Likewise, the friendRemover class removes users from the friends ArrayList and removes edges from the graph. The friendRecommender class provides two ways for users to get new friends. This class can randomly select 3 friends from one of the current user's friends and return this list of users as a recommendation. The class can also recommend a user based on a graph-based algorithm such that the most common friend amongst your current friends is recommended to you. This is done by searching the user's neighbors or friends in other words in the graph and then looking through their friends and counting the most common or interconnected one and returning this recommendation.
+The friend system involves the friendAdder, friendRemover, and friendRecommender use cases as well as the respective tests, controllers and friendFacade. The system also included the respective controllers like the addFriendController that interact with the UI and call upon the correct use cases and other packages. The friendAdder class interacts with the acccountManager use case and the user and graph entities, allowing a user to add friends. There is a lot of emphasis on utilizing the graph which uses a dictionary that maps username strings to users. The friendAdder class adds a selected user to the friends ArrayList in the user entity as well as adds an edge between users in the graph entity. Likewise, the friendRemover class removes users from the friends ArrayList and removes edges from the graph. The friendRecommender class provides two ways for users to get new friends. This class can randomly select 1 friend from one of the current user's friends and return this list of users as a recommendation. The class can also recommend a user based on a graph-based algorithm such that the most common friend amongst your current friends is recommended to you. This is done by searching the user's neighbors or friends in other words in the graph and then looking through their friends and counting the most common or interconnected one and returning this recommendation. 
 The friendAdderTest, friendRecommenderTest, and friendRemoverTest creates a set of users and tests their respective functions through asserting the correct users have been added or recommended as well as checking if the correct amount of users have been added.
 
 
@@ -34,11 +38,15 @@ The friendAdderTest, friendRecommenderTest, and friendRemoverTest creates a set 
 The AccountManager contains the addUser, removeUser, addFriend, removeFriend methods that are used by the FriendAdder, FriendRemover, UserCreator, UserRemover use cases. The accountmanager uses a static graph which stores all the users in the form of a hashmap that maps the user’s username to the User object. This graph is kept static to ensure that all uses of the accountmanager in various other use cases, refer to the same graph. We update the graph in the Graph.ser file each time a change is made to it i.e. each time a user is added or removed, a friend is added or removed, we update the graph in the file. The methods in the accountmanager handle edge cases as well, such as logging into an account which does not exist.
 The FriendAdder and FriendRemover are 2 use cases that are responsible for adding and removing friends of the users respectively.
 The 2 entities are the Graph and the User. The User contains the respective attributes such as username, password and a list of friends. The graph contains a hashmap that maps the username to the User, as mentioned earlier.
-The database package contains the ReadGraph and WriteGraph classes that are responsible for reading the graph from the ser file and writing a graph into the ser file, respectively.
+The database package contains the ReadGraph and WriteGraph classes that are responsible for reading the graph from the ser file and writing a graph into the ser file, respectively. 
+
+The FriendFacade is created to implement the facade design pattern. The facade class contains the add friend and remove friend methods of the accountmanager and the facade is called whenever these methods need to be implemented
 
 
 ### Manit - Report Button
 The report feature helps make the chatting app a place of mutual respect and ensures standards are met in terms of language used and keeping it a friendly safe place where nobody should be offended. The report button in the chat allows user’s to report to the Admin if they believe the opposite person has been offensive towards them in some sort. The chat is then sent to an algorithm to help identify hatespeech used.
+
+There is a report controller also added in between the Report Use Case and the Chat UI to follow clean architecture and created tests to check if the controller is also working as we want.
 
 There are functions created within the Chat Class (this was done in collaboration with Arian) to store the messages within a txt file. In order to keep unique files for each chat in the system we defined a method to keep the file name a concatenation of the two usernames and when reading from files check the order of the concatenation of the file name to not have duplicate files for the same chat. The methods to read chat is crucial as the chats get updated simultaneously as two users are chatting.
 
@@ -78,9 +86,6 @@ Each time a PointSystemR object is created, its constructor loads in the differe
 Creating an inheritance hierarchy for PointSystem allowed Event.execute() to be modelled as polymorphic method, thereby eliminating bloated code for the different point manipulation cases.
 
 
-#### Clean architecture and use of design patterns
-- Abstraction and inheritance
-- SOLID principles
-- Packaging
-- Serialization
-- Observer pattern?
+#### Github Features
+
+
