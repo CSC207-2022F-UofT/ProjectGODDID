@@ -161,7 +161,11 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
         readFromTextFile();
     }
 
-    // TODO: documentation
+    /**
+     * Sets the visibility of the frame.
+     *
+     * @param setting the preferred visibility setting of the frame.
+     */
     @Override
     public void setVisible(boolean setting){
         frame.setVisible(setting);
@@ -356,6 +360,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
 
     /**
      * Executes desired code if a specific key has been typed
+     *
      * @param e the event to be processed
      */
     @Override
@@ -365,6 +370,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
 
     /**
      * Updates the text file and then updates the display if the enter key has been detected to have been pressed.
+     *
      * @param e the event to be processed
      */
     @Override
@@ -384,6 +390,7 @@ public class ChatScreen extends JFrame implements ActionListener, KeyListener, C
 
     /**
      * Executes desired code if a specific key has been typed
+     *
      * @param e the event to be processed
      */
     @Override

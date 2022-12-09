@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * This file exists to test the ChatManagerController to ensure that all the methods are working as they should be.
+ * This file exists to test the ChatManagerController to ensure that all the methods are working how they should be.
  *
  * @author Arian Khademi
  * @version 1.0

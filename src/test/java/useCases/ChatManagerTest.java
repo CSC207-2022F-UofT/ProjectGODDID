@@ -7,19 +7,19 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
+/**
+ * This file exists to test the ChatManager class to ensure that all the methods are working as they should be.
+ *
+ * @author Brandon
+ * @version 1.0
+ * @since December 7th, 2022
+ */
 public class ChatManagerTest {
     AccountManager accountManager = new AccountManager();
     User user1, user2, user3, user4, user5;
 
     /**
-     * To test use case:
-     * 1) Create 5 users and add them to the graph
-     * 2) Typically we call a controller as this function is controlled by a UI
-     * but here we can bypass the controller and just directly call the FriendAdder
-     * use case for testing purposes
-     * 3) Add the friends to various users using FriendAdder
-     * 4) Check that right friends are added to corresponding users
-     * 5) Check right amount of friends are added to corresponding user
+     * To prepare for testing the use cases, we create 5 users and add them to the accountManager we created.
      */
     @BeforeEach
     void setUp() throws IOException, ClassNotFoundException {
@@ -40,12 +40,21 @@ public class ChatManagerTest {
 
     }
 
+    /**
+     * Exists to be run after each test. Code can be added inside the method if configuration is desired.
+     */
     @AfterEach
     void tearDown() {
     }
 
+    /**
+     * This test checks whether randomMatch correctly matches the user to one of their friends.
+     *
+     * @throws IOException if addFriend fails.
+     * @throws ClassNotFoundException if addFriend fails.
+     */
     @Test
-    void randomMatch() throws IOException, ClassNotFoundException {
+    void randomMatchTest() throws IOException, ClassNotFoundException {
         FriendAdder fd = new FriendAdder();
         fd.addFriend(user1, user2);
         fd.addFriend(user1, user3);
@@ -56,8 +65,15 @@ public class ChatManagerTest {
         assert(matched.equals(user2) || matched.equals(user3));
     }
 
+    /**
+     * This test checks whether skipMatch correctly matches the user to a different user than the user they chose
+     * to skip (who they were previously matched with).
+     *
+     * @throws IOException if addFriend fails.
+     * @throws ClassNotFoundException if addFriend fails.
+     */
     @Test
-    void skipMatch() throws IOException, ClassNotFoundException {
+    void skipMatchTest() throws IOException, ClassNotFoundException {
         FriendAdder fd = new FriendAdder();
         fd.addFriend(user1, user2);
         fd.addFriend(user1, user3);
