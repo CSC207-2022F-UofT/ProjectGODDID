@@ -130,9 +130,18 @@ Creating an inheritance hierarchy for PointSystem allowed Event.execute() to be 
 </ul>
 <li>Design Patterns</li>
 <ul>
-<li>Graph pattern - Implemented in the AccountManager use case. Stores all the users.</li>
-<li>Factory Pattern - Implemented in the UserFactory class that the AccountManager class calls. It is responsible for creating users.</li>
-<li>Facade Pattern - Implemented in FriendFacade. Since multiple actors can access the add or remove friend use cases (ReportManager and AccountManager), a facade is implemented to keep access to these functions private.</li>
+<li>Graph pattern</li>
+<ul>
+<li>Implemented in the AccountManager use case. Stores all the users.</li>
+</ul>
+<li>Factory Pattern</li>
+<ul>
+<li>Implemented in the UserFactory class that the AccountManager class calls. It is responsible for creating users.</li>
+</ul>
+<li>Facade Pattern</li>
+<ul>
+<li>Implemented in FriendFacade. Since multiple actors can access the add or remove friend use cases (ReportManager and AccountManager), a facade is implemented to keep access to these functions private.</li>
+</ul>
 <li>Dependency Injection</li>
 <ul>
 <li>Used in PointSystem so that point storage and manipulation is  independent of persistence mechanisms and gateways </li>
